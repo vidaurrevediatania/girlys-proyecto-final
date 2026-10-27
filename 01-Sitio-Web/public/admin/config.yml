@@ -21,7 +21,7 @@ collections:
             widget: "list"
             fields:
               - { label: "ID", name: "id", widget: "string" }
-              - { label: "Zona", name: "zona", widget: "select", options: ["manos", "pies"] }
+              - { label: "Zona", name: "zona", widget: "select", options: ["manos"] }
               - { label: "Nombre", name: "nombre", widget: "string" }
               - { label: "Duración (min)", name: "duracion", widget: "number" }
               - { label: "Precio (Bs)", name: "precio", widget: "number" }
@@ -54,8 +54,10 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Descripción", name: "description", widget: "string" }
-      - { label: "Fecha", name: "date", widget: "datetime" }
-      - { label: "Autor", name: "author", widget: "string", default: "Girlys" }
+      - { label: "Título", name: "titulo", widget: "string" }
+      - { label: "Descripción", name: "descripcion", widget: "string" }
+      - { label: "Fecha", name: "fecha", widget: "datetime" }
+      - { label: "Categoría", name: "categoria", widget: "string" }
+      - { label: "Imagen", name: "imagen", widget: "string", required: false }
+      - { label: "Texto alternativo de imagen", name: "imagenAlt", widget: "string", required: false }
       - { label: "Cuerpo", name: "body", widget: "markdown" }

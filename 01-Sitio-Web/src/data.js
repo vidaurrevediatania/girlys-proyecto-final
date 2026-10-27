@@ -8,8 +8,8 @@ export const MONEDA = 'Bs'
 import serviciosData from './data/servicios.json'
 import sucursalesData from './data/sucursales.json'
 
-export const SERVICIOS = serviciosData
-export const SUCURSALES = sucursalesData
+export const SERVICIOS = serviciosData.services
+export const SUCURSALES = sucursalesData.branches
 
 export const FORMAS = [
   {

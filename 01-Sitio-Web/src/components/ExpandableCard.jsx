@@ -9,14 +9,41 @@ import { medir } from '../lib/analytics.js'
 import { duracionTexto } from '../lib/precio.js'
 import { whatsappUrl } from '../lib/sitio.js'
 
-import foto1 from '../fotos/uñas1.webp'
-import foto2 from '../fotos/uñas2.webp'
-import foto3 from '../fotos/uñas3.webp'
-import foto4 from '../fotos/uñas4.webp'
+function MapaSucursal({ sucursal, modal = false }) {
+  const nombre = sucursal.nombre || sucursal.title
+  const consulta = encodeURIComponent(sucursal.mapaQuery)
+  const mapa = `https://maps.google.com/maps?hl=es&q=${consulta}&z=16&output=embed`
+  const enlace = `https://www.google.com/maps/search/?api=1&query=${consulta}`
 
-/* Las fotos se importan para que Vite las copie al build. Antes se
-   apuntaba a /fotos/... y esas rutas no existían en public: eran 404. */
-const FOTOS = [foto1, foto2, foto3, foto4]
+  return (
+    <div className={`mapa-sucursal${modal ? ' mapa-sucursal-modal' : ''}`}>
+      <div className="mapa-sucursal-marca">
+        <img src="/favicon.svg" alt="" width="28" height="28" />
+        <span className="serif">Girlys</span>
+        <span className="mapa-sucursal-ciudad">Sucre · Bolivia</span>
+      </div>
+      <iframe
+        className="mapa-sucursal-iframe"
+        src={mapa}
+        title={`Mapa de ${nombre}, Sucre`}
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        allowFullScreen
+        tabIndex={modal ? 0 : -1}
+      />
+      {modal && (
+        <a
+          className="mapa-sucursal-enlace"
+          href={enlace}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Abrir en Google Maps <span aria-hidden="true">↗</span>
+        </a>
+      )}
+    </div>
+  )
+}
 
 function BookingFlow({ sucursal, seleccion, precio, onClose }) {
   const dias = useMemo(() => proximosDias(7), [])
@@ -255,11 +282,11 @@ function BookingFlow({ sucursal, seleccion, precio, onClose }) {
   )
 }
 
-const cards = SUCURSALES.map((s, i) => ({
+const cards = SUCURSALES.map((s) => ({
   id: s.id,
   title: s.nombre,
   description: s.linea,
-  src: FOTOS[i % FOTOS.length],
+  mapaQuery: s.mapaQuery,
   ctaText: `Reservar en ${s.nombre}`,
 }))
 
@@ -329,11 +356,7 @@ export function ExpandableCardDemo({ seleccion, precio, onReserve }) {
               </motion.button>
 
               <motion.div layoutId={`image-${active.title}-${id}`}>
-                <img
-                  src={active.src}
-                  alt={`Trabajo de manicura · ${active.title}`}
-                  className="expandable-image"
-                />
+                <MapaSucursal sucursal={sucursal} modal />
               </motion.div>
 
               <div className="expandable-body">
@@ -355,7 +378,7 @@ export function ExpandableCardDemo({ seleccion, precio, onReserve }) {
                     className="expandable-scroll"
                   >
                     <div className="expandable-content">
-                      <p>{sucursal.nota}</p>
+                      <p>{sucursal.linea}</p>
                       <div className="expandable-info">
                         <div className="expandable-row">
                           <span className="expandable-label">Teléfono</span>
@@ -363,9 +386,7 @@ export function ExpandableCardDemo({ seleccion, precio, onReserve }) {
                         </div>
                         <div className="expandable-row">
                           <span className="expandable-label">Horario</span>
-                          <span className="expandable-value">
-                            {sucursal.horario.filter(Boolean).length} días a la semana
-                          </span>
+                          <span className="expandable-value">{sucursal.horarioTexto}</span>
                         </div>
                       </div>
                     </div>
@@ -424,13 +445,7 @@ export function ExpandableCardDemo({ seleccion, precio, onReserve }) {
           >
             <div className="expandable-card-inner">
               <motion.div layoutId={`image-${card.title}-${id}`}>
-                <img
-                  src={card.src}
-                  alt={`Trabajo de manicura · ${card.title}`}
-                  className="expandable-card-img"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <MapaSucursal sucursal={card} />
               </motion.div>
               <div className="expandable-card-text">
                 <motion.h3 layoutId={`title-${card.title}-${id}`}>

@@ -23,8 +23,8 @@ const origenActual =
 
 // El número se guarda solo con dígitos; la versión visible se arma de él
 // para que cambiar VITE_WHATSAPP_PHONE no deje un teléfono viejo en el pie.
-const numeroWhatsApp = String(env.VITE_WHATSAPP_PHONE || '59160475900').replace(/\D/g, '')
-const telefonoValido = numeroWhatsApp.length >= 8 ? numeroWhatsApp : '59160475900'
+const numeroWhatsApp = String(env.VITE_WHATSAPP_PHONE || '59163396452').replace(/\D/g, '')
+const telefonoValido = numeroWhatsApp.length >= 8 ? numeroWhatsApp : '59163396452'
 
 const formatoVisible = (numero) =>
   numero.startsWith('591') && numero.length === 11

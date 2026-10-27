@@ -111,7 +111,7 @@ function VistaEntrada({ entrada }) {
               <p className="etiqueta">Escrito por</p>
               <p className="serif blog-firma-nombre">Equipo de Girlys</p>
               <p className="apunte">
-                Manicura y pedicura con precio cerrado en Sucre.
+                Manicura con precio cerrado en Sucre.
                 Escribimos lo que aplicamos en el salón, sin promesas que no podamos cumplir.
               </p>
             </div>

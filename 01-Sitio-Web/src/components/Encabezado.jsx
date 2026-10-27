@@ -25,7 +25,7 @@ export default function Encabezado() {
       <div className="contenido barra-int">
         <Link to={esInicio ? '#portada' : '/'} className="marca">
           <span className="marca-nombre">Girlys</span>
-          <span className="marca-sub">manicura y pedicura</span>
+          <span className="marca-sub">manicura</span>
         </Link>
 
         <nav className="nav" aria-label="Principal">

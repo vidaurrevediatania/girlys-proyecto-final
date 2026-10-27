@@ -3,8 +3,7 @@ import { SERVICIOS } from '../data.js'
 import { duracionTexto } from '../lib/precio.js'
 
 const GRUPOS = [
-  { id: 'manos', titulo: 'Manos' },
-  { id: 'pies', titulo: 'Pies' },
+  { id: 'manos', titulo: 'Manicura' },
 ]
 
 export default function Servicios({ onElegir }) {

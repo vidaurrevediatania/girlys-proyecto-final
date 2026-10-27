@@ -12,7 +12,7 @@ export default function Portada() {
           <p className="etiqueta">Sucre · desde 2019</p>
 
           <h1 className="titular portada-h1">
-            Manicura y pedicura
+            Manicura
             <span className="portada-h1-linea">con precio cerrado.</span>
           </h1>
 

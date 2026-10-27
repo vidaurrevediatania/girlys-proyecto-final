@@ -11,7 +11,7 @@ Una manicura esculpida no cuesta lo mismo en todas las manos. El precio depende 
 
 ## 1. El servicio
 
-Manicura, pedicura, semipermanente o esculpida. Cada uno tiene su precio base y su tiempo. La esculpida lleva más producto y más limado que una manicura clásica, por eso parte de un precio distinto.
+Manicura clásica, semipermanente o esculpida: cada servicio tiene su precio base y su tiempo. La esculpida lleva más producto y más limado que una manicura clásica, por eso parte de un precio distinto.
 
 ## 2. La forma
 

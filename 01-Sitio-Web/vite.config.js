@@ -49,7 +49,7 @@ function datosEstructurados(ORIGEN) {
       url: `${ORIGEN}/`,
       logo: `${ORIGEN}/favicon.svg`,
       description:
-        'Salón de manicura y pedicura con precio cerrado en Sucre, Bolivia.',
+        'Salón de manicura con precio cerrado en Sucre, Bolivia.',
       areaServed: 'Sucre',
     },
     ...SUCURSALES.map((sucursal) => ({

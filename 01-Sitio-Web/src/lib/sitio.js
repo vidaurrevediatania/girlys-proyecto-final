@@ -33,7 +33,7 @@ const formatoVisible = (numero) =>
 
 export const SITIO = {
   nombre: 'Girlys',
-  lema: 'Manicura y pedicura con precio cerrado',
+  lema: 'Manicura con precio cerrado',
   url: origenEsMarcador ? origenActual : origenDeclarado,
 
   // número en formato internacional, solo dígitos (Bolivia = 591)

@@ -27,9 +27,9 @@ export default function Inicio() {
   const [seleccion, setSeleccion] = useState(INICIAL)
 
   useSEO({
-    titulo: 'Girlys · Manicura y pedicura en Sucre',
+    titulo: 'Girlys · Manicura en Sucre',
     descripcion:
-      'Calcula el precio de tu manicura o pedicura, elige forma, largo y diseño, y reserva en nuestros tres salones de Sucre.',
+      'Calcula el precio de tu manicura, elige forma, largo y diseño, y reserva en nuestros tres salones de Sucre.',
     ruta: '/',
     imagen: '/og-girlys.jpg',
   })

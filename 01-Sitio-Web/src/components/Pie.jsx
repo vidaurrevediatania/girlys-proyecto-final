@@ -16,7 +16,7 @@ export default function Pie() {
           <div>
             <p className="marca-nombre serif pie-marca">Girlys</p>
             <p className="apunte pie-linea">
-              Manicura y pedicura en Sucre. Atendemos con cita,
+              Manicura en Sucre. Atendemos con cita,
               sin fila y con el precio cerrado antes de empezar.
             </p>
             <Link className="btn btn-linea pie-cta" to={seccion('#calculadora')}>

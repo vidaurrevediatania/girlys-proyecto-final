@@ -46,38 +46,6 @@ export const SERVICIOS = [
     precio: 200,
     resumen: 'Acrílico o gel de reconstrucción, el largo va incluido.',
   },
-  {
-    id: 'pedicura-classic',
-    zona: 'pies',
-    nombre: 'Pedicura Clásica',
-    duracion: 60,
-    precio: 90,
-    resumen: 'Lima, cutículas, exfoliación y esmalte.',
-  },
-  {
-    id: 'pedicura-spa',
-    zona: 'pies',
-    nombre: 'Pedicura Spa',
-    duracion: 90,
-    precio: 150,
-    resumen: 'Baño de sales, exfoliación y masaje plantar.',
-  },
-  {
-    id: 'pedicura-semi',
-    zona: 'pies',
-    nombre: 'Pedicura Semipermanente',
-    duracion: 120,
-    precio: 160,
-    resumen: 'Gel con lámpara UV, 21 días de duración.',
-  },
-  {
-    id: 'pedicura-esculpidas',
-    zona: 'pies',
-    nombre: 'Pedicura Esculpida',
-    duracion: 150,
-    precio: 230,
-    resumen: 'Reconstrucción en gel, limado doble y forma a medida.',
-  },
 ]
 
 export const FORMAS = [

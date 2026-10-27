@@ -45,15 +45,8 @@ export default function Calculadora({ seleccion, alCambiar, precio, alReservar }
                 value={servicio.id}
                 onChange={(e) => alCambiar({ servicioId: e.target.value })}
               >
-                <optgroup label="Manos">
+                <optgroup label="Manicura">
                   {SERVICIOS.filter((s) => s.zona === 'manos').map((s) => (
-                    <option key={s.id} value={s.id}>
-                      {s.nombre} — {s.precio} Bs
-                    </option>
-                  ))}
-                </optgroup>
-                <optgroup label="Pies">
-                  {SERVICIOS.filter((s) => s.zona === 'pies').map((s) => (
                     <option key={s.id} value={s.id}>
                       {s.nombre} — {s.precio} Bs
                     </option>

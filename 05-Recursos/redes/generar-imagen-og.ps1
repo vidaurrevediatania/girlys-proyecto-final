@@ -79,8 +79,8 @@ $br = New-Object System.Drawing.SolidBrush $oro
 $g.FillPath($br, $rombo)
 $br.Dispose(); $rombo.Dispose()
 
-$fSub = New-Object System.Drawing.Font('Georgia', 23, [System.Drawing.FontStyle]::Regular)
-Centrado (Espaciado 'MANICURA & PEDICURA' ' ') $fSub $tinta 386 44
+$fSub = New-Object System.Drawing.Font('Georgia', 28, [System.Drawing.FontStyle]::Regular)
+Centrado (Espaciado 'MANICURA' ' ') $fSub $tinta 386 44
 
 $fLugar = New-Object System.Drawing.Font('Georgia', 19, [System.Drawing.FontStyle]::Regular)
 Centrado (Espaciado "SUCRE $punto BOLIVIA" ' ') $fLugar $oro 436 38

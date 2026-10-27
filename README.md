@@ -136,7 +136,7 @@ Antes de presentar el sitio como negocio real:
 - [ ] Dominio real
 - [x] ID de Google Analytics (`G-ZMHXH6EH9Y`, en `.env.production`)
 - [x] Instagram: <https://www.instagram.com/girlys.sucre/> (`VITE_INSTAGRAM_URL`)
-- [x] Facebook: <https://www.facebook.com/share/1Gi3ihnXN4/> (`VITE_FACEBOOK_URL`)
+- [x] Facebook: <https://www.facebook.com/share/1EwZ2ADCBq/> (`VITE_FACEBOOK_URL`)
 - [ ] Textos legales revisados
 
 Todo lo comercial vive en `01-Sitio-Web/src/data.js` y `01-Sitio-Web/.env`.

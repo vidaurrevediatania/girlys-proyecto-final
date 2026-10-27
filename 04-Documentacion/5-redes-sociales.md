@@ -109,7 +109,7 @@ VITE_YOUTUBE_URL=
 ```
 
 > Instagram ya está conectado con `https://www.instagram.com/girlys.sucre/` y Facebook con
-> `https://www.facebook.com/share/1Gi3ihnXN4/`. El enlace de Facebook es el enlace compartido
+> `https://www.facebook.com/share/1EwZ2ADCBq/`. El enlace de Facebook es el enlace compartido
 > que se recibió; si después configuras un nombre de usuario propio para la página, se puede
 > reemplazar por su URL más corta.
 

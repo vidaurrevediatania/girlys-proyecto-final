@@ -21,7 +21,7 @@ SEO = que Google entienda la página y la muestre cuando alguien busca "manicura
 | `sitemap.xml` (home + blog) | `public/` | ✅ |
 | Un solo `h1`, jerarquía de `h2`/`h3` | Componentes | ✅ |
 | Enlaces internos con texto descriptivo | Navegación y pie | ✅ |
-| 404 real que devuelve 404 | `.htaccess` | ✅ |
+| 404 real para archivos inexistentes (rutas del SPA muestran la portada) | `.htaccess` | ✅ |
 | Rendimiento: sitio estático, sin fuentes externas | Build | ✅ |
 | Imágenes en WebP con `width`/`height` | `src/assets` | ✅ |
 | Accesibilidad: foco visible, contraste, `aria-label` | Componentes | ✅ |

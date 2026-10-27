@@ -56,7 +56,7 @@ foreach ($puerto in 8090, 8443, 8080) {
 
 Bien 'Encendiendo WordPress (PHP)...'
 $php = Start-Process -FilePath $phpExe `
-    -ArgumentList '-S','127.0.0.1:8090','-t',$wpDir,(Join-Path $wpDir 'router.php') `
+    -ArgumentList "-S 127.0.0.1:8090 -t `"$wpDir`" `"$(Join-Path $wpDir 'router.php')`"" `
     -WorkingDirectory $wpDir -PassThru -WindowStyle Hidden `
     -RedirectStandardOutput (Join-Path $logs 'php.log') `
     -RedirectStandardError  (Join-Path $logs 'php-error.log')

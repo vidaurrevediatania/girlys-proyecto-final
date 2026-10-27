@@ -139,7 +139,7 @@ update_option('timezone_string', 'America/La_Paz');
 update_option('date_format', 'd/m/Y');
 update_option('time_format', 'H:i');
 update_option('start_of_week', 1);
-update_option('blog_public', 0); // local: que Google no lo indexe todavía
+update_option('blog_public', 1); // visible: activa robots.txt y los sitemaps del blog
 update_option('default_comment_status', 'closed');
 update_option('default_ping_status', 'closed');
 update_option('default_pingback_flag', 0);

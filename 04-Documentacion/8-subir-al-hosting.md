@@ -166,7 +166,10 @@ Ver documento 3, sección 3.2. Resumen:
 | `https://tudominio.com/sitemap.xml` | Sitemap del sitio |
 | `https://tudominio.com/blog/wp-sitemap.xml` | Sitemap del blog |
 | `https://tudominio.com/robots.txt` | Robots con los dos sitemaps |
-| `https://tudominio.com/una-ruta-inexistente` | 404 real |
+| `https://tudominio.com/archivo-inexistente.pdf` | 404 real (archivo inexistente) |
+
+> WordPress instalado en `/blog` **no publica** `/blog/robots.txt`: el estándar es que
+> `robots.txt` viva en la raíz del dominio. El de la raíz ya incluye el sitemap del blog.
 
 Cuando todo eso funcione: enviar los sitemaps a Search Console y crear la ficha de
 Google Business Profile.

@@ -75,7 +75,7 @@ En local se trabaja sin caché. En el hosting se activa en 30 segundos:
 | Zona horaria | America/La_Paz |
 | Enlaces permanentes | `/%postname%/` → `/blog/mi-entrada/` |
 | Comentarios | Cerrados por defecto y en entradas antiguas |
-| Visibilidad en buscadores | **Desactivada** (local) |
+| Visibilidad en buscadores | **Activada** (necesaria para robots.txt y sitemaps) |
 | Página de inicio | Página "Inicio" con diseño propio |
 | Página de entradas | "Blog" en `/blog/entradas/` |
 | Categorías | Cuidado de uñas · Tendencias · Paso a paso |
@@ -85,8 +85,10 @@ En local se trabaja sin caché. En el hosting se activa en 30 segundos:
 
 ### Sobre la visibilidad en buscadores
 
-Está **desmarcada** a propósito: `Ajustes → Lectura → "Disuadir a los motores de búsqueda"`.
-Cuando el sitio esté en el dominio real, hay que **desmarcarla** para que Google indexe el blog.
+Está **activada** (`Ajustes → Lectura → "Disuadir a los motores de búsqueda"` desmarcado).
+Es necesario para que WordPress publique `robots.txt` y los sitemaps del blog.
+En localhost no hay riesgo de indexación: Google no puede entrar a tu PC.
+Al publicar en el dominio real debe quedar igual (activada).
 
 ---
 
@@ -114,6 +116,6 @@ Cuando el sitio esté en el dominio real, hay que **desmarcarla** para que Googl
 - [x] Plugins básicos instalados (SEO, backup, seguridad, caché).
 - [x] Contenido inicial publicado (3 entradas, 3 páginas, 3 categorías).
 - [x] Menú y portada configurados.
-- [x] Comentarios cerrados y buscadores bloqueados en local.
+- [x] Comentarios cerrados y buscadores configurados.
 - [ ] Activar WP Super Cache al pasar a producción.
-- [ ] Desmarcar "disuadir a los motores de búsqueda" al publicar.
+- [ ] Revisar los sitemaps del blog al publicar.

@@ -71,7 +71,7 @@ Proyecto Final 2.0
 
 | Punto | Documento | Estado |
 |---|---|---|
-| 1. Tema, modelo de ingreso, dominio y CMS | `04-Documentacion/1-tema-dominio-cms.md` | ✅ Definido y documentado |
+| 1. Tema, modelo de ingreso, dominio y CMS | `04-Documentacion/1-tema-dominio-cms.md` | ✅ Definido y documentado (CMS gráfico en `/admin`) |
 | 2. Instalación del sitio y del blog | `04-Documentacion/2-instalacion-cms-dominio.md` | ✅ Funcionando en local |
 | 3. SSL | `04-Documentacion/3-ssl.md` | ✅ Local autofirmado + Vercel automático |
 | 4. Google Analytics | `04-Documentacion/4-google-analytics.md` | ✅ Configurado con el ID `G-ZMHXH6EH9Y` |

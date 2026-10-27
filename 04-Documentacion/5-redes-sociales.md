@@ -21,6 +21,35 @@ Todo el material ya está preparado en `05-Recursos\redes`:
 > Los pasos de abajo quedan como registro de cómo se hizo.
 
 1. Descargar Instagram en el teléfono (o entrar a <https://instagram.com>).
+
+## 5.0 Panel de gestión (CMS gráfico, nuevo)
+
+El sitio tiene un **panel gráfico de gestión** en `/admin`:
+
+- URL: <https://girlys-proyecto-final.vercel.app/admin>
+- Editor visual para servicios, sucursales y artículos del blog.
+- Conectado a GitHub: cada cambio crea un commit y Vercel publica automáticamente.
+- Requiere configurar una aplicación OAuth de GitHub (ver sección 5.0.1).
+
+### 5.0.1 Configurar la autenticación de GitHub (una sola vez)
+
+1. Entrá a **GitHub → Settings → Developer settings → OAuth Apps → New OAuth App**.
+2. Completá:
+   - **Application name:** `Girlys CMS`
+   - **Homepage URL:** `https://girlys-proyecto-final.vercel.app`
+   - **Authorization callback URL:** `https://girlys-proyecto-final.vercel.app/api/callback`
+3. Guardá y copiá el **Client ID** y el **Client Secret**.
+4. En **Vercel → Settings → Environment Variables**, agregá:
+   - `GITHUB_CLIENT_ID` = (el Client ID)
+   - `GITHUB_CLIENT_SECRET` = (el Client Secret)
+5. Redeployá (o esperá al próximo push).
+
+Después de eso, entrá a `/admin`, pulsá **Login with GitHub** y autorizá.
+Los cambios que guardes crearán un commit en el repositorio y Vercel reconstruirá el sitio en 1 a 2 minutos.
+
+> El panel gráfico reemplaza la edición manual de `src/data.js` y los archivos Markdown
+> para el contenido de servicios, sucursales y blog. Los cambios no se publican al instante:
+> GitHub recibe el commit, Vercel reconstruye y el sitio se actualiza.
 2. **Crear cuenta nueva** con el correo del negocio.
 3. Usuario sugerido (elegir uno libre):
 

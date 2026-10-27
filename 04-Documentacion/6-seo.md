@@ -69,10 +69,18 @@ Por eso la primera publicación en Vercel ya genera un sitemap correcto, sin con
 
 ## 6.2 Lo que falta y depende de vos
 
-### A. Dominio real
+### A. Dominio
 
-Mientras el canonical diga `https://TU-DOMINIO.com`, **no se debe indexar**.
-Cuando tengas el dominio:
+El sitio ya está publicado en:
+
+```
+https://girlys-proyecto-final.vercel.app
+```
+
+El canonical, el sitemap y `robots.txt` ya apuntan a esa dirección. **No hace falta
+comprar un dominio para la entrega.**
+
+Si más adelante quieres un dominio propio:
 
 ```powershell
 cd "03-Servidor-Local"
@@ -89,7 +97,7 @@ apuntando al dominio nuevo. Después hay que hacer `commit` y `push`.
 3. Dos caminos:
    - **Dominio** (recomendado): pide un registro TXT en el DNS. Solo funciona si tenés acceso
      al DNS (el proveedor del dominio).
-   - **Prefijo de URL**: `https://tudominio.com/` → verificación por **etiqueta HTML**.
+   - **Prefijo de URL**: `https://girlys-proyecto-final.vercel.app/` → verificación por **etiqueta HTML**.
 4. Si elegís etiqueta HTML, Google da algo así:
 
 ```html
@@ -109,11 +117,13 @@ apuntando al dominio nuevo. Después hay que hacer `commit` y `push`.
 Dentro de Search Console → **Sitemaps**, escribir:
 
 ```
-https://tudominio.com/sitemap.xml
+https://girlys-proyecto-final.vercel.app/sitemap.xml
 ```
 
 Es **un solo sitemap**: incluye el sitio y todas las entradas del blog.
 No hay un segundo sitemap de WordPress.
+
+> Si más adelante conectás un dominio propio, enviá el sitemap con ese dominio.
 
 ### D. Probar los datos estructurados
 

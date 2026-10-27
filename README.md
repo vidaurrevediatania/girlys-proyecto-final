@@ -7,6 +7,9 @@ listo para correr en una PC con Windows y publicarse en **Vercel** con GitHub.
 > mismo proyecto y despliegue estático en Vercel. **No hay WordPress, PHP, MySQL
 > ni base de datos.** Eso elimina el hosting aparte y deja el despliegue en dos pasos.
 
+**Sitio publicado:** <https://girlys-proyecto-final.vercel.app>  
+**Repositorio:** <https://github.com/vidaurrevediatania/girlys-proyecto-final>
+
 ---
 
 ## Qué incluye

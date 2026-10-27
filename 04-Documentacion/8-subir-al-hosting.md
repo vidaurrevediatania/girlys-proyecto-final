@@ -157,7 +157,10 @@ Abrir la URL de Vercel y comprobar:
 
 ---
 
-## 8.6 Conectar el dominio propio (cuando lo tengas)
+## 8.6 Conectar un dominio propio (opcional)
+
+**La URL gratuita de Vercel ya sirve para la entrega.** Este paso es solo si más
+adelante quieres un dominio como `girlys.com.bo`.
 
 1. Comprar el dominio (NIC Bolivia, Namecheap, GoDaddy o similar).
 2. En Vercel: abrir el proyecto → **Settings → Domains**.

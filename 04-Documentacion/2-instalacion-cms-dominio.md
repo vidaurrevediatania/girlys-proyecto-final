@@ -173,8 +173,12 @@ npm run preview      # previsualiza la construcción
 
 El sitio es una aplicación de una sola página. Una dirección sin extensión
 (`/blog/no-existe`) devuelve la página 404 propia con estado HTTP 200, porque el
-servidor entrega `index.html` y React decide qué mostrar. Un archivo inexistente
-con extensión (`/archivo.pdf`) sí devuelve un 404 real.
+servidor entrega `index.html` y React decide qué mostrar.
+
+En el servidor local, un archivo inexistente con extensión (`/archivo.pdf`) sí
+devuelve un 404 real. En Vercel, el rewrite entrega `index.html` para cualquier
+ruta, así que también muestra la página 404 propia con estado HTTP 200. No afecta
+al SEO porque esa página está marcada `noindex`.
 
 ---
 

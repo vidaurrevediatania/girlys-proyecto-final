@@ -174,7 +174,9 @@ tocar el código.
 
 ---
 
-## 9.6 Dominio propio
+## 9.6 Dominio propio (opcional)
+
+El sitio ya funciona con la URL gratuita de Vercel. Comprar un dominio es opcional.
 
 1. Vercel → proyecto → **Settings → Domains**.
 2. Agregar el dominio y copiar los registros DNS.

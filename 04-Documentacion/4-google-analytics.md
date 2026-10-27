@@ -44,8 +44,7 @@ Con eso se puede responder: **¿cuánta gente calcula un precio y cuánta termin
 6. **Crear** y aceptar los términos.
 7. Elegir plataforma: **Web**.
 8. Flujo de datos:
-   - URL del sitio: `https://tudominio.com` (el dominio real; si todavía no lo tenés,
-     escribí `https://localhost:8443` y después se cambia).
+   - URL del sitio: `https://girlys-proyecto-final.vercel.app` (el sitio ya está publicado ahí).
    - Nombre del flujo: `Sitio Girlys`.
 9. **Crear flujo**.
 10. Copiar el **ID de medición**, con la forma:

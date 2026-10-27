@@ -3,6 +3,10 @@
 Guía corta para abrir el proyecto y entender qué hay en cada carpeta.
 Todo está **en tu PC**. No hace falta WordPress, PHP, MySQL ni Docker.
 
+> **Sitio ya publicado:** <https://girlys-proyecto-final.vercel.app>  
+> **Repositorio:** <https://github.com/vidaurrevediatania/girlys-proyecto-final>  
+> Ese dominio gratuito de Vercel es suficiente para la entrega.
+
 ---
 
 ## 1. Abrir el sitio (2 pasos)
@@ -92,6 +96,12 @@ Proyecto Final 2.0
 
 ## 5. Publicar en Vercel (resumen)
 
+El sitio **ya está publicado** en:
+
+```
+https://girlys-proyecto-final.vercel.app
+```
+
 1. Subir el proyecto a GitHub.
 2. En <https://vercel.com>, **Add New → Project** e importar el repositorio.
 3. Pulsar **Deploy**.
@@ -99,7 +109,8 @@ Proyecto Final 2.0
 Vercel lee `vercel.json`, construye `01-Sitio-Web` y publica el sitio y el blog.
 No hace falta configurar PHP, base de datos ni variables obligatorias.
 
-Cuando tengas dominio propio:
+La URL gratuita de Vercel es suficiente para la entrega. Si más adelante quieres
+un dominio propio:
 
 1. Vercel → **Settings → Domains** → agregar el dominio.
 2. Ejecutar `03-Servidor-Local\configurar-dominio.ps1 -Dominio "https://tudominio.com"`.

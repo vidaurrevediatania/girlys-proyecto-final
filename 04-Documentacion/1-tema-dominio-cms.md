@@ -47,24 +47,24 @@ El sitio no vende productos: **vende turnos**. El ingreso se genera así:
 
 ## 1.3 Dominio
 
-**Todavía no hay dominio asignado.** El proyecto está preparado para funcionar sin uno
-y para conectarlo después en un solo paso.
+**El sitio ya está publicado** en la URL gratuita de Vercel. No hace falta comprar
+un dominio para la entrega.
 
 | Dato | Valor |
 |---|---|
-| Dominio actual | **pendiente** (marcador `https://TU-DOMINIO.com` en `.env`) |
-| Dónde se cambia | `03-Servidor-Local\configurar-dominio.ps1` |
-| Primer despliegue | Vercel asigna una URL gratis (`proyecto.vercel.app`) |
-| SSL local | autofirmado (documento 3) |
-| SSL en Vercel | automático y gratis |
+| Dominio actual | **https://girlys-proyecto-final.vercel.app** (gratis) |
+| Dónde se administra | Vercel → proyecto → **Settings → Domains** |
+| SSL | automático y gratis |
+| Dominio propio | opcional, para más adelante |
 
-### Cómo funciona sin dominio
+### Cómo funciona
 
 - En local, el sitio usa `https://localhost:8443`.
-- En Vercel, la primera publicación usa automáticamente la URL que asigna la plataforma.
-- El canonical, el sitemap y `robots.txt` se generan con la dirección que corresponda.
+- En Vercel, la dirección de producción es la URL gratuita del proyecto.
+- El canonical, el sitemap y `robots.txt` se generan solos con la dirección del despliegue.
+- No hay que ejecutar `configurar-dominio.ps1` mientras se use la URL de Vercel.
 
-### Cómo poner el dominio cuando lo tengas
+### Si más adelante compras un dominio
 
 1. Comprar el dominio (NIC Bolivia, Namecheap, GoDaddy o similar).
 2. En Vercel: **Settings → Domains → Add**, escribir el dominio y seguir los registros DNS.
@@ -77,14 +77,14 @@ y para conectarlo después en un solo paso.
 
 Vercel emite el certificado HTTPS solo. No hay que instalar Let's Encrypt ni tocar Apache.
 
-> Mientras el canonical diga `TU-DOMINIO.com`, no conviene enviar el sitio a Google.
-> Con la URL de Vercel o el dominio propio, ya queda listo para Search Console.
+> En el `.env` local, `VITE_SITE_ORIGIN=https://TU-DOMINIO.com` es solo un marcador.
+> En Vercel no está configurado, así que el sitio toma automáticamente su URL real.
 
-### Recomendación de dominio
+### Recomendación
 
-- Para la entrega sirve la URL gratuita de Vercel.
+- Para la entrega alcanza con la URL gratuita de Vercel.
 - Para el negocio conviene un dominio propio: `girlys.com.bo` o `girlysbolivia.com`
-  (entre 10 y 15 USD al año).
+  (entre 10 y 15 USD al año). Es un paso opcional.
 
 ---
 

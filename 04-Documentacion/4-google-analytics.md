@@ -1,7 +1,7 @@
 # Punto 4 · Google Analytics 4
 
 El sitio **ya tiene el código de Analytics instalado y configurado** con el ID de medición
-`G-ZMXH6EH9Y`. La cuenta y la propiedad ya fueron creadas; no hay que pegar nada.
+`G-ZMHXH6EH9Y`. La cuenta y la propiedad ya fueron creadas; no hay que pegar nada.
 
 ---
 
@@ -56,7 +56,7 @@ G-XXXXXXXXXX
 
 ## 4.3 Dónde está guardado el ID
 
-El ID `G-ZMXH6EH9Y` está en:
+El ID `G-ZMHXH6EH9Y` está en:
 
 ```text
 01-Sitio-Web/.env.production
@@ -65,7 +65,7 @@ El ID `G-ZMXH6EH9Y` está en:
 Contenido:
 
 ```env
-VITE_GA_MEASUREMENT_ID=G-ZMXH6EH9Y
+VITE_GA_MEASUREMENT_ID=G-ZMHXH6EH9Y
 ```
 
 Ese archivo **sí se sube a GitHub** y Vercel lo usa al construir. El ID de medición es un
@@ -118,7 +118,7 @@ Para pruebas locales con `npm run dev`, el ID se puede poner en `01-Sitio-Web/.e
 ## 4.6 Resumen para la defensa
 
 1. GA4 creado con la cuenta del negocio.
-2. ID `G-ZMXH6EH9Y` configurado en `.env.production` y sitio reconstruido.
+2. ID `G-ZMHXH6EH9Y` configurado en `.env.production` y sitio reconstruido.
 3. Carga **solo con consentimiento**.
 4. Eventos personalizados que miden el embudo: calcular → reservar → WhatsApp.
 5. Verificado en tiempo real.

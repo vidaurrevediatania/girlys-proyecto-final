@@ -79,7 +79,7 @@ Si lo pierdes, se puede cambiar la contraseña con un script (pídemelo).
 - **Categorías:** Cuidado de uñas, Tendencias, Paso a paso.
 - **Menú:** Inicio · Blog · Servicios y precios · Sitio principal.
 - **Comentarios:** cerrados por defecto.
-- **Visibilidad en buscadores:** desactivada (es local; no queremos que Google lo indexe todavía).
+- **Visibilidad en buscadores:** activada (necesaria para que el blog publique `robots.txt` y sus sitemaps).
 
 ---
 

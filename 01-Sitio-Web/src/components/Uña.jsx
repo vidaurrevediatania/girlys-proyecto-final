@@ -14,9 +14,7 @@ import { textoLargo } from '../lib/precio.js'
     Como el ancho no cambia al alargar, los diseños se quedan pegados a la
     punta: se agrandan con la uña, no con el largo. */
 function Diseno({ diseno, a, punta }) {
-  const { tipY, yHombro, altoPunta, anchoPunta } = punta
-  // el margen para pasarse del borde, para que el recorte no muerda la curva
-  const m = 8
+  const { tipY } = punta
   if (diseno === 'french') {
     // LA PUNTA BLANCA: una media luna pegada al borde.
     //
@@ -31,21 +29,23 @@ function Diseno({ diseno, a, punta }) {
     // de cúpula— el blanco se derramaba por los costados y quedaba un tazón
     // en vez de un french.
     //
-    // El grosor va con el ancho de la uña, no con el largo: el borde libre
-    // es el mismo con 0.24 cm que con 1.44 cm.
+    // Una media luna lisa y opaca, siguiendo el contorno real de la punta.
+    // Limitamos su grosor a la extensión disponible para que en uñas cortas
+    // la línea de sonrisa no tape el lecho natural.
     const { c1i, c1d, c2i, c2d, vertice, yHombro, anchoPunta } = punta
-    const d = a * 0.38
-    const X = a + m
+    const d = Math.min(a * 0.32, punta.extensionPx * 0.7)
+    const X = a + 12
     const baja = ([x, y]) => `${r(x)} ${r(y + d)}`
     return (
       <path
-        d={`M ${r(-X)} ${r(tipY - 6)}
+        fillOpacity="1"
+        d={`M ${r(-X)} ${r(tipY - 12)}
             L ${r(-X)} ${r(yHombro + d)}
             L ${r(-anchoPunta)} ${r(yHombro + d)}
             C ${baja(c1i)} ${baja(c2i)} ${baja(vertice)}
             C ${baja(c2d)} ${baja(c1d)} ${r(anchoPunta)} ${r(yHombro + d)}
             L ${r(X)} ${r(yHombro + d)}
-            L ${r(X)} ${r(tipY - 6)} Z`}
+            L ${r(X)} ${r(tipY - 12)} Z`}
       />
     )
   }

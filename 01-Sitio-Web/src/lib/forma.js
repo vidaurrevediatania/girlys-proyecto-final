@@ -43,7 +43,7 @@ export function medidas({ unidades, punta, arco, caja }) {
   const extensionPx = largoEnCm(unidades) * CSS_PX_POR_CM
   const altoPunta = Math.min(Math.max(anchoPunta * arco, 0.6), extensionPx * 0.65)
   const yHombro = tipY + altoPunta
-  return { unidades, largoPx, anchoCuticula, anchoPunta, tipY, altoPunta, yHombro }
+  return { unidades, largoPx, extensionPx, anchoCuticula, anchoPunta, tipY, altoPunta, yHombro }
 }
 
 /**

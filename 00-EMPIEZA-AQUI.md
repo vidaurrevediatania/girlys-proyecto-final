@@ -75,7 +75,7 @@ Proyecto Final 2.0
 | 2. Instalación del sitio y del blog | `04-Documentacion/2-instalacion-cms-dominio.md` | ✅ Funcionando en local |
 | 3. SSL | `04-Documentacion/3-ssl.md` | ✅ Local autofirmado + Vercel automático |
 | 4. Google Analytics | `04-Documentacion/4-google-analytics.md` | ✅ Configurado con el ID `G-ZMHXH6EH9Y` |
-| 5. Facebook e Instagram sin pago | `04-Documentacion/5-redes-sociales.md` | ✅ Material listo; faltan crear las cuentas |
+| 5. Facebook e Instagram sin pago | `04-Documentacion/5-redes-sociales.md` | ✅ Instagram creado; falta la página de Facebook |
 | 6. SEO | `04-Documentacion/6-seo.md` | ✅ Aplicado; falta dominio real |
 | 7. Vista inicial, tema y dependencias | `04-Documentacion/7-vista-inicial-plugins.md` | ✅ Hecho |
 | 8. Publicar en Vercel | `04-Documentacion/8-subir-al-hosting.md` | ✅ Preparado |
@@ -89,7 +89,9 @@ Proyecto Final 2.0
 2. **Importar el repositorio en Vercel**. El proyecto ya trae `vercel.json`: no hay que configurar nada.
 3. **Google Analytics ya está configurado** con el ID `G-ZMHXH6EH9Y` en
    `01-Sitio-Web/.env.production`. No tienes que pegar nada.
-4. **Crear Instagram y Facebook** con tu teléfono. El material ya está en `05-Recursos/redes`.
+4. **Instagram ya está creado** en <https://www.instagram.com/girlys.sucre/> y conectado al
+   sitio. Falta **crear la página de Facebook** con tu cuenta personal. El material está en
+   `05-Recursos/redes`.
 5. **Pasar tus datos reales** (WhatsApp, direcciones, precios y fotos) cuando los tengas.
 
 ---

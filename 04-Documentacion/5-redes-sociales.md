@@ -17,6 +17,9 @@ Todo el material ya está preparado en `05-Recursos\redes`:
 
 ## 5.1 Crear la cuenta de Instagram (profesional, gratis)
 
+> **Cuenta creada:** <https://www.instagram.com/girlys.sucre/> (usuario `@girlys.sucre`).
+> Los pasos de abajo quedan como registro de cómo se hizo.
+
 1. Descargar Instagram en el teléfono (o entrar a <https://instagram.com>).
 2. **Crear cuenta nueva** con el correo del negocio.
 3. Usuario sugerido (elegir uno libre):
@@ -99,11 +102,14 @@ Cuando tengas las URLs, abrir `01-Sitio-Web\.env.production` (el archivo que usa
 publicado) y completar:
 
 ```env
-VITE_INSTAGRAM_URL=https://instagram.com/girlys.nails
+VITE_INSTAGRAM_URL=https://www.instagram.com/girlys.sucre/
 VITE_FACEBOOK_URL=https://facebook.com/girlys.nails
 VITE_TIKTOK_URL=
 VITE_YOUTUBE_URL=
 ```
+
+> Instagram ya está conectado con `https://www.instagram.com/girlys.sucre/`.
+> Falta completar `VITE_FACEBOOK_URL` cuando la página esté creada.
 
 Para probar en la PC alcanza con repetir lo mismo en `01-Sitio-Web\.env` y ejecutar:
 

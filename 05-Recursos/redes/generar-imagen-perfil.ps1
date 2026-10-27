@@ -88,8 +88,8 @@ $g.FillPath($brochaRombo, $rombo)
 $brochaRombo.Dispose(); $rombo.Dispose()
 
 # --- subtitulo ----------------------------------------------
-$fSub = New-Object System.Drawing.Font('Georgia', 27, [System.Drawing.FontStyle]::Regular)
-Centrado (Espaciado 'MANICURA & PEDICURA' ' ') $fSub $tinta 717 56
+$fSub = New-Object System.Drawing.Font('Georgia', 30, [System.Drawing.FontStyle]::Regular)
+Centrado (Espaciado 'MANICURA' ' ') $fSub $tinta 717 56
 
 $fLugar = New-Object System.Drawing.Font('Georgia', 23, [System.Drawing.FontStyle]::Regular)
 Centrado (Espaciado "SUCRE $punto BOLIVIA" ' ') $fLugar $oro 784 48

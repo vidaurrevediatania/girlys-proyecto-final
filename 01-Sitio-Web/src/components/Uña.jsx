@@ -29,10 +29,27 @@ function Diseno({ diseno, a, punta }) {
     // de cúpula— el blanco se derramaba por los costados y quedaba un tazón
     // en vez de un french.
     //
-    // Media luna lisa y redondeada; la curva interior conserva su arco y
-    // afina solo al acercarse a los extremos para que no queden cuadrados.
-    const { c1i, c1d, c2i, c2d, vertice, yHombro, anchoPunta } = punta
+    // Media luna lisa y redondeada. Las alas bajan un poco por los costados,
+    // pero la sonrisa vuelve a tocar el contorno en punta, sin cortes cuadrados.
+    const { c1i, c1d, c2i, c2d, vertice, izq, yHombro, anchoPunta } = punta
     const d = Math.min(a * 0.38, punta.extensionPx * 0.75)
+    const bajadaLateral = Math.min(d * 0.42, BASE_Y - yHombro - 1)
+    const yExtremo = yHombro + bajadaLateral
+    const bordeIzquierdoEnY = (y) => {
+      for (let i = 1; i < izq.length; i++) {
+        const anterior = izq[i - 1]
+        const actual = izq[i]
+        if (anterior[1] >= y && actual[1] <= y) {
+          const tramo = (anterior[1] - y) / (anterior[1] - actual[1])
+          return anterior[0] + (actual[0] - anterior[0]) * tramo
+        }
+      }
+      return -anchoPunta
+    }
+    const extremoIzquierdo = bordeIzquierdoEnY(yExtremo)
+    const extremoDerecho = -extremoIzquierdo
+    const controlLateralDerecho = [extremoDerecho - bajadaLateral * 0.42, yExtremo - bajadaLateral * 0.18]
+    const controlLateralIzquierdo = [extremoIzquierdo + bajadaLateral * 0.42, yExtremo - bajadaLateral * 0.18]
     const X = a + 12
     const punto = ([x, y]) => `${r(x)} ${r(y)}`
     const baja = ([x, y], factor = 1) => punto([x, y + d * factor])
@@ -40,13 +57,15 @@ function Diseno({ diseno, a, punta }) {
       <path
         fillOpacity="1"
         d={`M ${r(-X)} ${r(tipY - 12)}
-            L ${r(-X)} ${r(yHombro)}
+            L ${r(-X)} ${r(yExtremo)}
+            L ${punto([extremoIzquierdo, yExtremo])}
             L ${r(-anchoPunta)} ${r(yHombro)}
             C ${punto(c1i)} ${punto(c2i)} ${punto(vertice)}
             C ${punto(c2d)} ${punto(c1d)} ${r(anchoPunta)} ${r(yHombro)}
-            C ${baja(c1d, 0.78)} ${baja(c2d)} ${r(0)} ${r(tipY + d)}
-            C ${baja(c2i)} ${baja(c1i, 0.78)} ${r(-anchoPunta)} ${r(yHombro)}
-            L ${r(-X)} ${r(yHombro)}
+            L ${punto([extremoDerecho, yExtremo])}
+            C ${punto(controlLateralDerecho)} ${baja(c2d)} ${r(0)} ${r(tipY + d)}
+            C ${baja(c2i)} ${punto(controlLateralIzquierdo)} ${punto([extremoIzquierdo, yExtremo])}
+            L ${r(-X)} ${r(yExtremo)}
             L ${r(-X)} ${r(tipY - 12)} Z`}
       />
     )

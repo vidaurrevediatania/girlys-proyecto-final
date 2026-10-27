@@ -29,23 +29,25 @@ function Diseno({ diseno, a, punta }) {
     // de cúpula— el blanco se derramaba por los costados y quedaba un tazón
     // en vez de un french.
     //
-    // Una media luna lisa y opaca, siguiendo el contorno real de la punta.
-    // Limitamos su grosor a la extensión disponible para que en uñas cortas
-    // la línea de sonrisa no tape el lecho natural.
+    // Media luna lisa: la curva interior vuelve al contorno en ambos costados,
+    // afinándose hasta una punta para evitar extremos cuadrados.
     const { c1i, c1d, c2i, c2d, vertice, yHombro, anchoPunta } = punta
     const d = Math.min(a * 0.32, punta.extensionPx * 0.7)
     const X = a + 12
-    const baja = ([x, y]) => `${r(x)} ${r(y + d)}`
+    const punto = ([x, y]) => `${r(x)} ${r(y)}`
+    const baja = ([x, y], factor = 1) => punto([x, y + d * factor])
     return (
       <path
         fillOpacity="1"
         d={`M ${r(-X)} ${r(tipY - 12)}
-            L ${r(-X)} ${r(yHombro + d)}
-            L ${r(-anchoPunta)} ${r(yHombro + d)}
-            C ${baja(c1i)} ${baja(c2i)} ${baja(vertice)}
-            C ${baja(c2d)} ${baja(c1d)} ${r(anchoPunta)} ${r(yHombro + d)}
-            L ${r(X)} ${r(yHombro + d)}
-            L ${r(X)} ${r(tipY - 12)} Z`}
+            L ${r(-X)} ${r(yHombro)}
+            L ${r(-anchoPunta)} ${r(yHombro)}
+            C ${punto(c1i)} ${punto(c2i)} ${punto(vertice)}
+            C ${punto(c2d)} ${punto(c1d)} ${r(anchoPunta)} ${r(yHombro)}
+            C ${baja(c1d, 0.22)} ${baja(c2d)} ${r(0)} ${r(tipY + d)}
+            C ${baja(c2i)} ${baja(c1i, 0.22)} ${r(-anchoPunta)} ${r(yHombro)}
+            L ${r(-X)} ${r(yHombro)}
+            L ${r(-X)} ${r(tipY - 12)} Z`}
       />
     )
   }

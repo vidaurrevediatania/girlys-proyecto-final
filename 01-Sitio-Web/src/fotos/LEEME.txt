@@ -1,0 +1,7 @@
+Arrastra aquí las fotos de la portada.
+
+No importa cómo las llames ni en qué formato estén (jpg, jpeg, png, webp):
+la galería las detecta sola y hace una diapositiva por cada una.
+Si las ordenas de la más linda a la menos, los rótulos salen en ese orden.
+Si la carpeta está vacía, la galería dibuja las ilustraciones y el sitio
+sigue funcionando.

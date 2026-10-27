@@ -1,0 +1,181 @@
+/* ============================================================
+   Girlys · tokens
+   El mundo: leche, hueso, rosa empolvado, rojo lacónico, bronce de
+   lámpara, el verde del led UV, y la piel del dedo. Todo del mismo
+   vecindario cálido: por eso ampliar la paleta no la hace discordar.
+   ============================================================ */
+
+@font-face {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url('/fuentes/karla-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url('/fuentes/karla-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Times New Roman es fuente del sistema: no se descarga nada. */
+
+:root {
+  /* ---- superficies: papel, 6 pasos de luminosidad, mismo tono.
+         Claros a propósito: la tinta es la que aporta el contraste. ---- */
+  --papel: #fdf8f4; /* leche — el papel de la mesa */
+  --papel-2: #faf3ec; /* un paso abajo */
+  --papel-3: #f6ece2; /* */
+  --papel-4: #f2e6da; /* el más hundido: la calculadora */
+  --papel-hondo: #f5ebe0; /* los campos van más oscuros que alrededor */
+  --papel-alto: #fffdfb; /* lo que flota: ficha, popover */
+
+  /* ---- tinta: cuatro niveles.
+         Los tres primeros están medidos contra --papel-4, el fondo más
+         oscuro: --tinta-3 ronda 5:1, así la etiqueta chica se lee. ---- */
+  --tinta: #241c17; /* primario — marrón casi negro, nunca gris puro */
+  --tinta-2: #56483d; /* secundario */
+  --tinta-3: #6f6053; /* metadatos — 4.9:1 sobre el fondo más oscuro */
+  --tinta-4: #9a8b7f; /* SOLO controles deshabilitados (exento por WCAG 1.4.3) */
+
+  /* ---- acentos ----
+     Tres, no uno, pero los tres son vecinos de la misma familia cálida.
+     El precio SIEMPRE usa --polvo: ese es el color que significa dinero. */
+  --polvo: #bf8a85; /* rosa empolvado · precio y CTA */
+  --polvo-hondo: #9e6b67;
+  --polvo-tinta: #744644;
+  --polvo-lavado: rgba(191, 138, 133, 0.08);
+  --polvo-lavado-2: rgba(191, 138, 133, 0.14);
+
+  --ladrillo: #ab6741; /* rojo lacónico, el esmalte de otoño */
+  --ladrillo-tinta: #7c4526;
+
+  --esmalte: #b01f26; /* rojo laca: limpio y saturado, no ladrillo */
+
+  --salvia: #6f8460; /* el verde del tobogán y del led */
+  --salvia-tinta: #47573c;
+
+  --laton: #9c7d4f; /* el metal de la lámpara */
+
+  /* ---- piel: el dedo de la ilustración ---- */
+  --piel: #e0b89e;
+  --piel-claro: #eecfba;
+  --piel-hondo: #c89b80;
+  --piel-linea: #96705a;
+
+  /* ---- la placa de la uña: nude opaco, no transparente ---- */
+  --una-base: #f8ece1;
+  --una-hondo: #d9a88d;
+
+  /* ---- filetes: pelo, no muro ---- */
+  --filete: rgba(47, 38, 32, 0.11);
+  --filete-suave: rgba(47, 38, 32, 0.06);
+  --filete-fuerte: rgba(47, 38, 32, 0.2);
+  --filete-polvo: rgba(191, 138, 133, 0.42);
+
+  /* ---- control tokens (independientes a propósito) ---- */
+  --campo-fondo: #efe6db;
+  --campo-fondo-foco: #f7f0e7;
+  --campo-filete: rgba(47, 38, 32, 0.16);
+  --campo-anillo: rgba(191, 138, 133, 0.28);
+
+  /* ---- tipografía ---- */
+  --serif: 'Times New Roman', 'Times', 'Liberation Serif', serif;
+  --sans: 'Karla', -apple-system, 'Segoe UI', system-ui, sans-serif;
+
+  /* ratio 1.25 sobre base 15px; times optical tracking */
+  --t-11: 0.6875rem;
+  --t-13: 0.8125rem;
+  --t-15: 0.9375rem;
+  --t-19: 1.1875rem;
+  --t-24: 1.5rem;
+  --t-30: 1.875rem;
+  --t-38: 2.375rem;
+  --t-48: 3rem;
+  --t-64: 4rem;
+
+  /* ---- espaciado: base 8 ---- */
+  --e1: 4px;
+  --e2: 8px;
+  --e3: 12px;
+  --e4: 16px;
+  --e5: 24px;
+  --e6: 32px;
+  --e7: 48px;
+  --e8: 64px;
+  --e9: 96px;
+  --e10: 128px;
+
+  /* ---- radios: escala, nunca mixtos al azar ---- */
+  --r-chico: 3px;
+  --r-medio: 6px;
+  --r-grande: 10px;
+  --r-full: 999px;
+
+  /* ---- movimiento ---- */
+  --salida: cubic-bezier(0.23, 1, 0.32, 1);
+  --mov: 180ms;
+  --mov-lento: 380ms;
+
+  --lavado-alto: 260px;
+}
+
+/* ============================================================
+   Cada sección lleva su tono de superficie, el tono del que viene
+   (para el lavado, y así ninguna transición tiene borde) y su realce.
+   El realce tiñe el rotular a 8%: es lo que hace que el color "cambie"
+   de sección sin que se note el corte.
+   ============================================================ */
+.t-portada {
+  --tono: var(--papel);
+  --tono-previo: var(--papel);
+  --realce: var(--polvo);
+}
+.t-servicios {
+  --tono: var(--papel-2);
+  --tono-previo: var(--papel);
+  --realce: var(--ladrillo);
+}
+.t-calculo {
+  --tono: var(--papel-4);
+  --tono-previo: var(--papel-3);
+  --realce: var(--polvo);
+}
+.t-sucursales {
+  --tono: var(--papel-3);
+  --tono-previo: var(--papel-4);
+  --realce: var(--salvia);
+}
+.t-reserva {
+  --tono: var(--papel-2);
+  --tono-previo: var(--papel-3);
+  --realce: var(--ladrillo);
+}
+.t-preguntas {
+  --tono: var(--papel-2);
+  --tono-previo: var(--papel-3);
+  --realce: var(--ladrillo);
+}
+.t-legal {
+  --tono: var(--papel-3);
+  --tono-previo: var(--papel-2);
+  --realce: var(--salvia);
+}
+.t-pie {
+  --tono: var(--papel-hondo);
+  --tono-previo: var(--papel-3);
+  --realce: var(--salvia);
+}
+
+/* el encabezado fijo no debe tapar el título al llegar por un ancla */
+section[id],
+details[id] {
+  scroll-margin-top: 84px;
+}

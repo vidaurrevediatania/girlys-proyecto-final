@@ -1,0 +1,39 @@
+# ============================================================
+#  Lo que NO va a GitHub
+# ============================================================
+
+# Dependencias y compilados: se regeneran
+node_modules/
+01-Sitio-Web/dist/
+.vercel/
+
+# Secretos y configuración local
+.env
+.env.local
+.env.*.local
+02-WordPress/CLAVE-ADMIN-LOCAL.txt
+02-WordPress/INSTALACION-LOCAL.txt
+02-WordPress/wp-config.php
+
+# Certificados: la clave privada nunca se sube
+03-Servidor-Local/certs/*.key
+03-Servidor-Local/certs/*.pem
+
+# Runtime local de PHP, base de datos y registros
+03-Servidor-Local/php/
+03-Servidor-Local/datos/
+03-Servidor-Local/logs/
+
+# Instaladores descargados (~120 MB, se bajan con instalar.ps1)
+99-Descargas/
+
+# WordPress completo: se instala en el hosting (ver documento 8)
+# La personalización del tema vive en 03-Servidor-Local/recursos/
+02-WordPress/
+
+# Basura del sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+*.log
+*.zip

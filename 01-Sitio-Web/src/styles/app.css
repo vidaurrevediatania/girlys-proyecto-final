@@ -1,0 +1,412 @@
+@import './tokens.css';
+
+/* ============================================================
+   reset
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+html {
+  scroll-behavior: smooth;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='52' viewBox='0 0 48 52'%3E%3Crect x='20' y='1' width='8' height='22' rx='3.5' fill='%23241c17'/%3E%3Crect x='21.8' y='4' width='2' height='16' rx='1' fill='%23ffffff' opacity='0.25'/%3E%3Crect x='22' y='23' width='4' height='7' fill='%239c7d4f'/%3E%3Cpath d='M17 30 h14 l-3 9 h-8 z' fill='%23d46a9e' stroke='%237c4526' stroke-width='1.5' stroke-linejoin='round'/%3E%3Cpath d='M21 32 L20.5 37 M24 32 L24 37.5 M27 32 L27.5 37' stroke='%238e3b32' stroke-width='1' stroke-linecap='round' fill='none'/%3E%3Cpath d='M24 40 c-2 2.5-3 4-3 5.5 a3 3 0 0 0 6 0 c0-1.5-1-3-3-5.5 z' fill='%23bf8a85' stroke='%23744644' stroke-width='1'/%3E%3Ccircle cx='23' cy='46' r='0.8' fill='%23ffffff' opacity='0.85'/%3E%3C/svg%3E") 24 46, auto;
+}
+a, button, input, textarea, select, label, [role="button"] {
+  cursor: inherit;
+}
+body {
+  font-family: var(--sans);
+  font-size: var(--t-15);
+  line-height: 1.6;
+  color: var(--tinta);
+  background: var(--papel);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-variant-numeric: tabular-nums;
+}
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+h1,
+h2,
+h3 {
+  font-weight: 400;
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+:focus-visible {
+  outline: 2px solid var(--campo-anillo);
+  outline-offset: 2px;
+  border-radius: var(--r-chico);
+}
+::selection {
+  background: var(--polvo-lavado-2);
+}
+
+/* ============================================================
+   tipografía — Times_new roman manda en los puntos importantes
+   ============================================================ */
+.serif {
+  font-family: var(--serif);
+  font-weight: 400;
+}
+.titular {
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+}
+.etiqueta {
+  font-family: var(--sans);
+  font-size: var(--t-11);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--tinta-3);
+}
+.apunte {
+  font-size: var(--t-13);
+  color: var(--tinta-2);
+  line-height: 1.65;
+}
+.nota {
+  font-size: var(--t-11);
+  color: var(--tinta-3);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   secciones — el lavado es la transición
+   Dos capas: el tono anterior que baja a nada (mata el borde), y un
+   tinte del realce de la sección (hace que el color cambie de verdad).
+   ============================================================ */
+.seccion {
+  position: relative;
+  background: var(--tono);
+  padding: var(--e9) 0;
+}
+.seccion::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: var(--lavado-alto);
+  background: linear-gradient(180deg, var(--tono-previo) 0%, transparent 100%);
+  pointer-events: none;
+}
+.seccion::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    118% 76% at 82% 4%,
+    color-mix(in oklab, var(--realce) 9%, transparent) 0%,
+    transparent 64%
+  );
+  pointer-events: none;
+}
+.seccion > .contenido {
+  position: relative;
+}
+.contenido {
+  width: min(1400px, 100% - var(--e7));
+  margin-inline: auto;
+}
+.contenido-angosto {
+  width: min(760px, 100% - var(--e7));
+  margin-inline: auto;
+}
+
+.encabezado-seccion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--e3) var(--e5);
+  padding-bottom: var(--e4);
+  margin-bottom: var(--e7);
+  border-bottom: 1px solid var(--filete);
+}
+/* el numeral y el rotular sí cambian de color por sección: es el
+   "cambia de color" que se nota sin que el corte se vea */
+.numeral {
+  font-family: var(--serif);
+  font-size: var(--t-13);
+  color: var(--realce);
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+}
+.titulo-seccion {
+  font-size: var(--t-38);
+  flex: 1 1 320px;
+}
+.rotulo-seccion {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: var(--t-19);
+  color: var(--realce);
+  opacity: 0.85;
+}
+
+/* ============================================================
+   botones — profundidad por filete, no por sombra
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e2);
+  min-height: 44px;
+  padding: 0 var(--e5);
+  border-radius: var(--r-full);
+  border: 1px solid var(--filete-fuerte);
+  font-size: var(--t-13);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition:
+    background-color var(--mov) var(--salida),
+    border-color var(--mov) var(--salida),
+    color var(--mov) var(--salida),
+    transform 140ms var(--salida);
+}
+.btn:active {
+  transform: scale(0.975);
+}
+.btn-firme {
+  background: var(--tinta);
+  border-color: var(--tinta);
+  color: var(--papel);
+}
+.btn-firme:hover {
+  background: var(--polvo-tinta);
+  border-color: var(--polvo-tinta);
+}
+.btn-linea:hover {
+  background: rgba(191, 138, 133, 0.09);
+  border-color: var(--filete-polvo);
+  color: var(--polvo-tinta);
+}
+.btn-rosa {
+  background: var(--polvo);
+  border-color: var(--polvo);
+  color: #fffdfb;
+}
+.btn-rosa:hover {
+  background: var(--polvo-hondo);
+  border-color: var(--polvo-hondo);
+}
+.btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   piezas
+   ============================================================ */
+.ficha {
+  background: var(--papel-alto);
+  border: 1px solid var(--filete);
+  border-radius: var(--r-grande);
+}
+.fila {
+  display: flex;
+  align-items: center;
+  gap: var(--e3);
+  min-height: 44px;
+  width: 100%;
+  padding: var(--e2) var(--e4);
+  border-radius: var(--r-medio);
+  border: 1px solid transparent;
+  text-align: left;
+  transition:
+    background-color var(--mov) var(--salida),
+    border-color var(--mov) var(--salida);
+}
+.fila:hover {
+  background: rgba(191, 138, 133, 0.08);
+}
+.fila[aria-pressed='true'],
+.fila[aria-checked='true'] {
+  background: rgba(191, 138, 133, 0.13);
+  border-color: var(--filete-polvo);
+}
+.punto-elegido {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--r-full);
+  border: 1px solid var(--filete-fuerte);
+  flex: none;
+  transition: background-color var(--mov) var(--salida);
+}
+.fila[aria-pressed='true'] .punto-elegido,
+.fila[aria-checked='true'] .punto-elegido {
+  background: var(--polvo);
+  border-color: var(--polvo);
+}
+.rotulo-opcion {
+  flex: 1;
+  font-size: var(--t-15);
+}
+.entradilla {
+  display: block;
+  font-size: var(--t-11);
+  color: var(--tinta-3);
+  line-height: 1.4;
+}
+.precio-opcion {
+  font-family: var(--serif);
+  font-size: var(--t-19);
+  color: var(--tinta);
+  flex: none;
+}
+.preciosuma {
+  font-family: var(--serif);
+  color: var(--polvo-tinta);
+  flex: none;
+}
+
+/* inputs */
+.campo {
+  width: 100%;
+  min-height: 44px;
+  padding: var(--e2) var(--e3);
+  background: var(--campo-fondo);
+  border: 1px solid var(--campo-filete);
+  border-radius: var(--r-medio);
+  font-size: var(--t-15);
+  transition:
+    background-color var(--mov) var(--salida),
+    border-color var(--mov) var(--salida);
+}
+.campo::placeholder {
+  color: var(--tinta-3);
+}
+.campo:hover {
+  border-color: var(--filete-fuerte);
+}
+.campo:focus {
+  background: var(--campo-fondo-foco);
+  border-color: var(--polvo);
+  outline: none;
+}
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 28px;
+  background: none;
+  cursor: pointer;
+}
+input[type='range']::-webkit-slider-runnable-track {
+  height: 2px;
+  border-radius: var(--r-full);
+  background: linear-gradient(
+    90deg,
+    var(--polvo) 0 var(--llenado, 0%),
+    var(--filete) var(--llenado, 0%) 100%
+  );
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -9px;
+  border-radius: var(--r-full);
+  background: var(--papel);
+  border: 1px solid var(--polvo-hondo);
+  transition: transform 140ms var(--salida);
+}
+input[type='range']:active::-webkit-slider-thumb {
+  transform: scale(0.92);
+}
+input[type='range']::-moz-range-track {
+  height: 2px;
+  border-radius: var(--r-full);
+  background: var(--filete);
+}
+input[type='range']::-moz-range-progress {
+  height: 2px;
+  border-radius: var(--r-full);
+  background: var(--polvo);
+}
+input[type='range']::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--r-full);
+  background: var(--papel);
+  border: 1px solid var(--polvo-hondo);
+}
+
+/* reveal */
+.revelar {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 520ms var(--salida),
+    transform 520ms var(--salida);
+}
+.revelar.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.salto-anchor {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .revelar {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  * {
+    transition-duration: 1ms !important;
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --e9: 72px;
+    --lavado-alto: 180px;
+  }
+  .contenido {
+    width: min(1160px, 100% - var(--e6));
+  }
+  .titulo-seccion {
+    font-size: var(--t-30);
+  }
+}

@@ -1,0 +1,1684 @@
+/* ============================================================
+   piezas — cada bloque declara qué manda y por qué
+   ============================================================ */
+
+/* ---------- barra ---------- */
+.barra {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color var(--mov) var(--salida),
+    background-color var(--mov) var(--salida);
+}
+.barra-fija {
+  background: rgba(248, 242, 236, 0.86);
+  backdrop-filter: blur(12px);
+  border-bottom-color: var(--filete);
+}
+.barra-int {
+  display: flex;
+  align-items: center;
+  gap: var(--e5);
+  min-height: 68px;
+}
+.marca {
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+}
+.marca-nombre {
+  font-family: var(--serif);
+  font-size: var(--t-24);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.marca-sub {
+  font-size: var(--t-11);
+  color: var(--tinta-3);
+  letter-spacing: 0.06em;
+}
+.nav {
+  display: flex;
+  gap: var(--e5);
+}
+.nav-enlace {
+  font-size: var(--t-13);
+  color: var(--tinta-2);
+  padding: var(--e1) 0;
+  border-bottom: 1px solid transparent;
+  transition:
+    color var(--mov) var(--salida),
+    border-color var(--mov) var(--salida);
+}
+.nav-enlace:hover {
+  color: var(--polvo-tinta);
+  border-bottom-color: var(--filete-polvo);
+}
+.barra-cta {
+  padding-inline: var(--e4);
+}
+
+/* ---------- portada ---------- */
+/* el titular manda; el carrusel es el apoyo, no la protagonista */
+.portada {
+  padding-top: var(--e8);
+}
+.portada-rejilla {
+  display: grid;
+  grid-template-columns: 1fr 372px;
+  gap: var(--e9);
+  align-items: center;
+}
+.portada-h1 {
+  font-size: var(--t-64);
+  margin: var(--e4) 0 var(--e5);
+}
+.portada-h1-linea {
+  display: block;
+  font-style: italic;
+  color: var(--polvo-tinta);
+}
+.portada-rotulo {
+  max-width: 46ch;
+}
+.portada-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e3);
+  margin-top: var(--e6);
+}
+.portada-datos {
+  display: flex;
+  gap: var(--e7);
+  margin-top: var(--e8);
+  padding-top: var(--e5);
+  border-top: 1px solid var(--filete);
+}
+.portada-datos dt {
+  margin-bottom: var(--e1);
+}
+.portada-dato {
+  font-size: var(--t-30);
+  line-height: 1;
+}
+/* ---------- galería ---------- */
+.galeria {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e3);
+}
+.galeria-marco {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--r-grande);
+  border: 1px solid var(--filete);
+  background: var(--papel-3);
+}
+.galeria-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--fundido, 320ms) var(--salida);
+}
+.galeria-slide.es-activa {
+  opacity: 1;
+}
+.galeria-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* el respaldo: la misma uña ilustrada en el look del slide */
+.galeria-look {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  background: linear-gradient(
+    170deg,
+    color-mix(in oklab, var(--polvo) 11%, var(--papel-alto)) 0%,
+    var(--papel-2) 72%
+  );
+}
+.galeria-look .una {
+  width: 62%;
+}
+/* el degradado de abajo: sin rótulo, la foto se sigue derritiendo en el
+   papel, sin el borde duro al final */
+.galeria-marco::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 30%;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 253, 251, 0.92) 46%);
+}
+.galeria-puntos {
+  display: flex;
+  gap: var(--e2);
+}
+.galeria-punto {
+  flex: 1;
+  min-height: 24px;
+  border-top: 2px solid var(--filete-fuerte);
+  transition: border-color var(--mov) var(--salida);
+}
+.galeria-punto:hover {
+  border-top-color: var(--tinta-3);
+}
+.galeria-punto.es-activo {
+  border-top-color: var(--polvo);
+}
+
+/* ---------- servicios ---------- */
+.grupo-precios + .grupo-precios {
+  margin-top: var(--e7);
+}
+.grupo-titulo {
+  padding-bottom: var(--e3);
+  color: var(--realce);
+}
+.lista-precios {
+  border-top: 1px solid var(--filete);
+}
+.precio-fila {
+  display: grid;
+  grid-template-columns: 1.1fr 1.6fr 76px 110px;
+  align-items: baseline;
+  gap: var(--e4);
+  width: 100%;
+  min-height: 56px;
+  padding: var(--e3) var(--e2);
+  border-bottom: 1px solid var(--filete-suave);
+  text-align: left;
+  transition: background-color var(--mov) var(--salida);
+}
+.precio-fila:hover {
+  background: color-mix(in oklab, var(--ladrillo) 8%, transparent);
+}
+.precio-nombre {
+  font-size: var(--t-19);
+}
+.precio-detalle {
+  color: var(--tinta-2);
+}
+.precio-tiempo {
+  text-align: right;
+}
+.precio-bolsa {
+  font-size: var(--t-19);
+  text-align: right;
+  color: var(--polvo-tinta);
+}
+.servicios-nota {
+  margin-top: var(--e5);
+  max-width: 52ch;
+}
+
+/* ---------- calculadora ---------- */
+/* los controles son el contenido; la ficha manda pero es más angosta
+   porque es un recibo, no una página */
+.calc-rejilla {
+  display: grid;
+  grid-template-columns: 1fr 372px;
+  gap: var(--e8);
+  align-items: start;
+}
+.calc-controles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e8);
+}
+.bloque-cab {
+  display: flex;
+  align-items: baseline;
+  gap: var(--e3);
+  padding-bottom: var(--e3);
+  margin-bottom: var(--e4);
+  border-bottom: 1px solid var(--filete);
+}
+.bloque-titulo {
+  font-family: var(--serif);
+  font-size: var(--t-24);
+}
+.bloque-apunte {
+  margin-top: var(--e3);
+  max-width: 48ch;
+}
+.campo-salto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.formas {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--e2);
+}
+.forma-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--e2);
+  min-height: 132px;
+  padding: var(--e3) var(--e2);
+  border: 1px solid var(--filete);
+  border-radius: var(--r-medio);
+  background: var(--papel-alto);
+  transition:
+    border-color var(--mov) var(--salida),
+    background-color var(--mov) var(--salida),
+    transform 140ms var(--salida);
+}
+.forma-btn:hover {
+  border-color: var(--filete-polvo);
+  background: rgba(191, 138, 133, 0.07);
+}
+.forma-btn:active {
+  transform: scale(0.975);
+}
+.forma-btn[aria-checked='true'] {
+  border-color: var(--polvo);
+  background: rgba(191, 138, 133, 0.13);
+}
+.glifo {
+  width: 100%;
+  max-width: 42px;
+  height: auto;
+}
+.forma-nombre {
+  font-size: var(--t-13);
+  font-weight: 500;
+}
+.forma-nota {
+  color: var(--tinta-3);
+}
+.forma-btn[aria-checked='true'] .forma-nota {
+  color: var(--polvo-tinta);
+}
+
+.largo-cabecera {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.largo-tramo {
+  font-size: var(--t-19);
+}
+.largo-medida {
+  font-size: var(--t-30);
+  line-height: 1;
+  color: var(--polvo-tinta);
+}
+.largo-marcas {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--t-11);
+  color: var(--tinta-3);
+  letter-spacing: 0.04em;
+}
+.disenos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e1);
+}
+.diseno-fila,
+.retiro-fila {
+  cursor: pointer;
+}
+.retiro-fila {
+  margin-top: var(--e2);
+  border-top: 1px solid var(--filete-suave);
+  border-radius: 0 0 var(--r-medio) var(--r-medio);
+}
+.retiro-fila .punto-elegido {
+  border-radius: 3px;
+}
+.retiro-fila:has(input:checked) {
+  background: rgba(191, 138, 133, 0.13);
+}
+.retiro-fila:has(input:checked) .punto-elegido {
+  background: var(--polvo);
+  border-color: var(--polvo);
+  box-shadow: inset 0 0 0 2px var(--papel-alto);
+}
+
+/* ---------- la ficha: el precio manda ---------- */
+.calc-lateral {
+  position: sticky;
+  top: 88px;
+}
+.ticket {
+  padding: var(--e5);
+  border-radius: var(--r-grande);
+}
+.ticket-figura {
+  display: flex;
+  justify-content: center;
+  padding: var(--e2) 0 var(--e5);
+}
+.ticket-figura .una {
+  width: 212px;
+}
+.ticket-servicio {
+  font-family: var(--serif);
+  font-size: var(--t-24);
+  line-height: 1.15;
+  margin: var(--e2) 0 var(--e4);
+  text-wrap: balance;
+}
+.ticket-lineas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e2);
+  padding: var(--e4) 0;
+  border-top: 1px solid var(--filete-suave);
+  border-bottom: 1px solid var(--filete-suave);
+}
+.ticket-linea {
+  display: flex;
+  align-items: baseline;
+  gap: var(--e2);
+}
+.ticket-dato {
+  font-size: var(--t-13);
+  color: var(--tinta-2);
+  flex: none;
+  max-width: 62%;
+}
+.ticket-dato.serif {
+  font-size: var(--t-15);
+}
+.ticket-linea-puntos {
+  flex: 1;
+  border-bottom: 1px dotted var(--filete-fuerte);
+  transform: translateY(-3px);
+}
+.ticket-monto {
+  font-size: var(--t-13);
+  color: var(--tinta-3);
+  flex: none;
+}
+.ticket-monto.serif {
+  font-size: var(--t-15);
+  color: var(--tinta-2);
+}
+.ticket-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--e3);
+  padding: var(--e4) 0 var(--e3);
+}
+.ticket-total-cifra {
+  font-family: var(--serif);
+  font-size: var(--t-38);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.ticket-anticipo {
+  padding: var(--e4);
+  margin-bottom: var(--e4);
+  border: 1px solid var(--filete-polvo);
+  border-radius: var(--r-medio);
+  background: rgba(191, 138, 133, 0.1);
+}
+.ticket-anticipo-cifra {
+  display: block;
+  font-family: var(--serif);
+  font-size: var(--t-48);
+  line-height: 1;
+  letter-spacing: -0.024em;
+  color: var(--polvo-tinta);
+  margin: var(--e1) 0 var(--e2);
+}
+.ticket-saldo {
+  display: block;
+}
+.ticket-cta {
+  width: 100%;
+}
+/* deshabilitado no es un botón oscuro atenuado: se lee como inerte */
+.ticket-cta:disabled {
+  opacity: 1;
+  background: transparent;
+  border-color: var(--filete);
+  border-style: dashed;
+  color: var(--tinta-3);
+  cursor: not-allowed;
+}
+.ticket-duracion {
+  text-align: center;
+  margin-top: var(--e3);
+}
+
+/* ---------- salones ---------- */
+.salones {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--e5);
+}
+.salon {
+  display: flex;
+  flex-direction: column;
+  padding: var(--e5);
+}
+/* la ficha del salón se tiñe con el realce de la sección: es lo que
+   hace que las tres tarjetas no se lean como tres bloques grises */
+.t-sucursales .salon {
+  background: linear-gradient(
+    168deg,
+    color-mix(in oklab, var(--salvia) 9%, var(--papel-alto)) 0%,
+    var(--papel-alto) 58%
+  );
+}
+.salon-numeral {
+  font-size: var(--t-19);
+  color: var(--realce);
+  opacity: 0.8;
+}
+.salon-nombre {
+  font-size: var(--t-30);
+  line-height: 1.05;
+  margin: var(--e2) 0 var(--e1);
+}
+.salon-linea {
+  min-height: 3em;
+}
+.salon-datos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e3);
+  padding: var(--e4) 0;
+  margin: var(--e4) 0;
+  border-top: 1px solid var(--filete-suave);
+  border-bottom: 1px solid var(--filete-suave);
+}
+.salon-valor {
+  font-size: var(--t-15);
+}
+.salon-nota {
+  flex: 1;
+}
+.salon-cta {
+  margin-top: var(--e4);
+}
+
+/* ---------- reserva ---------- */
+/* acá manda la agenda: la ficha baja a columna de recibo */
+.reserva-rejilla {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--e8);
+  align-items: start;
+}
+.agenda {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e7);
+}
+.agenda-salones {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--e3);
+}
+.agenda-salon {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e1);
+  padding: var(--e4);
+  min-height: 124px;
+  text-align: left;
+  border: 1px solid var(--filete);
+  border-radius: var(--r-medio);
+  background: var(--papel-alto);
+  transition:
+    border-color var(--mov) var(--salida),
+    background-color var(--mov) var(--salida);
+}
+.agenda-salon:hover {
+  border-color: var(--filete-polvo);
+}
+.agenda-salon[aria-checked='true'] {
+  border-color: var(--ladrillo);
+  background: color-mix(in oklab, var(--ladrillo) 13%, var(--papel-alto));
+}
+.agenda-salon[aria-checked='true'] .agenda-salon-nombre {
+  color: var(--ladrillo-tinta);
+}
+.agenda-salon-nombre {
+  font-size: var(--t-19);
+  line-height: 1.1;
+}
+.agenda-salon-hora {
+  display: flex;
+  align-items: center;
+  gap: var(--e2);
+  margin-top: auto;
+  font-size: var(--t-13);
+  color: var(--tinta-2);
+}
+/* el verde del led de la lámpara: solo significa "hoy abre" */
+.led {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--r-full);
+  background: var(--led);
+  flex: none;
+}
+
+.dias {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--e2);
+}
+.dia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-height: 76px;
+  padding: var(--e2) 0;
+  border: 1px solid var(--filete);
+  border-radius: var(--r-medio);
+  background: var(--papel-alto);
+  transition:
+    border-color var(--mov) var(--salida),
+    background-color var(--mov) var(--salida);
+}
+.dia:hover {
+  border-color: var(--filete-polvo);
+}
+.dia[aria-checked='true'] {
+  border-color: var(--ladrillo);
+  background: color-mix(in oklab, var(--ladrillo) 13%, var(--papel-alto));
+}
+.dia-corto {
+  font-size: var(--t-11);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tinta-3);
+}
+.dia-numero {
+  font-size: var(--t-24);
+  line-height: 1.05;
+}
+.dia-mes {
+  font-size: var(--t-11);
+  color: var(--tinta-3);
+  text-transform: capitalize;
+}
+
+.cupos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: var(--e2);
+}
+.cupo {
+  min-height: 44px;
+  border: 1px solid var(--filete);
+  border-radius: var(--r-chico);
+  background: var(--papel-alto);
+  font-size: var(--t-13);
+  transition:
+    border-color var(--mov) var(--salida),
+    background-color var(--mov) var(--salida),
+    color var(--mov) var(--salida);
+}
+.cupo:hover:not(:disabled) {
+  border-color: var(--ladrillo);
+  background: color-mix(in oklab, var(--ladrillo) 11%, transparent);
+}
+.cupo[aria-checked='true'] {
+  background: var(--ladrillo-tinta);
+  border-color: var(--ladrillo-tinta);
+  color: var(--papel);
+}
+.cupo:disabled {
+  color: var(--tinta-4);
+  background: transparent;
+  border-color: var(--filete-suave);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+.cupos-nota {
+  margin-top: var(--e4);
+  padding-top: var(--e3);
+  border-top: 1px solid var(--filete-suave);
+}
+.vacio {
+  padding: var(--e5);
+  border: 1px dashed var(--filete-fuerte);
+  border-radius: var(--r-medio);
+  color: var(--tinta-2);
+  font-size: var(--t-13);
+}
+
+.reserva-lateral {
+  position: sticky;
+  top: 88px;
+}
+.resumen-datos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e3);
+  padding: var(--e4) 0;
+  margin: var(--e3) 0 0;
+  border-top: 1px solid var(--filete-suave);
+  border-bottom: 1px solid var(--filete-suave);
+}
+.resumen-datos > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.resumen-valor {
+  font-family: var(--serif);
+  font-size: var(--t-15);
+  line-height: 1.3;
+}
+.campos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e3);
+  margin-bottom: var(--e4);
+}
+.campo-caja {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e2);
+}
+.confirmacion-codigo {
+  font-family: var(--serif);
+  font-size: var(--t-48);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--polvo-tinta);
+  margin: var(--e2) 0 var(--e4);
+}
+.confirmacion .ticket-total {
+  margin-top: var(--e4);
+}
+.confirmacion .nota {
+  margin-bottom: var(--e4);
+}
+
+/* ---------- pie ---------- */
+.pie {
+  padding-block: var(--e8);
+}
+.pie-rejilla {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: var(--e7);
+  padding-bottom: var(--e7);
+}
+.pie-marca {
+  font-size: var(--t-30);
+}
+.pie-linea {
+  margin-top: var(--e3);
+  max-width: 34ch;
+}
+.pie-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e3);
+  margin-top: var(--e3);
+}
+.pie-enlace {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.pie-enlace .serif {
+  font-size: var(--t-15);
+  transition: color var(--mov) var(--salida);
+}
+.pie-enlace:hover .serif {
+  color: var(--polvo-tinta);
+}
+.pie-legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e3);
+  padding-top: var(--e5);
+  border-top: 1px solid var(--filete);
+}
+.pie-subir:hover {
+  color: var(--polvo-tinta);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1080px) {
+  .portada-rejilla {
+    grid-template-columns: 1fr 320px;
+    gap: var(--e7);
+  }
+  .calc-rejilla {
+    grid-template-columns: 1fr 320px;
+  }
+  .reserva-rejilla {
+    grid-template-columns: 1fr 300px;
+  }
+  .formas {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  .nav {
+    display: none;
+  }
+  .portada-rejilla,
+  .calc-rejilla,
+  .reserva-rejilla,
+  .salones,
+  .pie-rejilla {
+    grid-template-columns: 1fr;
+  }
+  .galeria {
+    max-width: 420px;
+  }
+  .calc-lateral,
+  .reserva-lateral {
+    position: static;
+  }
+  .agenda-salones {
+    grid-template-columns: 1fr;
+  }
+  .agenda-salon {
+    min-height: 0;
+  }
+  .dias {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .portada-datos {
+    gap: var(--e6);
+  }
+}
+
+@media (max-width: 560px) {
+  .precio-fila {
+    grid-template-columns: 1fr auto;
+    gap: var(--e1) var(--e3);
+  }
+  .precio-detalle,
+  .precio-tiempo {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+  .formas {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .dias {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .portada-h1 {
+    font-size: var(--t-48);
+  }
+  .ticket-anticipo-cifra {
+    font-size: var(--t-38);
+  }
+  .ticket-total-cifra {
+    font-size: var(--t-30);
+  }
+  .barra-cta {
+    padding-inline: var(--e3);
+  }
+  .portada-datos {
+    gap: var(--e5);
+  }
+  .portada-dato {
+    font-size: var(--t-24);
+  }
+}
+
+/* ============================================================
+   ExpandableCard — tarjetas expandibles de sucursales
+   ============================================================ */
+
+.expandable-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--e5);
+}
+
+.expandable-card {
+  background: var(--papel);
+  border: 1px solid var(--filete);
+  border-radius: var(--r2);
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.25s ease;
+}
+
+.expandable-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.expandable-card-inner {
+  padding: var(--e5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--e4);
+}
+
+.expandable-card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--r1);
+}
+
+.expandable-card-text h3 {
+  font-family: var(--serif);
+  font-size: var(--t-20);
+  margin-bottom: var(--e1);
+}
+
+.expandable-card-text p {
+  font-size: var(--t-13);
+  color: var(--tinta-3);
+  line-height: 1.5;
+}
+
+.expandable-card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--e3) var(--e5);
+  background: var(--ladrillo);
+  color: var(--papel);
+  font-size: var(--t-13);
+  font-weight: 600;
+  border-radius: 999px;
+  text-align: center;
+  transition: background 0.2s ease;
+}
+
+.expandable-card:hover .expandable-card-btn {
+  background: var(--ladrillo-tinta);
+}
+
+/* Modal overlay */
+.expandable-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 90;
+  backdrop-filter: blur(2px);
+}
+
+.expandable-modal-wrapper {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.expandable-modal {
+  pointer-events: auto;
+  position: relative;
+  width: 92%;
+  max-width: 920px;
+  max-height: 92vh;
+  background: var(--papel);
+  border-radius: var(--r2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.22);
+}
+
+.expandable-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #333;
+  transition: background 0.2s ease;
+}
+
+.expandable-close:hover {
+  background: #fff;
+}
+
+.expandable-image {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.expandable-body {
+  padding: var(--e6, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--e5, 24px);
+  /* la ficha y el formulario de reserva son más altos que la pantalla:
+     el cuerpo scrollea dentro del modal en vez de quedar cortado */
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.expandable-header h3 {
+  font-family: var(--serif);
+  font-size: var(--t-24);
+  margin-bottom: var(--e1);
+}
+
+.expandable-header p {
+  font-size: var(--t-14);
+  color: var(--tinta-3);
+}
+
+.expandable-scroll {
+  max-height: 260px;
+  overflow-y: auto;
+  padding-right: var(--e2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--e4);
+}
+/* En la reserva no queremos un panel de 260 px: el formulario completo
+   scrollea dentro del cuerpo del modal, que es más cómodo. */
+.expandable-scroll-reserva {
+  max-height: none;
+  overflow: visible;
+  padding-right: 0;
+}
+
+.expandable-content p {
+  font-size: var(--t-14);
+  color: var(--tinta-3);
+  line-height: 1.6;
+}
+
+.expandable-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e2);
+}
+
+.expandable-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--e3) 0;
+  border-bottom: 1px solid var(--filete);
+}
+
+.expandable-label {
+  font-size: var(--t-12);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--tinta-4);
+  font-weight: 600;
+}
+
+.expandable-value {
+  font-size: var(--t-14);
+  color: var(--tinta-2);
+  font-weight: 500;
+}
+
+.expandable-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--e3) var(--e5);
+  background: var(--ladrillo);
+  color: var(--papel);
+  font-size: var(--t-14);
+  font-weight: 600;
+  border-radius: 999px;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.2s ease;
+}
+
+.expandable-cta:hover {
+  background: var(--ladrillo-tinta);
+}
+
+.expandable-reserve-btn {
+  margin-top: auto;
+  padding: var(--e3) var(--e5);
+  background: var(--ladrillo);
+  color: var(--papel);
+  font-size: var(--t-14);
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s ease;
+}
+
+.expandable-reserve-btn:hover {
+  background: var(--ladrillo-tinta);
+}
+
+/* Booking Flow — agenda layout */
+.booking-flow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e5, 24px);
+}
+
+.booking-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--e6, 40px);
+}
+
+.booking-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e4, 20px);
+}
+
+.booking-side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e4, 20px);
+  padding: var(--e5, 24px);
+  background: var(--papel-2, #f8f4f0);
+  border-radius: var(--r1, 12px);
+  border: 1px solid var(--filete, #e8e0d8);
+}
+
+.booking-step {
+  display: flex;
+  align-items: center;
+  gap: var(--e3, 12px);
+  margin-bottom: var(--e3, 12px);
+}
+
+.booking-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: var(--ladrillo, #b85c4a);
+  color: var(--papel, #fdf8f4);
+  font-size: var(--t-13, 13px);
+  font-weight: 700;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.booking-step-label {
+  font-size: var(--t-14, 14px);
+  font-weight: 600;
+  color: var(--tinta-2, #4a4038);
+}
+
+.booking-dias {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--e2, 8px);
+}
+
+.booking-dia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: var(--e3, 12px) var(--e2, 8px);
+  background: var(--papel, #fdf8f4);
+  border: 1px solid var(--filete, #e8e0d8);
+  border-radius: var(--r1, 12px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 72px;
+  justify-content: center;
+}
+
+.booking-dia:hover {
+  border-color: var(--ladrillo, #b85c4a);
+  background: var(--papel-2, #f8f4f0);
+}
+
+.booking-dia[aria-checked="true"] {
+  background: var(--ladrillo, #b85c4a);
+  border-color: var(--ladrillo, #b85c4a);
+  color: var(--papel, #fdf8f4);
+}
+
+.booking-dia-corto {
+  font-size: var(--t-11, 11px);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--tinta-4, #9a8b7f);
+  font-weight: 600;
+}
+
+.booking-dia[aria-checked="true"] .booking-dia-corto {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.booking-dia-num {
+  font-size: var(--t-20, 20px);
+  font-weight: 700;
+  color: var(--tinta-1, #2a2520);
+  line-height: 1;
+}
+
+.booking-dia[aria-checked="true"] .booking-dia-num {
+  color: var(--papel, #fdf8f4);
+}
+
+.booking-dia-mes {
+  font-size: var(--t-11, 11px);
+  color: var(--tinta-3, #6f6053);
+  text-transform: capitalize;
+}
+
+.booking-dia[aria-checked="true"] .booking-dia-mes {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.booking-cupos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: var(--e2, 8px);
+}
+
+.booking-cupo {
+  padding: var(--e3, 12px) var(--e2, 8px);
+  background: var(--papel, #fdf8f4);
+  border: 1px solid var(--filete, #e8e0d8);
+  border-radius: var(--r1, 12px);
+  font-size: var(--t-14, 14px);
+  font-weight: 600;
+  color: var(--tinta-2, #4a4038);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  font-family: var(--serif, 'Times New Roman', serif);
+}
+
+.booking-cupo:hover:not(:disabled) {
+  border-color: var(--ladrillo, #b85c4a);
+  background: var(--papel-2, #f8f4f0);
+}
+
+.booking-cupo[aria-checked="true"] {
+  background: var(--ladrillo, #b85c4a);
+  border-color: var(--ladrillo, #b85c4a);
+  color: var(--papel, #fdf8f4);
+}
+
+.booking-cupo:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e3, 12px);
+}
+
+.booking-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.booking-field .etiqueta {
+  font-size: var(--t-11, 11px);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--tinta-4, #9a8b7f);
+  font-weight: 600;
+}
+
+.booking-field .campo {
+  padding: var(--e3, 12px) var(--e4, 16px);
+  border: 1px solid var(--filete, #e8e0d8);
+  border-radius: var(--r1, 12px);
+  font-size: var(--t-14, 14px);
+  background: var(--papel, #fdf8f4);
+  color: var(--tinta-1, #2a2520);
+  transition: border-color 0.2s ease;
+}
+
+.booking-field .campo:focus {
+  outline: none;
+  border-color: var(--ladrillo, #b85c4a);
+}
+
+.booking-resumen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e2, 8px);
+  padding-top: var(--e3, 12px);
+  border-top: 1px solid var(--filete, #e8e0d8);
+}
+
+.booking-resumen-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--t-13, 13px);
+}
+
+.booking-resumen-valor {
+  color: var(--tinta-2, #4a4038);
+  font-weight: 500;
+  text-align: right;
+}
+
+.booking-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--e2, 8px);
+  margin-top: var(--e2, 8px);
+  border-top: 1px dashed var(--filete, #e8e0d8);
+}
+
+.booking-total .ticket-total-cifra {
+  font-size: var(--t-18, 18px);
+  font-weight: 700;
+  color: var(--tinta-1, #2a2520);
+  font-family: var(--serif, 'Times New Roman', serif);
+}
+
+.booking-anticipo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--e2, 8px) var(--e3, 12px);
+  background: var(--ladrillo, #b85c4a);
+  border-radius: var(--r1, 12px);
+  margin-top: var(--e2, 8px);
+}
+
+.booking-anticipo .etiqueta {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: var(--t-11, 11px);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.booking-anticipo-cifra {
+  color: var(--papel, #fdf8f4);
+  font-size: var(--t-16, 16px);
+  font-weight: 700;
+  font-family: var(--serif, 'Times New Roman', serif);
+}
+
+.booking-submit {
+  margin-top: auto;
+  padding: var(--e4, 16px) var(--e5, 24px);
+  background: var(--ladrillo, #b85c4a);
+  color: var(--papel, #fdf8f4);
+  font-size: var(--t-14, 14px);
+  font-weight: 700;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-align: center;
+}
+
+.booking-submit:hover:not(:disabled) {
+  background: var(--ladrillo-2, #a04e3e);
+}
+
+.booking-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.booking-confirm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e4, 20px);
+  padding: var(--e5, 24px);
+  text-align: center;
+}
+
+.stateful-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--e3, 12px);
+  padding: var(--e4, 16px) var(--e6, 32px);
+  background: var(--ladrillo);
+  color: var(--papel);
+  font-size: var(--t-14, 14px);
+  font-weight: 700;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.25s ease, opacity 0.25s ease;
+  font-family: inherit;
+}
+
+.stateful-btn:hover:not(:disabled) {
+  background: var(--ladrillo-tinta);
+}
+
+.stateful-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.stateful-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: var(--papel);
+  border-radius: 50%;
+  animation: stateful-girar 0.7s linear infinite;
+}
+
+.stateful-check {
+  width: 20px;
+  height: 20px;
+  color: var(--salvia);
+}
+
+@keyframes stateful-girar {
+  to { transform: rotate(360deg); }
+}
+
+.booking-confirm .confirmacion-codigo {
+  font-size: var(--t-32, 32px);
+  font-weight: 700;
+  color: var(--ladrillo, #b85c4a);
+  font-family: var(--serif, 'Times New Roman', serif);
+  letter-spacing: 0.05em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .expandable-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .expandable-card-img {
+    height: 160px;
+  }
+
+  .expandable-image {
+    height: 180px;
+  }
+
+  .booking-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-dias {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .booking-cupos {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  }
+}
+/* ============================================================
+   WhatsApp, preguntas frecuentes y legales
+   ============================================================ */
+
+.ticket-wa {
+  width: 100%;
+  margin-top: var(--e2);
+}
+
+/* ---------- preguntas ---------- */
+.preguntas-rejilla {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--e7);
+}
+.pregunta {
+  border-bottom: 1px solid var(--filete);
+}
+.pregunta summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--e4);
+  padding: var(--e4) 0;
+  font-family: var(--serif);
+  font-size: var(--t-19);
+  line-height: 1.3;
+  cursor: pointer;
+  list-style: none;
+}
+.pregunta summary::-webkit-details-marker,
+.legal-bloque summary::-webkit-details-marker {
+  display: none;
+}
+.pregunta summary:hover,
+.legal-bloque summary:hover {
+  color: var(--polvo-tinta);
+}
+.pregunta-signo {
+  flex: none;
+  font-family: var(--sans);
+  font-size: var(--t-19);
+  line-height: 1;
+  color: var(--polvo-tinta);
+  transition: transform var(--mov) var(--salida);
+}
+details[open] > summary .pregunta-signo {
+  transform: rotate(45deg);
+}
+.pregunta .apunte {
+  padding: 0 var(--e6) var(--e5) 0;
+  max-width: 56ch;
+}
+.preguntas-pie {
+  margin-top: var(--e5);
+}
+.enlace-subrayado {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--polvo);
+}
+.enlace-subrayado:hover {
+  color: var(--polvo-tinta);
+}
+
+/* ---------- legales ---------- */
+.legal-intro {
+  margin-top: calc(var(--e5) * -1);
+  margin-bottom: var(--e4);
+  max-width: 62ch;
+}
+.legal-rejilla {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--e5);
+  align-items: start;
+}
+.legal-bloque {
+  border-top: 1px solid var(--filete-fuerte);
+  padding-top: var(--e3);
+}
+.legal-bloque summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--e3);
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--t-19);
+  line-height: 1.3;
+}
+.legal-texto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e3);
+  padding-top: var(--e3);
+}
+.legal-fecha {
+  margin-top: var(--e5);
+}
+
+/* ---------- WhatsApp flotante ---------- */
+.acciones-flotantes {
+  position: fixed;
+  right: max(var(--e5), env(safe-area-inset-right));
+  bottom: max(var(--e5), env(safe-area-inset-bottom));
+  z-index: 50;
+  transition:
+    opacity var(--mov) var(--salida),
+    transform var(--mov) var(--salida);
+}
+.acciones-flotantes.es-apartado {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+.flotante-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--e2);
+  min-height: 48px;
+  padding: 0 var(--e4) 0 var(--e3);
+  border-radius: var(--r-full);
+  background: var(--salvia);
+  border: 1px solid var(--salvia-tinta);
+  color: #fffdfb;
+  font-size: var(--t-13);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 12px 28px -14px rgba(36, 28, 23, 0.6);
+  transition:
+    background-color var(--mov) var(--salida),
+    transform 140ms var(--salida);
+}
+.flotante-wa:hover {
+  background: var(--salvia-tinta);
+}
+.flotante-wa:active {
+  transform: scale(0.97);
+}
+
+/* ---------- aviso de analítica ---------- */
+.aviso-analitica {
+  position: fixed;
+  left: var(--e5);
+  bottom: var(--e5);
+  z-index: 70;
+  width: min(360px, calc(100vw - 2 * var(--e5)));
+  padding: var(--e4);
+  background: var(--papel-alto);
+  border: 1px solid var(--filete-fuerte);
+  border-radius: var(--r-grande);
+  box-shadow: 0 18px 40px -24px rgba(36, 28, 23, 0.5);
+}
+.aviso-analitica-acciones {
+  display: flex;
+  gap: var(--e2);
+  margin-top: var(--e3);
+}
+.aviso-analitica .btn {
+  min-height: 38px;
+  padding: 0 var(--e3);
+  font-size: var(--t-11);
+}
+
+/* ---------- pie ---------- */
+.pie-cta {
+  margin-top: var(--e4);
+}
+.pie-redes {
+  margin-top: var(--e5);
+}
+.pie-redes-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e2) var(--e4);
+  margin-top: var(--e2);
+}
+.pie-red {
+  font-size: var(--t-13);
+  border-bottom: 1px solid transparent;
+}
+.pie-red:hover {
+  color: var(--polvo-tinta);
+  border-color: var(--polvo);
+}
+.pie-wa-general {
+  margin-top: var(--e2);
+  padding-top: var(--e3);
+  border-top: 1px solid var(--filete-suave);
+}
+.pie-legal-enlaces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e2) var(--e5);
+}
+.pie-legal-enlaces a:hover {
+  color: var(--polvo-tinta);
+}
+
+@media (max-width: 960px) {
+  .preguntas-rejilla,
+  .legal-rejilla {
+    grid-template-columns: 1fr;
+  }
+  .legal-rejilla {
+    gap: var(--e3);
+  }
+}
+
+@media (max-width: 560px) {
+  .acciones-flotantes {
+    right: var(--e4);
+    bottom: var(--e4);
+  }
+  .flotante-wa {
+    min-height: 46px;
+    padding: 0 var(--e3);
+  }
+  .flotante-wa span {
+    font-size: var(--t-11);
+  }
+  .aviso-analitica {
+    left: var(--e4);
+    right: var(--e4);
+    bottom: 84px;
+    width: auto;
+  }
+  .pregunta .apunte {
+    padding-right: 0;
+  }
+  /* el botón flotante vive abajo a la derecha: dejamos aire para que no
+     tape el enlace de WhatsApp que cierra las preguntas */
+  .preguntas-pie {
+    padding-bottom: 64px;
+  }
+}

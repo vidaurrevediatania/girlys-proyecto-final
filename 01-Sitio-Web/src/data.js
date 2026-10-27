@@ -5,48 +5,11 @@
 
 export const MONEDA = 'Bs'
 
-export const SERVICIOS = [
-  {
-    id: 'manicura-express',
-    zona: 'manos',
-    nombre: 'Manicura Express',
-    duracion: 45,
-    precio: 55,
-    resumen: 'Limado, cutículas y esmaltado tradicional.',
-  },
-  {
-    id: 'manicura-classic',
-    zona: 'manos',
-    nombre: 'Manicura Clásica',
-    duracion: 60,
-    precio: 70,
-    resumen: 'Completa: limado, cutículas, hidratación y esmalte.',
-  },
-  {
-    id: 'manicura-spa',
-    zona: 'manos',
-    nombre: 'Manicura Spa',
-    duracion: 90,
-    precio: 120,
-    resumen: 'Exfoliación, masque y masaje de mano.',
-  },
-  {
-    id: 'manicura-semi',
-    zona: 'manos',
-    nombre: 'Manicura Semipermanente',
-    duracion: 120,
-    precio: 130,
-    resumen: 'Gel con lámpara UV, 21 días de duración.',
-  },
-  {
-    id: 'manicura-esculpidas',
-    zona: 'manos',
-    nombre: 'Manicura Esculpida',
-    duracion: 150,
-    precio: 200,
-    resumen: 'Acrílico o gel de reconstrucción, el largo va incluido.',
-  },
-]
+import serviciosData from './data/servicios.json'
+import sucursalesData from './data/sucursales.json'
+
+export const SERVICIOS = serviciosData
+export const SUCURSALES = sucursalesData
 
 export const FORMAS = [
   {
@@ -105,69 +68,6 @@ export const RETIRO = { nombre: 'Retirar esmalte previo', precio: 15 }
 
 export const ANTICIPO = 0.5
 
-// Ubicaciones, horario y teléfono compartido indicados por la dueña.
-export const SUCURSALES = [
-  {
-    id: 'centro',
-    nombre: 'Centro Histórico',
-    linea: 'Calle Junín · Galería Paseo La Plata',
-    calle: 'Calle Junín, Galería Paseo La Plata',
-    zona: 'Centro Histórico',
-    telefono: '+591 633 964 52',
-    mapaQuery: 'Calle Junín, Galería Paseo La Plata, Sucre, Bolivia',
-    nota: 'Calle Junín · Galería Paseo La Plata',
-    horarioTexto: 'Lun–Vie 09:00–18:00 · Sáb 09:00–16:00 · Dom cerrado',
-    horario: [
-      { abre: '09:00', cierra: '18:00' },
-      { abre: '09:00', cierra: '18:00' },
-      { abre: '09:00', cierra: '18:00' },
-      { abre: '09:00', cierra: '18:00' },
-      { abre: '09:00', cierra: '18:00' },
-      { abre: '09:00', cierra: '16:00' },
-      null, // domingo
-    ],
-  },
-  {
-    id: 'las-americas',
-    nombre: 'Av. Las Américas',
-    linea: '258 Av. Las Américas',
-    calle: '258 Av. Las Américas',
-    zona: 'Sucre',
-    telefono: '+591 633 964 52',
-    mapaQuery: '258 Avenida Las Américas, Sucre, Bolivia',
-    nota: '258 Av. Las Américas',
-    horarioTexto: 'Lun–Vie 09:00–18:00 · Sáb 09:00–16:00 · Dom cerrado',
-    horario: [
-      { abre: '09:00', cierra: '18:00' },
-      { abre: '09:00', cierra: '18:00' },
-      { abre: '09:00', cierra: '18:00' },
-      { abre: '09:00', cierra: '18:00' },
-      { abre: '09:00', cierra: '18:00' },
-      { abre: '09:00', cierra: '16:00' },
-      null,
-    ],
-  },
-  {
-    id: 'jaime-mendoza',
-    nombre: 'Av. Jaime Mendoza',
-    linea: 'Calle Tarija 14 · Av. Jaime Mendoza',
-    calle: 'Calle Tarija 14',
-    zona: 'Av. Jaime Mendoza',
-    telefono: '+591 633 964 52',
-    mapaQuery: 'Calle Tarija 14, Avenida Jaime Mendoza, Sucre, Bolivia',
-    nota: 'Calle Tarija 14 · Av. Jaime Mendoza',
-    horarioTexto: 'Lun–Vie 09:00–18:00 · Sáb 09:00–16:00 · Dom cerrado',
-    horario: [
-      { abre: '09:00', cierra: '18:00' },
-      { abre: '09:00', cierra: '18:00' },
-      { abre: '09:00', cierra: '18:00' },
-      { abre: '09:00', cierra: '18:00' },
-      { abre: '09:00', cierra: '18:00' },
-      { abre: '09:00', cierra: '16:00' },
-      null,
-    ],
-  },
-]
 
 export const DIAS = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
 export const DIAS_CORTO = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom']

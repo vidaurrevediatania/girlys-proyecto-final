@@ -134,7 +134,7 @@ Antes de presentar el sitio como negocio real:
 - [ ] Precios confirmados
 - [ ] Fotos propias (las actuales son de muestra)
 - [ ] Dominio real
-- [ ] ID de Google Analytics
+- [x] ID de Google Analytics (`G-ZMXH6EH9Y`, en `.env.production`)
 - [ ] URLs de Instagram y Facebook
 - [ ] Textos legales revisados
 

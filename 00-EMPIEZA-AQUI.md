@@ -74,7 +74,7 @@ Proyecto Final 2.0
 | 1. Tema, modelo de ingreso, dominio y CMS | `04-Documentacion/1-tema-dominio-cms.md` | ✅ Definido y documentado |
 | 2. Instalación del sitio y del blog | `04-Documentacion/2-instalacion-cms-dominio.md` | ✅ Funcionando en local |
 | 3. SSL | `04-Documentacion/3-ssl.md` | ✅ Local autofirmado + Vercel automático |
-| 4. Google Analytics | `04-Documentacion/4-google-analytics.md` | ✅ Código listo; falta tu ID |
+| 4. Google Analytics | `04-Documentacion/4-google-analytics.md` | ✅ Configurado con el ID `G-ZMXH6EH9Y` |
 | 5. Facebook e Instagram sin pago | `04-Documentacion/5-redes-sociales.md` | ✅ Material listo; faltan crear las cuentas |
 | 6. SEO | `04-Documentacion/6-seo.md` | ✅ Aplicado; falta dominio real |
 | 7. Vista inicial, tema y dependencias | `04-Documentacion/7-vista-inicial-plugins.md` | ✅ Hecho |
@@ -87,8 +87,8 @@ Proyecto Final 2.0
 
 1. **Crear el repositorio de GitHub** y subir la carpeta. Los comandos están en el documento 8.
 2. **Importar el repositorio en Vercel**. El proyecto ya trae `vercel.json`: no hay que configurar nada.
-3. **Crear la cuenta de Google Analytics** (necesita tu correo de Google) y pegar el ID `G-...`
-   en `01-Sitio-Web/.env` o en las variables de Vercel.
+3. **Google Analytics ya está configurado** con el ID `G-ZMXH6EH9Y` en
+   `01-Sitio-Web/.env.production`. No tienes que pegar nada.
 4. **Crear Instagram y Facebook** con tu teléfono. El material ya está en `05-Recursos/redes`.
 5. **Pasar tus datos reales** (WhatsApp, direcciones, precios y fotos) cuando los tengas.
 

@@ -1,8 +1,7 @@
 # Punto 4 · Google Analytics 4
 
-El sitio **ya tiene el código de Analytics instalado**. Solo falta pegar el identificador
-de tu cuenta de Google, porque esa cuenta la tenés que crear vos (yo no puedo crear cuentas
-de Google en tu nombre).
+El sitio **ya tiene el código de Analytics instalado y configurado** con el ID de medición
+`G-ZMXH6EH9Y`. La cuenta y la propiedad ya fueron creadas; no hay que pegar nada.
 
 ---
 
@@ -55,32 +54,32 @@ G-XXXXXXXXXX
 
 ---
 
-## 4.3 Pegar el ID en el proyecto
+## 4.3 Dónde está guardado el ID
 
-1. Abrir `01-Sitio-Web\.env` con el Bloc de notas.
-2. Buscar:
+El ID `G-ZMXH6EH9Y` está en:
+
+```text
+01-Sitio-Web/.env.production
+```
+
+Contenido:
 
 ```env
-VITE_GA_MEASUREMENT_ID=
+VITE_GA_MEASUREMENT_ID=G-ZMXH6EH9Y
 ```
 
-3. Pegar el ID:
+Ese archivo **sí se sube a GitHub** y Vercel lo usa al construir. El ID de medición es un
+dato público (no es una contraseña), por eso no hay problema en que esté en el repositorio.
 
-```env
-VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
-```
+Si algún día hay que cambiarlo:
 
-4. Guardar y reconstruir:
+1. Editar `01-Sitio-Web/.env.production`.
+2. Guardar.
+3. Hacer `git add`, `git commit` y `git push`.
+4. Vercel reconstruye sola y toma el ID nuevo.
 
-```powershell
-cd "01-Sitio-Web"
-npm run build
-```
-
-5. Reiniciar el servidor (`iniciar.ps1`).
-
-> Si publicás en Vercel, el ID también se puede cargar como variable de entorno en el panel
-> de Vercel (Settings → Environment Variables) sin tocar el archivo.
+Para pruebas locales con `npm run dev`, el ID se puede poner en `01-Sitio-Web/.env`
+(ese archivo no se sube a GitHub). El sitio publicado usa `.env.production`.
 
 ---
 
@@ -119,7 +118,7 @@ npm run build
 ## 4.6 Resumen para la defensa
 
 1. GA4 creado con la cuenta del negocio.
-2. ID pegado en `.env` y sitio reconstruido.
+2. ID `G-ZMXH6EH9Y` configurado en `.env.production` y sitio reconstruido.
 3. Carga **solo con consentimiento**.
 4. Eventos personalizados que miden el embudo: calcular → reservar → WhatsApp.
 5. Verificado en tiempo real.

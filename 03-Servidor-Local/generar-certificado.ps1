@@ -22,7 +22,9 @@ $candidatos = @(
 if (-not $candidatos) {
     Write-Host '  No se encontro OpenSSL.' -ForegroundColor Red
     Write-Host '  Instala Git para Windows (https://git-scm.com) y vuelve a intentar.'
-    Read-Host 'Pulsa Enter para cerrar'
+    Write-Host '  Git incluye OpenSSL y ademas lo necesitas para publicar en GitHub.'
+    Write-Host ''
+    if (-not $SinPausa) { Read-Host 'Pulsa Enter para cerrar' }
     exit 1
 }
 

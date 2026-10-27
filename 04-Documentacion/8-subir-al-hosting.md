@@ -1,175 +1,209 @@
-# Punto 8 · Cómo subirlo al hosting (cuando lo tengas)
+# Punto 8 · Publicar el sitio en internet (GitHub + Vercel)
 
-El proyecto ya está armado. Esto es lo que hay que hacer el día que tengas dominio y hosting.
-Sirve para CWP, cPanel o cualquier panel parecido.
+Esta es la parte que haces tú. Son dos cuentas gratuitas y dos pasos:
+**subir el proyecto a GitHub** e **importarlo en Vercel**. No hay que configurar
+PHP, base de datos, certificados ni hosting.
 
----
-
-## 8.1 Antes de subir: checklist
-
-- [ ] Dominio real definido.
-- [ ] Haber ejecutado `configurar-dominio.ps1` con ese dominio.
-- [ ] `npm run build` sin errores.
-- [ ] Carpeta `01-Sitio-Web\dist` actualizada.
-- [ ] Datos reales en `src/data.js` (WhatsApp, direcciones, precios).
-- [ ] ID de Analytics pegado en `.env` (si ya existe).
+> **Antes de empezar:** el proyecto ya está preparado. `vercel.json` contiene
+> todo lo necesario para construir y publicar el sitio y el blog.
 
 ---
 
-## 8.2 Subir el sitio principal
+## 8.1 Lo que necesitas
 
-### Paso 1 · Construir
+- [ ] Cuenta de **GitHub** (gratis): <https://github.com/signup>
+- [ ] Cuenta de **Vercel** (gratis): <https://vercel.com/signup>
+- [ ] El proyecto en tu PC, con el sitio funcionando en `https://localhost:8443`
+
+Para crear la cuenta de Vercel, elige **Continue with GitHub**. Así quedan conectadas
+y no tienes que recordar otra contraseña.
+
+---
+
+## 8.2 Checklist antes de subir
+
+- [ ] El sitio abre bien en `https://localhost:8443/`.
+- [ ] El blog abre bien en `https://localhost:8443/blog`.
+- [ ] Los datos de demostración están claros (WhatsApp, direcciones, precios).
+- [ ] No hay contraseñas ni claves en el proyecto.
+
+El archivo `.gitignore` ya excluye lo que no debe subir:
+
+```
+node_modules/          ← dependencias (se instalan solas en Vercel)
+01-Sitio-Web/dist/     ← construcción (Vercel la hace)
+.env                   ← tus datos locales
+03-Servidor-Local/certs/        ← certificados locales (se generan solos)
+```
+
+---
+
+## 8.3 Subir el proyecto a GitHub
+
+Elige **una** de las dos formas. La A es la más fácil si no usas la terminal.
+
+### Opción A · GitHub Desktop (recomendada)
+
+1. Descargar **GitHub Desktop** gratis: <https://desktop.github.com>
+2. Instalarlo y abrirlo.
+3. Iniciar sesión con la cuenta de GitHub.
+4. Menú **File → Add local repository…**
+5. Elegir la carpeta **`Proyecto Final 2.0`** (la que contiene `01-Sitio-Web`).
+6. Si dice que no es un repositorio, pulsar **create a repository** y aceptar.
+7. Arriba a la derecha, pulsar **Publish repository**.
+8. Nombre: `girlys-proyecto-final`.
+9. **Desmarcar** *Keep this code private* si quieres que sea público
+   (para la entrega suele servir privado; Vercel puede leer repositorios privados).
+10. Pulsar **Publish repository**.
+
+GitHub Desktop sube solo los archivos permitidos y omite `node_modules`, `dist`,
+`.env` y las claves.
+
+### Opción B · PowerShell
+
+Abrir PowerShell **dentro de la carpeta `Proyecto Final 2.0`** y ejecutar:
 
 ```powershell
-cd "01-Sitio-Web"
-npm run build
+git status
+git add .
+git commit -m "Proyecto Final 2.0: sitio React con blog estatico"
+git branch -M main
 ```
 
-### Paso 2 · Comprimir el contenido de `dist`
+Luego crear el repositorio vacío en <https://github.com/new>:
 
-No comprimir la carpeta: **el contenido**. Debe quedar así:
+- Nombre: `girlys-proyecto-final`
+- **No** marcar "Add a README", "Add .gitignore" ni licencia.
+- Pulsar **Create repository**.
+
+GitHub muestra una dirección parecida a:
 
 ```
-index.html
-assets/
-fuentes/
-favicon.svg
-og-girlys.jpg
-robots.txt
-sitemap.xml
-apple-touch-icon.png
-.htaccess          ← oculto
+https://github.com/TU-USUARIO/girlys-proyecto-final.git
 ```
 
-### Paso 3 · Subir
+Copiarla y ejecutar (reemplazando la dirección):
 
-1. Entrar al panel del hosting (CWP `:2083` o cPanel).
-2. **Administrador de archivos** → `public_html`.
-3. Borrar el `index.html` de ejemplo si existe.
-4. **Subir** el ZIP → clic derecho → **Extract**.
-5. Borrar el ZIP.
-6. Activar **Mostrar archivos ocultos** y confirmar que `.htaccess` está ahí.
+```powershell
+git remote add origin https://github.com/TU-USUARIO/girlys-proyecto-final.git
+git push -u origin main
+```
 
-### Paso 4 · Probar
+La primera vez se abre una ventana del navegador para iniciar sesión en GitHub.
+No hay que escribir una contraseña en la terminal.
 
-- `https://tudominio.com` → debe abrir el sitio.
-- `https://tudominio.com/servicios` → debe abrir el sitio (no 404).
-- `https://tudominio.com/loquesea` → debe mostrar la página 404 propia.
+### Comprobar que no se subió nada privado
 
----
+En PowerShell, dentro del proyecto:
 
-## 8.3 Instalar WordPress en `/blog`
+```powershell
+git ls-files | Select-String "\.env$|CLAVE|\.key$|node_modules|/dist/"
+```
 
-**No copies la carpeta `02-WordPress` local**: trae SQLite y en el hosting conviene MySQL.
-
-### Opción A · Instalador del panel (más fácil)
-
-1. CWP → **WordPress Manager** (o Softaculous en cPanel).
-2. **Install** → dominio → carpeta: `blog`.
-3. Completar título, usuario y contraseña.
-4. Instalar.
-
-### Opción B · Manual
-
-1. Descargar <https://wordpress.org/latest.zip>.
-2. Subir a `public_html/blog` y extraer.
-3. Abrir `https://tudominio.com/blog/` y seguir el asistente.
-4. Base de datos: crear una en **MySQL → Create Database** (usuario y contraseña nuevos).
-
-> Anotá esos datos en un lugar seguro. No se comparten en capturas.
+No debe devolver nada. Si devuelve algo, avisar antes de publicar.
 
 ---
 
-## 8.4 Pasar el contenido del blog local al hosting
+## 8.4 Publicar en Vercel
 
-El contenido no se copia por archivos: se **exporta e importa**.
+1. Entrar a <https://vercel.com> e iniciar sesión **con GitHub**.
+2. Pulsar **Add New… → Project**.
+3. En la lista, buscar `girlys-proyecto-final` y pulsar **Import**.
+   (Si no aparece, pulsar **Adjust GitHub App Permissions** y dar acceso al repositorio.)
+4. En la pantalla de configuración:
 
-### En tu PC
-
-1. `https://localhost:8443/blog/wp-admin/`
-2. **Herramientas → Exportar → Todo el contenido**.
-3. Descargar el `.xml`.
-
-### En el hosting
-
-1. **Herramientas → Importar → WordPress**.
-2. Instalar el importador si lo pide.
-3. Subir el `.xml`.
-4. Asignar las entradas al usuario administrador del hosting.
-5. Marcar **Descargar e importar archivos adjuntos** si las imágenes están en el `.xml`.
-
-### Después de importar
-
-1. **Apariencia → Temas → Añadir nuevo** → buscar **Astra** → Instalar → Activar.
-2. **Plugins → Añadir nuevo**:
-   - Rank Math SEO
-   - UpdraftPlus
-   - Wordfence Security
-   - WP Super Cache
-3. Subir por FTP el archivo
-   `02-WordPress\wp-content\mu-plugins\girlys-estilo.php`
-   a `public_html/blog/wp-content/mu-plugins/`.
-4. **Ajustes → Enlaces permanentes** → *Nombre de la entrada* → Guardar.
-5. **Ajustes → Lectura** → desmarcar *Disuadir a los motores de búsqueda*.
-6. **Ajustes → Comentarios** → desmarcar *Permitir comentarios*.
-7. Crear el menú y asignarlo a **Primary**.
-8. Comprobar `https://tudominio.com/blog/`.
-
-### Imágenes
-
-Si alguna imagen no se importó, subirla a **Medios** y volver a insertarla.
-El `.xml` no siempre incluye los archivos físicos.
-
----
-
-## 8.5 SSL en el hosting
-
-Ver documento 3, sección 3.2. Resumen:
-
-1. CWP → **SSL / TLS → AutoSSL** → Run.
-2. Esperar y comprobar el candado.
-3. Verificar que `http://` redirige a `https://`.
-
----
-
-## 8.6 Ajustes finales de WordPress
-
-| Ajuste | Valor |
+| Campo | Qué poner |
 |---|---|
-| **Ajustes → General → URL de WordPress** | `https://tudominio.com/blog` |
-| **Ajustes → General → URL del sitio** | `https://tudominio.com/blog` |
-| **Ajustes → Lectura** | Portada: página "Inicio"; entradas: página "Blog" |
-| **Ajustes → Enlaces permanentes** | Nombre de la entrada |
-| **Rank Math** | Ver documento 6 |
-| **UpdraftPlus** | Semanal, 4 copias, guardar en Google Drive o descargar |
-| **Wordfence** | Activar escaneo y alertas por correo |
+| **Project Name** | `girlys-proyecto-final` (o el que quieras) |
+| **Framework Preset** | **Other** |
+| **Root Directory** | **dejar vacío** (la raíz del repositorio) |
+| **Build Command** | dejar el que aparece (lo toma de `vercel.json`) |
+| **Output Directory** | dejar el que aparece |
+| **Environment Variables** | ninguna por ahora |
 
-> Si al entrar a `/blog/wp-admin/` redirige a `localhost`, hay que corregir
-> las URLs en `wp-config.php`:
-> ```php
-> define('WP_HOME','https://tudominio.com/blog');
-> define('WP_SITEURL','https://tudominio.com/blog');
-> ```
-> o en la tabla `wp_options` (`siteurl` y `home`).
+> **Importante:** no elegir la carpeta `01-Sitio-Web` como Root Directory.
+> El archivo `vercel.json` de la raíz ya indica dónde está el sitio y cómo construirlo.
+
+5. Pulsar **Deploy**.
+6. Esperar 1 o 2 minutos. Cuando termine, Vercel muestra **Congratulations** y un botón
+   **Visit**.
+7. La dirección será parecida a:
+
+```
+https://girlys-proyecto-final.vercel.app
+```
+
+Esa URL ya funciona y tiene HTTPS. Se puede entregar así mientras no haya dominio propio.
 
 ---
 
-## 8.7 Verificación final
+## 8.5 Probar la publicación
+
+Abrir la URL de Vercel y comprobar:
 
 | Prueba | Resultado esperado |
 |---|---|
-| `https://tudominio.com` | Sitio con candado |
-| `http://tudominio.com` | Redirige a HTTPS |
-| `https://www.tudominio.com` | Redirige sin `www` |
-| `https://tudominio.com/blog/` | Blog con el mismo estilo |
-| `https://tudominio.com/blog/wp-admin/` | Panel de WordPress |
-| `https://tudominio.com/sitemap.xml` | Sitemap del sitio |
-| `https://tudominio.com/blog/wp-sitemap.xml` | Sitemap del blog |
-| `https://tudominio.com/robots.txt` | Robots con los dos sitemaps |
-| `https://tudominio.com/archivo-inexistente.pdf` | 404 real (archivo inexistente) |
+| `https://TU-PROYECTO.vercel.app/` | Portada con candado |
+| `.../blog` | Listado del blog |
+| `.../blog/cuidado-semipermanente` | Entrada completa |
+| `.../sitemap.xml` | Sitemap con la URL de Vercel |
+| `.../robots.txt` | Robots apuntando al sitemap |
+| `.../blog/no-existe` | Página 404 propia |
+| Calculadora | El precio cambia al elegir opciones |
+| Botón de WhatsApp | Abre WhatsApp con el resumen |
 
-> WordPress instalado en `/blog` **no publica** `/blog/robots.txt`: el estándar es que
-> `robots.txt` viva en la raíz del dominio. El de la raíz ya incluye el sitemap del blog.
+> El sitemap usará automáticamente la URL de Vercel porque todavía no hay dominio
+> configurado. Cuando conectes el dominio, se actualiza solo en la próxima publicación.
 
-Cuando todo eso funcione: enviar los sitemaps a Search Console y crear la ficha de
-Google Business Profile.
+---
+
+## 8.6 Conectar el dominio propio (cuando lo tengas)
+
+1. Comprar el dominio (NIC Bolivia, Namecheap, GoDaddy o similar).
+2. En Vercel: abrir el proyecto → **Settings → Domains**.
+3. Escribir el dominio y pulsar **Add**.
+4. Vercel muestra los registros DNS. Cargarlos en el panel del proveedor del dominio:
+
+| Tipo | Nombre | Valor |
+|---|---|---|
+| A | `@` | `76.76.21.21` |
+| CNAME | `www` | `cname.vercel-dns.com` |
+
+5. Esperar la propagación (5 minutos a 24 horas) y pulsar **Refresh** en Vercel.
+6. Cuando Vercel diga **Valid Configuration**, ejecutar en tu PC:
+
+```powershell
+cd "03-Servidor-Local"
+.\configurar-dominio.ps1 -Dominio "https://tudominio.com"
+```
+
+7. Hacer `commit` y `push` (o publicar desde GitHub Desktop).
+8. Vercel reconstruye y el canonical, el sitemap y `robots.txt` quedan con el dominio nuevo.
+
+El certificado HTTPS del dominio lo emite Vercel automáticamente.
+
+---
+
+## 8.7 Si Vercel muestra un error
+
+| Mensaje | Causa probable | Solución |
+|---|---|---|
+| `No package.json found` | Se eligió mal la Root Directory | Volver a Settings → General → Root Directory: vacío |
+| `vite: not found` | No se instalaron las dependencias | Revisar que `01-Sitio-Web/package-lock.json` esté en GitHub |
+| `Build failed` | Un archivo no compila | Ejecutar `npm run build` en local y corregir el error |
+| La página carga en blanco | Se publicó `dist` viejo o falta el rewrite | Revisar que `vercel.json` esté en la raíz del repositorio |
+| El blog da 404 al entrar directo | Falta el rewrite del SPA | Confirmar que `vercel.json` incluye `"rewrites"` |
+| No aparece el repositorio | Vercel no tiene permiso | **Adjust GitHub App Permissions** y dar acceso |
+
+Para volver a desplegar después de corregir: hacer `commit` y `push`.
+Vercel publica solo, sin tocar ningún panel.
+
+---
+
+## 8.8 Resumen para la defensa
+
+1. Código versionado en **GitHub**.
+2. Publicación automática en **Vercel** desde la rama `main`.
+3. HTTPS automático y gratuito.
+4. Un solo despliegue incluye el sitio y el blog.
+5. Sin hosting PHP, sin base de datos y sin costo mensual.

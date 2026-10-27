@@ -1,132 +1,52 @@
-# Punto 9 · Publicar en GitHub y Vercel
+# Punto 9 · GitHub, Vercel y mantenimiento
 
-El repositorio ya está preparado (`.gitignore`, `vercel.json`, README). Solo faltan tus cuentas.
-
-> **Aviso importante:** Vercel **solo puede alojar el sitio React** (HTML/CSS/JS).
-> WordPress necesita PHP y una base de datos, y Vercel no los ofrece.
-> El blog puede quedar en un hosting PHP aparte o publicarse después.
-> El sitio principal funciona perfecto en Vercel.
+El proyecto se publica una sola vez y después se actualiza con **commit y push**.
+No hay que entrar a ningún panel de hosting ni subir archivos por FTP.
 
 ---
 
 ## 9.1 Qué se sube y qué no
 
-| Carpeta | Va a GitHub | Por qué |
+| Carpeta o archivo | Va a GitHub | Por qué |
 |---|---|---|
-| `01-Sitio-Web` | ✅ | Código del sitio |
+| `01-Sitio-Web` | ✅ | Código del sitio y del blog |
 | `04-Documentacion` | ✅ | Documentación |
 | `05-Recursos` | ✅ | Capturas y material de redes |
-| `03-Servidor-Local` (scripts) | ✅ | Servidor, certificado, instalador |
-| `03-Servidor-Local/php` | ❌ | 30 MB de binarios; `instalar.ps1` los baja |
-| `02-WordPress` | ❌ | Se instala en el hosting |
-| `99-Descargas` | ❌ | Instaladores descargables |
-| `.env` | ❌ | Contiene datos locales |
-| `certs/*.key` | ❌ | Clave privada del certificado |
+| `03-Servidor-Local` (scripts) | ✅ | Servidor local y certificado público |
+| `vercel.json` | ✅ | Configuración de publicación |
+| `01-Sitio-Web/node_modules` | ❌ | Se instala sola en cada construcción |
+| `01-Sitio-Web/dist` | ❌ | Vercel la genera |
+| `01-Sitio-Web/.env` | ❌ | Contiene datos locales |
+| `03-Servidor-Local/certs` | ❌ | Certificados locales: se generan en cada PC |
+| `03-Servidor-Local/logs` | ❌ | Registros temporales |
 
 Todo eso ya está en `.gitignore`.
 
----
-
-## 9.2 Subir a GitHub
-
-### Crear el repositorio
-
-1. Entrar a <https://github.com/new>.
-2. Nombre: `girlys-proyecto-final`.
-3. **Private** (recomendado) o Public.
-4. **No** marcar "Add a README", "Add .gitignore" ni licencia.
-5. **Create repository**.
-
-### Conectar la carpeta
-
-Abrir PowerShell **dentro de `Proyecto Final 2.0`** y ejecutar:
+### Comprobar antes de publicar
 
 ```powershell
-git init
-git add .
-git commit -m "Proyecto Final 2.0: sitio React, WordPress local, SSL, SEO y documentacion"
-git branch -M main
-git remote add origin https://github.com/TU-USUARIO/girlys-proyecto-final.git
-git push -u origin main
-```
-
-Si GitHub pide contraseña, **no es la de la cuenta**: hay que crear un *token*
-(GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens)
-y usarlo como contraseña.
-
-Verificar que **no** se subió nada sensible:
-
-```powershell
-git ls-files | Select-String "\.env$|CLAVE|\.key$|php/"
+git ls-files | Select-String "\.env$|CLAVE|\.key$|node_modules|/dist/"
 ```
 
 No debe devolver nada.
 
 ---
 
-## 9.3 Publicar en Vercel
+## 9.2 Primera publicación
 
-1. Entrar a <https://vercel.com> con la cuenta de GitHub.
-2. **Add New → Project**.
-3. Importar `girlys-proyecto-final`.
-4. Configuración:
+Los pasos completos están en el **documento 8**. Resumen:
 
-| Campo | Valor |
-|---|---|
-| Framework Preset | **Vite** (o "Other") |
-| Root Directory | `01-Sitio-Web` |
-| Build Command | `npm run build` |
-| Output Directory | `dist` |
-| Install Command | `npm install` |
+1. Crear el repositorio `girlys-proyecto-final` en GitHub.
+2. Subir la carpeta `Proyecto Final 2.0` (GitHub Desktop o PowerShell).
+3. En Vercel: **Add New → Project → Import** el repositorio.
+4. Dejar **Root Directory** vacío y **Framework Preset: Other**.
+5. **Deploy**.
 
-> Si Vercel detecta el `vercel.json` de la raíz, usará esa configuración automáticamente.
-> Las dos formas funcionan; no mezclar.
-
-5. **Environment Variables** → agregar una por una:
-
-| Nombre | Ejemplo | Obligatoria |
-|---|---|---|
-| `VITE_SITE_ORIGIN` | `https://girlys.vercel.app` o el dominio final | Sí |
-| `VITE_WHATSAPP_PHONE` | `59170000000` | Sí |
-| `VITE_GA_MEASUREMENT_ID` | `G-XXXXXXXXXX` | Si ya existe GA4 |
-| `VITE_INSTAGRAM_URL` | `https://instagram.com/...` | Opcional |
-| `VITE_FACEBOOK_URL` | `https://facebook.com/...` | Opcional |
-| `VITE_BLOG_URL` | `/blog` (solo si el blog estará en el mismo dominio) | Opcional |
-
-6. **Deploy**.
-
-En 1-2 minutos queda en `https://girlys-proyecto-final.vercel.app`.
-
-### Probar
-
-- `/` carga el sitio.
-- `/servicios` carga el sitio (no 404).
-- El candado es válido (Vercel emite su propio certificado).
-- La calculadora y el botón de WhatsApp funcionan.
+La primera URL será algo como `https://girlys-proyecto-final.vercel.app`.
 
 ---
 
-## 9.4 Dominio propio en Vercel
-
-1. Vercel → proyecto → **Settings → Domains**.
-2. Agregar `tudominio.com` y `www.tudominio.com`.
-3. Vercel muestra los registros DNS:
-
-| Tipo | Nombre | Valor |
-|---|---|---|
-| A | `@` | `76.76.21.21` |
-| CNAME | `www` | `cname.vercel-dns.com` |
-
-4. Cargarlos en el panel del dominio (o pedírselos al proveedor).
-5. Esperar la propagación (5 min a 24 h) y pulsar **Refresh**.
-6. Actualizar `VITE_SITE_ORIGIN` con el dominio final y volver a desplegar.
-
-> El certificado lo emite Vercel automáticamente. No hace falta Let's Encrypt ni ZeroSSL
-> cuando el sitio está en Vercel; esos se usan en hosting tradicional (documento 3).
-
----
-
-## 9.5 Actualizar el sitio después
+## 9.3 Actualizar el sitio después
 
 Cada cambio local:
 
@@ -136,50 +56,185 @@ git commit -m "Describe el cambio"
 git push
 ```
 
-Vercel reconstruye solo. No hay que subir archivos por FTP.
+Vercel detecta el cambio en la rama `main` y publica en 1 o 2 minutos.
 
-Para cambios de contenido (precios, textos):
+### Cambiar precios, horarios o textos
 
 1. Editar `01-Sitio-Web/src/data.js`.
-2. `npm run build` para probar en local.
-3. Commit y push.
+2. Probar en local con `iniciar.ps1`.
+3. Hacer commit y push.
+
+Los datos estructurados, la calculadora y las preguntas se actualizan juntos porque
+salen del mismo archivo.
+
+### Cambiar el WhatsApp o las redes
+
+1. Editar `01-Sitio-Web/.env` en tu PC.
+2. Ejecutar `npm run build` para probar.
+3. Hacer commit y push.
+
+> El archivo `.env` no se sube. Para que Vercel use esos valores, hay que cargarlos
+> como **Environment Variables** (ver 9.5) o dejar los valores por defecto del código.
 
 ---
 
-## 9.6 El blog en Vercel: opciones reales
+## 9.4 Publicar una entrada nueva del blog
 
-| Opción | Ventaja | Desventaja |
+Se puede hacer desde GitHub, sin instalar nada.
+
+### Paso 1 · Crear el archivo
+
+1. Entrar al repositorio en GitHub.
+2. Abrir la carpeta `01-Sitio-Web/src/content/blog`.
+3. Pulsar **Add file → Create new file**.
+4. Nombre del archivo: `mi-entrada-nueva.md`
+   (el nombre define la dirección: `/blog/mi-entrada-nueva`).
+5. Escribir el encabezado y el texto:
+
+```markdown
+---
+titulo: Mi entrada nueva
+descripcion: Una frase que explique de qué trata.
+fecha: 2026-11-01
+categoria: Cuidado de uñas
+imagen: /blog/mi-entrada-nueva.webp
+imagenAlt: Descripción de la imagen
+---
+
+Texto de la entrada con **Markdown**.
+
+## Un subtítulo
+
+- Una lista
+- Otra idea
+```
+
+6. Abajo, escribir un mensaje como `Nueva entrada del blog`.
+7. Pulsar **Commit changes**.
+
+### Paso 2 · Subir la imagen
+
+1. Abrir `01-Sitio-Web/public/blog`.
+2. Pulsar **Add file → Upload files**.
+3. Arrastrar la imagen (mejor en formato `.webp`, menos de 500 KB).
+4. Pulsar **Commit changes**.
+
+El nombre debe coincidir con el campo `imagen` del encabezado.
+
+### Paso 3 · Esperar la publicación
+
+Vercel reconstruye sola. En 1 o 2 minutos la entrada aparece en `/blog`, en el sitemap
+y en la portada del blog.
+
+### Reglas del contenido
+
+| Campo | Obligatorio | Ejemplo |
 |---|---|---|
-| **A. Blog en hosting PHP** (recomendado) | WordPress completo, como se pidió | Necesita hosting aparte |
-| **B. Blog en subdominio** (`blog.tudominio.com`) | Separado y limpio | Otro hosting igual |
-| **C. Sin blog publicado** | Todo en Vercel | No se cumple el punto de CMS en producción |
-| **D. Blog estático** | Rápido | No es WordPress |
+| `titulo` | Sí | `Cómo cuidar la manicura` |
+| `descripcion` | Sí | Una frase de 120-160 caracteres |
+| `fecha` | Sí | `2026-11-01` (ordena las entradas) |
+| `categoria` | Sí | `Cuidado de uñas` |
+| `imagen` | No | `/blog/mi-imagen.webp` |
+| `imagenAlt` | Recomendado | Descripción real de la imagen |
 
-Si elegís A o B, en Vercel hay que poner `VITE_BLOG_URL` con la URL completa
-(`https://blog.tudominio.com`) para que el enlace del pie no apunte a `/blog` (que en Vercel no existe).
+Si una categoría es nueva, el filtro aparece solo en la portada del blog.
+
+### Borrar una entrada
+
+1. Abrir el archivo `.md` en GitHub.
+2. Pulsar el icono de papelera.
+3. **Commit changes**.
+
+Vercel la quita del sitio y del sitemap en la próxima publicación.
 
 ---
 
-## 9.7 Checklist de publicación
+## 9.5 Variables de entorno en Vercel
+
+No son obligatorias para la primera publicación. Sirven para cambiar datos sin
+tocar el código.
+
+1. Vercel → proyecto → **Settings → Environment Variables**.
+2. Agregar las que necesites:
+
+| Nombre | Ejemplo | Para qué |
+|---|---|---|
+| `VITE_WHATSAPP_PHONE` | `59170000000` | Número del botón y la reserva |
+| `VITE_GA_MEASUREMENT_ID` | `G-XXXXXXXXXX` | Google Analytics 4 |
+| `VITE_INSTAGRAM_URL` | `https://instagram.com/girlys.nails` | Enlace en el pie |
+| `VITE_FACEBOOK_URL` | `https://facebook.com/girlys.nails` | Enlace en el pie |
+| `VITE_TIKTOK_URL` | `https://tiktok.com/@girlys.nails` | Enlace en el pie |
+| `VITE_CONTACT_EMAIL` | `hola@girlys.com` | Correo de contacto |
+| `VITE_SITE_ORIGIN` | `https://tudominio.com` | Dominio final (opcional) |
+
+3. Guardar y pulsar **Redeploy** para que se apliquen.
+
+> Si `VITE_SITE_ORIGIN` queda vacío o con el marcador, Vercel usa automáticamente
+> la URL del proyecto. No hay que configurarlo para la primera entrega.
+
+---
+
+## 9.6 Dominio propio
+
+1. Vercel → proyecto → **Settings → Domains**.
+2. Agregar el dominio y copiar los registros DNS.
+3. Cargarlos en el proveedor del dominio.
+4. Cuando Vercel confirme, ejecutar en tu PC:
+
+```powershell
+cd "03-Servidor-Local"
+.\configurar-dominio.ps1 -Dominio "https://tudominio.com"
+```
+
+5. Hacer commit y push.
+
+Vercel emite el certificado HTTPS solo. No hay que comprar ni renovar nada.
+
+---
+
+## 9.7 Mantenimiento mensual
+
+| Tarea | Cada cuánto | Cómo |
+|---|---|---|
+| Revisar que el sitio abra | 1 mes | Abrir la URL de Vercel |
+| Actualizar precios u horarios | Cuando cambien | Editar `src/data.js` y hacer push |
+| Publicar una entrada | 2 o 4 semanas | Crear `.md` en GitHub |
+| Revisar enlaces rotos | 3 meses | Recorrer el sitio y el blog |
+| Revisar Search Console | 1 mes | Ver errores de indexación |
+| Actualizar dependencias | 6 meses | `npm update` y probar en local |
+| Copia de seguridad | Automática | El historial de GitHub |
+
+### Actualizar dependencias (con cuidado)
+
+```powershell
+cd 01-Sitio-Web
+npm update
+npm run build
+```
+
+Si la construcción falla, volver atrás con `git checkout -- package.json package-lock.json`.
+
+---
+
+## 9.8 Checklist de publicación
 
 - [ ] Repositorio creado y `git push` exitoso.
 - [ ] `git ls-files` no muestra `.env`, claves ni contraseñas.
 - [ ] Proyecto importado en Vercel.
-- [ ] Variables de entorno cargadas.
+- [ ] **Root Directory** vacío y **Framework Preset: Other**.
 - [ ] Deploy en verde.
-- [ ] Rutas internas funcionan (SPA).
-- [ ] `VITE_SITE_ORIGIN` con la URL real.
+- [ ] Portada, blog y una entrada funcionan.
+- [ ] El sitemap y `robots.txt` abren.
+- [ ] La calculadora y WhatsApp funcionan.
 - [ ] Dominio conectado (si ya lo tenés).
-- [ ] Sitemap y robots con el dominio correcto.
-- [ ] Search Console verificado.
-- [ ] Blog publicado aparte o decisión tomada.
+- [ ] Search Console verificado y sitemap enviado.
 
 ---
 
-## 9.8 Resumen para la defensa
+## 9.9 Resumen para la defensa
 
 1. Código versionado en **GitHub** con `.gitignore` que excluye secretos y binarios.
 2. Despliegue automático en **Vercel** desde la rama `main`.
 3. HTTPS automático de Vercel.
 4. Variables de entorno separadas del código.
-5. Blog WordPress documentado para hosting PHP (Vercel no ejecuta PHP).
+5. Blog gestionado con **Markdown + Git**: se publica con un commit, sin panel ni base de datos.

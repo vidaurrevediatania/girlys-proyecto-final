@@ -13,6 +13,14 @@ const env = import.meta.env
 
 const sinBarraFinal = (valor) => String(valor || '').replace(/\/+$/, '')
 
+// Si no hay dominio configurado (o sigue el marcador), se usa el origen real
+// desde el que se abrió la página. Así funciona en localhost, en la URL de
+// Vercel y en el dominio final sin tocar código.
+const origenDeclarado = sinBarraFinal(env.VITE_SITE_ORIGIN || '')
+const origenEsMarcador = !origenDeclarado || /TU-DOMINIO/i.test(origenDeclarado)
+const origenActual =
+  typeof window !== 'undefined' ? sinBarraFinal(window.location.origin) : 'https://TU-DOMINIO.com'
+
 // El número se guarda solo con dígitos; la versión visible se arma de él
 // para que cambiar VITE_WHATSAPP_PHONE no deje un teléfono viejo en el pie.
 const numeroWhatsApp = String(env.VITE_WHATSAPP_PHONE || '59160475900').replace(/\D/g, '')
@@ -26,13 +34,15 @@ const formatoVisible = (numero) =>
 export const SITIO = {
   nombre: 'Girlys',
   lema: 'Manicura y pedicura con precio cerrado',
-  url: sinBarraFinal(env.VITE_SITE_ORIGIN || 'https://TU-DOMINIO.com'),
+  url: origenEsMarcador ? origenActual : origenDeclarado,
 
   // número en formato internacional, solo dígitos (Bolivia = 591)
   whatsapp: telefonoValido,
   whatsappVisible: formatoVisible(telefonoValido),
   correo: env.VITE_CONTACT_EMAIL || '',
-  blog: env.VITE_BLOG_URL || '',
+
+  // El blog vive dentro del mismo sitio React: /blog
+  blog: '/blog',
 
   // analítica y chat: si están vacíos, no se carga ningún script externo
   ga: env.VITE_GA_MEASUREMENT_ID || '',

@@ -1,10 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
   "installCommand": "cd 01-Sitio-Web && npm install",
   "buildCommand": "cd 01-Sitio-Web && npm run build",
   "outputDirectory": "01-Sitio-Web/dist",
   "trailingSlash": false,
-  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/(.*)",

@@ -1,11 +1,11 @@
-# Punto 3 · SSL: autofirmado, Let's Encrypt y ZeroSSL
+# Punto 3 · SSL: HTTPS en local y en producción
 
 Hay dos escenarios y conviene no mezclarlos:
 
 | Escenario | Certificado | Costo | Estado |
 |---|---|---|---|
 | **Local (tu PC)** | Autofirmado | 0 | ✅ Hecho |
-| **Hosting real** | Let's Encrypt (recomendado) o ZeroSSL | 0 | ⏳ Cuando haya dominio |
+| **Producción (Vercel)** | Automático (Let's Encrypt) | 0 | ✅ Al publicar |
 
 ---
 
@@ -57,85 +57,58 @@ Es opcional. Solo hazlo en tu computadora, nunca en un equipo compartido.
 
 ### Seguridad de la clave privada
 
-`localhost.key` está excluida de Git (`.gitignore`). Si se filtra, cualquiera podría
-suplantar el sitio **en tu red local**. Regenerar el certificado es suficiente.
+Los dos archivos se generan en tu PC y **no se suben a GitHub** (`.gitignore`).
+Si la clave se filtra, cualquiera podría suplantar el sitio **en tu red local**.
+Regenerar el certificado es suficiente: `generar-certificado.ps1`.
 
 ---
 
-## 3.2 Hosting real: Let's Encrypt (recomendado)
+## 3.2 Producción: HTTPS automático en Vercel
 
-Gratis, se renueva sola cada 90 días y la mayoría de los paneles la instala en dos clics.
+Vercel emite y renueva el certificado **sin configuración**:
 
-### En CWP (panel de usuario)
+1. El sitio se publica con la URL gratuita `https://proyecto.vercel.app`.
+2. Vercel instala un certificado de Let's Encrypt y lo renueva solo.
+3. Al conectar un dominio propio (documento 8), también lo emite solo.
 
-1. Entrar a `https://TU-HOST:2083`.
-2. Menú **SSL / TLS → AutoSSL**.
-3. Seleccionar el dominio y pulsar **Run AutoSSL**.
-4. Esperar 1-2 minutos. Debe aparecer *Certificate installed*.
+No hay que comprar certificados, instalar AutoSSL, ni pegar claves en un panel.
+Tampoco hay que forzar HTTPS a mano: Vercel redirige `http://` a `https://`.
 
-### En cPanel
+### Comprobar que funciona
 
-1. **Seguridad → SSL/TLS Status**.
-2. Marcar el dominio → **Run AutoSSL**.
-
-### Verificar
-
-- Abrir `https://tudominio.com` y comprobar el candado.
-- Ver la fecha de vencimiento (debe ser ~90 días).
-- Probar `http://tudominio.com` → debe redirigir a `https://`.
-
-Si AutoSSL falla, casi siempre es porque el DNS todavía no apunta al servidor.
-Esperar la propagación (hasta 24 h) y reintentar.
+| Prueba | Resultado esperado |
+|---|---|
+| Abrir `https://proyecto.vercel.app` | Candado válido en el navegador |
+| Abrir `http://proyecto.vercel.app` | Redirige a `https://` |
+| Fecha del certificado | Vercel la renueva antes de que venza |
 
 ---
 
-## 3.3 Hosting real: ZeroSSL (alternativa)
+## 3.3 Por qué no hay contenido mixto
 
-Útil si el hosting no tiene AutoSSL o si Let's Encrypt está limitado por rate limit.
+El sitio **no carga nada por HTTP**:
 
-1. Crear cuenta gratis en <https://zerossl.com>.
-2. **New Certificate → 90-day Free**.
-3. Escribir el dominio (sin `https://`, sin barra final).
-4. Elegir validación **HTTP File Upload** (la más simple):
-   - ZeroSSL da un archivo y una ruta.
-   - Subirlo con el Administrador de archivos del hosting.
-   - Pulsar **Verify**.
-5. Descargar el paquete. Vienen 3 archivos:
-   - `certificate.crt` (el certificado)
-   - `ca_bundle.crt` (la cadena)
-   - `private.key` (la clave)
-6. En CWP: **SSL / TLS → Install Certificate**, pegar los tres y guardar.
-7. Renovar cada 90 días (ZeroSSL gratis **no** renueva automático).
+- Las fuentes están autoalojadas en `public/fuentes`.
+- Las imágenes son locales o del mismo dominio.
+- No se usan Google Fonts ni librerías desde CDN.
 
-> Let's Encrypt es preferible justamente por la renovación automática.
-> ZeroSSL queda como plan B documentado.
+Por eso el candado no se rompe. Para verificarlo: abrir el sitio → `F12` →
+pestaña **Console** → buscar advertencias *Mixed Content*. No debe haber ninguna.
+
+> La única excepción posible es Google Analytics, que se carga por HTTPS y solo
+> si la persona acepta el aviso de cookies.
 
 ---
 
-## 3.4 Forzar HTTPS (ya incluido)
+## 3.4 Qué pasa con el certificado local al publicar
 
-El archivo `01-Sitio-Web\deploy\.htaccess` ya trae las reglas para el hosting Apache:
+Nada. El certificado autofirmado **solo existe en tu PC** y no se sube a GitHub.
+En producción, el navegador ve el certificado real de Vercel.
 
-```apache
-# HTTP -> HTTPS
-RewriteCond %{HTTPS} !=on
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-# www -> sin www
-RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 ```
-
-Se sube junto con el sitio (es un archivo oculto: activar "mostrar archivos ocultos" en el
-administrador de archivos).
-
-### Comprobar que no hay contenido mixto
-
-El sitio **no carga nada por HTTP**: fuentes autoalojadas, imágenes locales, sin Google Fonts.
-Por eso el candado no se rompe.
-
-Para verificarlo: abrir el sitio → `F12` → pestaña **Console** → buscar advertencias
-*Mixed Content*. No debe haber ninguna.
+Tu PC:    https://localhost:8443   → certificado autofirmado (advertencia)
+Internet: https://tudominio.com    → certificado de Vercel (candado verde)
+```
 
 ---
 
@@ -143,7 +116,6 @@ Para verificarlo: abrir el sitio → `F12` → pestaña **Console** → buscar a
 
 1. **Local:** certificado autofirmado generado con OpenSSL, HTTPS en `localhost:8443`,
    advertencia del navegador explicada y justificada.
-2. **Producción:** Let's Encrypt gratis con renovación automática desde el panel;
-   ZeroSSL documentado como alternativa manual.
-3. **Redirección:** HTTP → HTTPS y `www` → sin `www` mediante `.htaccess`.
+2. **Producción:** Vercel emite y renueva el certificado automáticamente (Let's Encrypt).
+3. **Redirección:** `http://` → `https://` la hace la plataforma.
 4. **Clave privada:** fuera de Git y nunca compartida.

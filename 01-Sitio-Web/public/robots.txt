@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-
-# El blog de WordPress (en /blog) publica su propio mapa de entradas.
-Sitemap: https://TU-DOMINIO.com/sitemap.xml
-Sitemap: https://TU-DOMINIO.com/blog/wp-sitemap.xml

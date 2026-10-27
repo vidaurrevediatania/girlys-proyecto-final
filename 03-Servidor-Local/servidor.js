@@ -1,13 +1,10 @@
 /**
  * Servidor local del Proyecto Final 2.0
  * ------------------------------------------------------------------
- * Une las dos piezas en un solo dominio, igual que en el hosting real:
+ * Sirve el sitio React construido en 01-Sitio-Web/dist con HTTPS.
+ * El blog es estático y vive en la misma carpeta: /blog.
  *
- *   https://localhost:8443/        -> sitio React (01-Sitio-Web/dist)
- *   https://localhost:8443/blog/   -> WordPress (02-WordPress)
- *
- * El certificado es autofirmado (punto 3 de la lista). El navegador
- * mostrará una advertencia la primera vez: es normal en local.
+ * No usa PHP, ni WordPress, ni base de datos.
  *
  * Arranque:  iniciar.ps1   (o  node servidor.js)
  */
@@ -24,8 +21,6 @@ const DIST = path.join(RAIZ, '01-Sitio-Web', 'dist')
 const CERT = path.join(AQUI, 'certs', 'localhost.crt')
 const LLAVE = path.join(AQUI, 'certs', 'localhost.key')
 
-const PHP_HOST = process.env.PHP_HOST || '127.0.0.1'
-const PHP_PORT = Number(process.env.PHP_PORT || 8090)
 const HTTPS_PORT = Number(process.env.HTTPS_PORT || 8443)
 const HTTP_PORT = Number(process.env.HTTP_PORT || 8080)
 const BASE = `https://localhost:${HTTPS_PORT}`
@@ -66,72 +61,49 @@ if (!fs.existsSync(path.join(DIST, 'index.html'))) {
   process.exit(1)
 }
 
-const registro = (msg) => console.log(`  ${new Date().toLocaleTimeString('es-BO')}  ${msg}`)
+function servirArchivo(res, destino, metodo) {
+  const ext = path.extname(destino).toLowerCase()
+  res.writeHead(200, {
+    'Content-Type': TIPOS[ext] || 'application/octet-stream',
+    'Cache-Control':
+      ext === '.html'
+        ? 'no-cache'
+        : ext === '.js' || ext === '.css' || ext === '.woff2'
+          ? 'public, max-age=31536000, immutable'
+          : 'public, max-age=3600',
+  })
+  if (metodo === 'HEAD') {
+    res.end()
+    return
+  }
+  fs.createReadStream(destino).pipe(res)
+}
 
-/** Sirve archivos del sitio React, con respaldo a index.html (rutas SPA). */
+/** Sirve archivos del sitio y manda las rutas del SPA a index.html. */
 function servirEstatico(req, res, urlPath) {
+  const metodo = req.method || 'GET'
   let relativo = decodeURIComponent(urlPath.split('?')[0])
-  if (relativo.endsWith('/')) relativo += 'index.html'
+  if (relativo === '/') relativo = '/index.html'
 
   const destino = path.normalize(path.join(DIST, relativo))
   if (!destino.startsWith(DIST)) {
-    res.writeHead(403).end('Prohibido')
+    res.writeHead(403, { 'Content-Type': 'text/plain; charset=utf-8' }).end('Prohibido')
     return
   }
 
   if (fs.existsSync(destino) && fs.statSync(destino).isFile()) {
-    const ext = path.extname(destino).toLowerCase()
-    res.writeHead(200, {
-      'Content-Type': TIPOS[ext] || 'application/octet-stream',
-      'Cache-Control': ext === '.html' ? 'no-cache' : 'public, max-age=3600',
-    })
-    fs.createReadStream(destino).pipe(res)
+    servirArchivo(res, destino, metodo)
     return
   }
 
-  // Ruta del SPA (por ejemplo /servicios): devolver index.html
-  if (!path.extname(relativo)) {
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' })
-    fs.createReadStream(path.join(DIST, 'index.html')).pipe(res)
+  // /blog, /blog/mi-entrada, /servicios... no tienen extensión: es una ruta
+  // del React Router y devuelve index.html para que la resuelva el navegador.
+  if (!path.extname(relativo.replace(/\/+$/, ''))) {
+    servirArchivo(res, path.join(DIST, 'index.html'), metodo)
     return
   }
 
   res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' }).end('404 - No encontrado')
-}
-
-/** Reenvía /blog/* al PHP que ejecuta WordPress. */
-function enviarAWordPress(req, res) {
-  const opciones = {
-    host: PHP_HOST,
-    port: PHP_PORT,
-    method: req.method,
-    path: req.url,
-    headers: {
-      ...req.headers,
-      host: `localhost:${HTTPS_PORT}`,
-      'x-forwarded-proto': 'https',
-      'x-forwarded-host': `localhost:${HTTPS_PORT}`,
-    },
-  }
-
-  const peticion = http.request(opciones, (respuesta) => {
-    res.writeHead(respuesta.statusCode || 502, respuesta.headers)
-    respuesta.pipe(res)
-  })
-
-  peticion.on('error', (err) => {
-    registro(`WordPress no responde (${err.code || err.message})`)
-    res.writeHead(502, { 'Content-Type': 'text/html; charset=utf-8' })
-    res.end(`<!doctype html><meta charset="utf-8"><title>WordPress apagado</title>
-      <div style="font-family:system-ui;max-width:640px;margin:12vh auto;padding:24px;line-height:1.6">
-      <h1 style="font-family:Georgia,serif">WordPress no está corriendo</h1>
-      <p>El sitio principal funciona, pero el blog necesita PHP.</p>
-      <p>Cierra esta ventana y ejecuta <code>iniciar.ps1</code> de nuevo,
-      o revisa la otra ventana negra (la de PHP) para ver el error.</p>
-      </div>`)
-  })
-
-  req.pipe(peticion)
 }
 
 const servidor = https.createServer(
@@ -140,23 +112,19 @@ const servidor = https.createServer(
     const url = req.url || '/'
 
     if (url === '/estado') {
-      const probarPhp = new Promise((ok) => {
-        const p = http.get({ host: PHP_HOST, port: PHP_PORT, path: '/blog/', timeout: 8000 }, (r) => {
-          r.resume()
-          ok(r.statusCode || 0)
-        })
-        p.on('error', () => ok(0))
-        p.on('timeout', () => { p.destroy(); ok(0) })
-      })
-      probarPhp.then((codigo) => {
-        res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' })
-        res.end(JSON.stringify({ sitio: 'ok', wordpress: codigo ? 'ok' : 'apagado', php: codigo }, null, 2))
-      })
-      return
-    }
-
-    if (url === '/blog' || url.startsWith('/blog/') || url.startsWith('/blog?')) {
-      enviarAWordPress(req, res)
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' })
+      res.end(
+        JSON.stringify(
+          {
+            sitio: 'ok',
+            blog: 'estatico',
+            rutas: ['/', '/blog', '/blog/:entrada'],
+            https: HTTPS_PORT,
+          },
+          null,
+          2,
+        ),
+      )
       return
     }
 
@@ -178,14 +146,13 @@ servidor.listen(HTTPS_PORT, () => {
   console.log('   GIRLYS - servidor local encendido')
   console.log('  ======================================================')
   console.log(`   Sitio web ....... ${BASE}/`)
-  console.log(`   Blog WordPress .. ${BASE}/blog/`)
-  console.log(`   Panel de WP ..... ${BASE}/blog/wp-admin/`)
+  console.log(`   Blog ............ ${BASE}/blog`)
   console.log(`   Estado .......... ${BASE}/estado`)
   console.log('')
   console.log('   El candado aparece como "no seguro" solo porque el')
   console.log('   certificado es autofirmado: haz clic en "Avanzado"')
   console.log('   y luego en "Continuar a localhost".')
   console.log('')
-  console.log('   Para apagar todo: cierra esta ventana o pulsa Ctrl+C.')
+  console.log('   Para apagar: cierra esta ventana o pulsa Ctrl+C.')
   console.log('')
 })

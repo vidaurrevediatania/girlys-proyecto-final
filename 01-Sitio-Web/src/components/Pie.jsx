@@ -1,9 +1,13 @@
+import { Link, useLocation } from 'react-router-dom'
 import { SUCURSALES } from '../data.js'
 import { medir } from '../lib/analytics.js'
 import { REDES, SITIO, hayRedes, whatsappUrl } from '../lib/sitio.js'
 
 export default function Pie() {
   const anio = new Date().getFullYear()
+  const { pathname } = useLocation()
+  const esInicio = pathname === '/'
+  const seccion = (hash) => (esInicio ? hash : `/${hash}`)
 
   return (
     <footer className="seccion t-pie pie">
@@ -15,9 +19,9 @@ export default function Pie() {
               Manicura y pedicura en Santa Cruz de la Sierra. Atendemos con cita,
               sin fila y con el precio cerrado antes de empezar.
             </p>
-            <a className="btn btn-linea pie-cta" href="#calculadora">
+            <Link className="btn btn-linea pie-cta" to={seccion('#calculadora')}>
               Calcular mi cita
-            </a>
+            </Link>
 
             {hayRedes && (
               <div className="pie-redes">
@@ -46,10 +50,10 @@ export default function Pie() {
             <ul className="pie-lista">
               {SUCURSALES.map((s) => (
                 <li key={s.id}>
-                  <a href="#sucursales" className="pie-enlace">
+                  <Link to={seccion('#sucursales')} className="pie-enlace">
                     <span className="serif">{s.nombre}</span>
                     <span className="nota">{s.linea}</span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -97,30 +101,28 @@ export default function Pie() {
             anticipo del 50 % confirma el cupo.
           </p>
           <nav className="pie-legal-enlaces" aria-label="Información legal">
-            <a href="#privacidad" className="nota">
+            <Link to={seccion('#privacidad')} className="nota">
               Privacidad
-            </a>
-            <a href="#terminos" className="nota">
+            </Link>
+            <Link to={seccion('#terminos')} className="nota">
               Términos
-            </a>
-            <a href="#cancelaciones" className="nota">
+            </Link>
+            <Link to={seccion('#cancelaciones')} className="nota">
               Cancelaciones
-            </a>
-            <a href="#preguntas" className="nota">
+            </Link>
+            <Link to={seccion('#preguntas')} className="nota">
               Preguntas
-            </a>
-            {SITIO.blog && (
-              <a
-                href={SITIO.blog}
-                className="nota"
-                onClick={() => medir('clic_social', { red: 'blog', origen: 'pie' })}
-              >
-                Blog
-              </a>
-            )}
-            <a href="#portada" className="nota pie-subir">
+            </Link>
+            <Link
+              to="/blog"
+              className="nota"
+              onClick={() => medir('clic_social', { red: 'blog', origen: 'pie' })}
+            >
+              Blog
+            </Link>
+            <Link to={seccion('#portada')} className="nota pie-subir">
               Volver arriba ↑
-            </a>
+            </Link>
           </nav>
         </div>
       </div>

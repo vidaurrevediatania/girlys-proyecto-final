@@ -1,94 +1,112 @@
-# Punto 7 · Vista inicial del sitio, temática y plugins
+# Punto 7 · Vista inicial del sitio, temática y dependencias
 
 ## 7.1 Vista del sitio principal
 
 ![Portada del sitio](../05-Recursos/capturas/01-sitio-web.png)
 
-- Paleta crema, rosa y negro: transmite salón de belleza, no una tienda genérica.
-- Tipografía serif para los títulos y palo seco para el texto.
-- La calculadora y la lista de precios son lo primero que se ve después del hero.
+- Paleta crema, rosa empolvado y negro: transmite salón de belleza, no una tienda genérica.
+- Tipografía serif para los títulos y palo seco (Karla) para el texto.
+- La calculadora y la lista de precios son lo primero que se ve después de la portada.
 - Botón flotante de WhatsApp siempre visible.
 
-## 7.2 Vista del blog (WordPress)
+## 7.2 Vista del blog
 
-![Portada del blog](../05-Recursos/capturas/02-blog-wordpress.png)
+![Portada del blog](../05-Recursos/capturas/02-blog.png)
 
-- Tema **Astra** adaptado con los mismos colores y tipografías del sitio.
-- Portada con hero, tres tarjetas de preguntas frecuentes y últimas entradas.
-- Menú: Inicio · Blog · Servicios y precios · Sitio principal.
-- Pie con enlace de vuelta al sitio comercial.
+- Mismo sistema visual que el sitio: misma paleta, tipografías y botones.
+- Portada con hero, filtros por categoría, una entrada destacada y el resto en tarjetas.
+- Menú: Inicio · Servicios · Calculadora · Salones · Preguntas · Blog.
+- Pie con enlaces al sitio comercial y aviso de precios.
 
 ### Entrada del blog
 
 ![Entrada del blog](../05-Recursos/capturas/03-blog-entrada.png)
 
+- Imagen destacada, categoría, fecha y tiempo de lectura.
+- Contenido en Markdown renderizado con el mismo estilo del sitio.
+- Caja final que invita a calcular el precio y enlaces a entradas relacionadas.
+
 ---
 
-## 7.3 Tema instalado
+## 7.3 Identidad visual implementada
 
 | Dato | Valor |
 |---|---|
-| Tema | **Astra** (gratis) |
-| Por qué | Liviano, compatible con bloques, muy usado, no requiere licencia |
-| Personalización | Plugin *mu* `girlys-estilo.php` con la paleta y tipografía del salón |
-| Alternativa incluida | Twenty Twenty-Five (tema por defecto de WordPress) |
+| Sistema de diseño | Variables CSS en `src/styles/tokens.css` |
+| Paleta | Papel crema, rosa empolvado, tinta oscura y bronce |
+| Títulos | Serif del sistema (`Times New Roman`) |
+| Texto | **Karla**, autoalojada en `public/fuentes` |
+| Estilo del blog | `src/styles/blog.css`, con las mismas variables |
+| Por qué | Un solo lenguaje visual en todo el sitio; el blog no parece "otra web" |
 
-El estilo se aplica con un **mu-plugin** (`02-WordPress\wp-content\mu-plugins\girlys-estilo.php`).
-Así no se modifica el tema: si se actualiza Astra, los colores siguen igual.
+No se usa una plantilla externa ni un tema comprado: el diseño está escrito
+directamente en CSS, así que no hay licencias ni actualizaciones que puedan
+romper los colores.
+
+### Cómo se mantiene la coherencia
+
+1. Los colores y espacios salen de `tokens.css`.
+2. El sitio y el blog usan las mismas clases base (`btn`, `titular`, `etiqueta`).
+3. Si cambia un color en `tokens.css`, cambia en todas las páginas.
+4. Las fuentes se sirven desde el mismo dominio: no dependen de Google Fonts.
 
 ---
 
-## 7.4 Plugins instalados
+## 7.4 Dependencias del proyecto
 
-| Plugin | Estado | Para qué | Configuración |
-|---|---|---|---|
-| **Rank Math SEO** | Activo | Títulos, sitemap, datos estructurados, redirecciones | Manual (documento 6) |
-| **UpdraftPlus** | Activo | Copias de seguridad programadas | Semanal, 4 copias |
-| **Wordfence Security** | Activo | Cortafuegos, escaneo de archivos, bloqueo de fuerza bruta | Básica |
-| **WP Super Cache** | Guardado | Caché de páginas en el hosting | Activar solo en producción |
-| **SQLite Database Integration** | Guardado | Motor de base de datos local | Ya funciona por el *drop-in* |
-| **Akismet** | Guardado | Anti-spam de comentarios | No se usa: comentarios cerrados |
+En lugar de plugins de WordPress, el sitio usa librerías de JavaScript declaradas
+en `01-Sitio-Web/package.json`:
 
-### Por qué WP Super Cache está desactivado
+| Dependencia | Versión | Para qué |
+|---|---|---|
+| **react** | 18 | Interfaz y componentes |
+| **react-dom** | 18 | Renderizado en el navegador |
+| **react-router-dom** | 6 | Rutas `/`, `/blog` y `/blog/:slug` |
+| **marked** | 14 | Convierte las entradas Markdown en HTML |
+| **motion** | 14 | Animaciones suaves de la interfaz |
+| **vite** | 5 | Construcción y servidor de desarrollo |
+| **@vitejs/plugin-react** | 4 | Soporte de React dentro de Vite |
 
-La caché guarda HTML estático y **esconde los cambios** mientras se edita.
-En local se trabaja sin caché. En el hosting se activa en 30 segundos:
-**WP Super Cache → Easy → Caching On**.
+### Por qué no hay plugins de WordPress
 
-### Plugins descartados a propósito
+El proyecto **no usa WordPress**. Por lo tanto no hay Rank Math, Astra, UpdraftPlus,
+Wordfence ni caché de plugins. Cada función que esos plugins resolvían se cubre así:
 
-| Plugin | Por qué no |
+| Función | Cómo se resuelve |
 |---|---|
-| Page builders (Elementor, WPBakery) | Pesados; el sitio principal no los necesita |
+| SEO y sitemap | `src/lib/seo.js` + `scripts/generar-seo.mjs` |
+| Tema y estilos | `tokens.css` y `blog.css` |
+| Copias de seguridad | Historial de Git y GitHub |
+| Seguridad | Sitio estático: no hay panel ni base de datos que atacar |
+| Caché | Vercel sirve los archivos estáticos desde su red |
+| Comentarios | Cerrados: no se usan |
+
+### Dependencias descartadas a propósito
+
+| Tecnología | Por qué no |
+|---|---|
+| WordPress + PHP | Vercel no ejecuta PHP; obligaría a pagar otro hosting |
+| MySQL / SQLite | El contenido vive en archivos Markdown versionados |
+| Page builders (Elementor, etc.) | Pesados; el diseño ya está hecho en CSS |
 | WooCommerce | No se venden productos online |
-| Revslider | Licencia paga y riesgo de seguridad |
-| Plugins de "SEO todo en uno" duplicados | Dos plugins de SEO se estorban |
+| Plugins de SEO duplicados | El SEO ya está implementado en el código |
 
 ---
 
-## 7.5 Configuración de WordPress ya aplicada
+## 7.5 Configuración del sitio ya aplicada
 
 | Ajuste | Valor |
 |---|---|
-| Título | Girlys · Blog de manicura y cuidado de uñas |
-| Descripción | Consejos de manicura, tendencias y precios claros en Santa Cruz |
-| Zona horaria | America/La_Paz |
-| Enlaces permanentes | `/%postname%/` → `/blog/mi-entrada/` |
-| Comentarios | Cerrados por defecto y en entradas antiguas |
-| Visibilidad en buscadores | **Activada** (necesaria para robots.txt y sitemaps) |
-| Página de inicio | Página "Inicio" con diseño propio |
-| Página de entradas | "Blog" en `/blog/entradas/` |
+| Título del sitio | Girlys · Manicura y pedicura en Santa Cruz de la Sierra |
+| Descripción | Calcula el precio, elige forma, largo y diseño, y reserva |
+| Idioma | Español (`lang="es"`) |
+| Zona horaria de las entradas | Fecha fija en cada archivo Markdown |
+| Rutas del blog | `/blog` y `/blog/<nombre-del-archivo>` |
 | Categorías | Cuidado de uñas · Tendencias · Paso a paso |
 | Entradas publicadas | 3, con texto real y sin relleno |
-| Menú | Inicio · Blog · Servicios y precios · Sitio principal |
-| Idioma del panel | Español (es_ES) |
-
-### Sobre la visibilidad en buscadores
-
-Está **activada** (`Ajustes → Lectura → "Disuadir a los motores de búsqueda"` desmarcado).
-Es necesario para que WordPress publique `robots.txt` y los sitemaps del blog.
-En localhost no hay riesgo de indexación: Google no puede entrar a tu PC.
-Al publicar en el dominio real debe quedar igual (activada).
+| Comentarios | No existen |
+| Visibilidad en buscadores | `index, follow`; el 404 es `noindex` |
+| Analítica | Solo se carga si la persona acepta el aviso |
 
 ---
 
@@ -98,13 +116,10 @@ Al publicar en el dominio real debe quedar igual (activada).
 2. Mostrar la calculadora: elegir servicio, forma, largo y diseño → el precio cambia.
 3. Pulsar **Reservar** → se abre WhatsApp con el resumen y el anticipo.
 4. Bajar a la lista de precios y a las preguntas frecuentes.
-5. Abrir `/blog/` y mostrar la portada del blog.
-6. Abrir `/blog/wp-admin/` y mostrar:
-   - Entradas y categorías.
-   - **Apariencia → Temas**: Astra activo.
-   - **Plugins**: Rank Math, UpdraftPlus, Wordfence.
-   - **Ajustes → Enlaces permanentes**.
-7. Volver al sitio y señalar el enlace "Blog" en el pie.
+5. Abrir `/blog` y mostrar la portada, los filtros y las tarjetas.
+6. Abrir una entrada y señalar la fecha, la categoría y el contenido.
+7. Volver al sitio y señalar el enlace **Blog** en el menú y en el pie.
+8. Enseñar `01-Sitio-Web/src/content/blog`: las entradas son archivos de texto.
 
 ---
 
@@ -112,10 +127,10 @@ Al publicar en el dominio real debe quedar igual (activada).
 
 - [x] Sitio principal visible con la temática del salón.
 - [x] Blog con el mismo estilo visual.
-- [x] Tema instalado y activo (Astra).
-- [x] Plugins básicos instalados (SEO, backup, seguridad, caché).
-- [x] Contenido inicial publicado (3 entradas, 3 páginas, 3 categorías).
+- [x] Identidad visual definida en un solo archivo de variables.
+- [x] Dependencias justificadas y sin plugins innecesarios.
+- [x] Contenido inicial publicado (3 entradas, 3 categorías).
 - [x] Menú y portada configurados.
 - [x] Comentarios cerrados y buscadores configurados.
-- [ ] Activar WP Super Cache al pasar a producción.
-- [ ] Revisar los sitemaps del blog al publicar.
+- [x] Funciona en móvil y en escritorio.
+- [x] Sin licencias pagas ni servicios de terceros obligatorios.

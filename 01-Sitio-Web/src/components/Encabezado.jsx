@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 const ENLACES = [
-  { href: '#servicios', texto: 'Servicios' },
-  { href: '#calculadora', texto: 'Calculadora' },
-  { href: '#sucursales', texto: 'Salones' },
-  { href: '#preguntas', texto: 'Preguntas' },
+  { hash: '#servicios', texto: 'Servicios' },
+  { hash: '#calculadora', texto: 'Calculadora' },
+  { hash: '#sucursales', texto: 'Salones' },
+  { hash: '#preguntas', texto: 'Preguntas' },
 ]
 
 export default function Encabezado() {
   const [fijo, setFijo] = useState(false)
+  const { pathname } = useLocation()
+  const esInicio = pathname === '/'
 
   useEffect(() => {
     const alScroll = () => setFijo(window.scrollY > 24)
@@ -20,22 +23,29 @@ export default function Encabezado() {
   return (
     <header className={`barra ${fijo ? 'barra-fija' : ''}`}>
       <div className="contenido barra-int">
-        <a href="#portada" className="marca">
+        <Link to={esInicio ? '#portada' : '/'} className="marca">
           <span className="marca-nombre">Girlys</span>
           <span className="marca-sub">manicura y pedicura</span>
-        </a>
+        </Link>
 
         <nav className="nav" aria-label="Principal">
           {ENLACES.map((e) => (
-            <a key={e.href} href={e.href} className="nav-enlace">
+            <Link
+              key={e.hash}
+              to={esInicio ? e.hash : `/${e.hash}`}
+              className="nav-enlace"
+            >
               {e.texto}
-            </a>
+            </Link>
           ))}
+          <Link to="/blog" className="nav-enlace nav-blog">
+            Blog
+          </Link>
         </nav>
 
-        <a href="#sucursales" className="btn btn-firme barra-cta">
+        <Link to={esInicio ? '#sucursales' : '/#sucursales'} className="btn btn-firme barra-cta">
           Reservar
-        </a>
+        </Link>
       </div>
     </header>
   )

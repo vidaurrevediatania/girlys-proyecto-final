@@ -9,6 +9,25 @@ const precioMax = Math.max(...SERVICIOS.map((s) => s.precio))
 const DIAS_SCHEMA = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 /**
+ * Dirección pública del sitio.
+ *
+ * Prioridad:
+ *   1. VITE_SITE_ORIGIN si tiene un dominio real.
+ *   2. La URL que Vercel asigna al proyecto (primer despliegue sin configurar nada).
+ *   3. El marcador local.
+ */
+function origenDelSitio(env) {
+  const declarado = String(env.VITE_SITE_ORIGIN || '').trim().replace(/\/+$/, '')
+  if (declarado && !/TU-DOMINIO/i.test(declarado)) return declarado
+
+  const vercel =
+    process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL || ''
+  if (vercel) return `https://${vercel.replace(/^https?:\/\//, '').replace(/\/+$/, '')}`
+
+  return 'https://TU-DOMINIO.com'
+}
+
+/**
  * JSON-LD generado desde los mismos datos que pinta la página.
  * Si cambias un teléfono, una dirección o una pregunta en src/data.js,
  * el dato estructurado cambia solo. No hay dos copias que mantener.
@@ -75,7 +94,7 @@ function seoGirlys(ORIGEN) {
       return [
         {
           tag: 'script',
-          attrs: { type: 'application/ld+json' },
+          attrs: { type: 'application/ld+json', id: 'jsonld-inicio' },
           children: datosEstructurados(ORIGEN),
           injectTo: 'head',
         },
@@ -84,14 +103,25 @@ function seoGirlys(ORIGEN) {
   }
 }
 
+/** Reemplaza el marcador del dominio en index.html por el origen calculado. */
+function origenEnHtml(ORIGEN) {
+  return {
+    name: 'girlys-origen',
+    transformIndexHtml(html) {
+      return html.replaceAll('__SITIO_ORIGEN__', ORIGEN)
+    },
+  }
+}
+
 export default defineConfig(({ mode }) => {
-  // El dominio todavía no está definido: se toma de VITE_SITE_ORIGIN (.env).
   const env = loadEnv(mode, process.cwd(), '')
-  const ORIGEN = (env.VITE_SITE_ORIGIN || 'https://TU-DOMINIO.com').replace(/\/+$/, '')
+  const ORIGEN = origenDelSitio(env)
 
   return {
-    plugins: [react(), seoGirlys(ORIGEN)],
-    base: './',
+    plugins: [react(), origenEnHtml(ORIGEN), seoGirlys(ORIGEN)],
+    // Rutas absolutas: /blog/mi-entrada necesita cargar /assets/... y no
+    // /blog/assets/..., que no existe.
+    base: '/',
     server: {
       watch: {
         // El ZIP de publicación y las capturas se generan mientras el servidor

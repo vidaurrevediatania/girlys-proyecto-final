@@ -47,75 +47,119 @@ El sitio no vende productos: **vende turnos**. El ingreso se genera así:
 
 ## 1.3 Dominio
 
-**Todavía no hay dominio asignado.** El proyecto está preparado para funcionar con cualquiera:
-la dirección se guarda en un solo lugar (`VITE_SITE_ORIGIN` dentro de `01-Sitio-Web\.env`) y un
-script actualiza el resto de los archivos.
+**Todavía no hay dominio asignado.** El proyecto está preparado para funcionar sin uno
+y para conectarlo después en un solo paso.
 
 | Dato | Valor |
 |---|---|
-| Dominio actual | **pendiente** (marcador `https://TU-DOMINIO.com`) |
+| Dominio actual | **pendiente** (marcador `https://TU-DOMINIO.com` en `.env`) |
 | Dónde se cambia | `03-Servidor-Local\configurar-dominio.ps1` |
+| Primer despliegue | Vercel asigna una URL gratis (`proyecto.vercel.app`) |
 | SSL local | autofirmado (documento 3) |
-| SSL en hosting | Let's Encrypt gratis (documento 3) |
+| SSL en Vercel | automático y gratis |
+
+### Cómo funciona sin dominio
+
+- En local, el sitio usa `https://localhost:8443`.
+- En Vercel, la primera publicación usa automáticamente la URL que asigna la plataforma.
+- El canonical, el sitemap y `robots.txt` se generan con la dirección que corresponda.
 
 ### Cómo poner el dominio cuando lo tengas
 
-1. Abre PowerShell en `03-Servidor-Local`.
-2. Ejecuta:
+1. Comprar el dominio (NIC Bolivia, Namecheap, GoDaddy o similar).
+2. En Vercel: **Settings → Domains → Add**, escribir el dominio y seguir los registros DNS.
+3. Ejecutar en tu PC:
    ```powershell
+   cd 03-Servidor-Local
    .\configurar-dominio.ps1 -Dominio "https://tudominio.com"
    ```
-3. El script actualiza `.env`, `sitemap.xml`, `robots.txt`, `index.html` y reconstruye el sitio.
+4. Hacer `git add .`, `git commit` y `git push`.
 
-> El marcador `TU-DOMINIO.com` aparece en el canonical y en el sitemap **solo mientras no haya dominio**.
-> No se debe publicar en internet con ese marcador: Google vería una dirección que no existe.
+Vercel emite el certificado HTTPS solo. No hay que instalar Let's Encrypt ni tocar Apache.
+
+> Mientras el canonical diga `TU-DOMINIO.com`, no conviene enviar el sitio a Google.
+> Con la URL de Vercel o el dominio propio, ya queda listo para Search Console.
 
 ### Recomendación de dominio
 
-- Si el proveedor del curso te da un subdominio (por ejemplo `algo.si.com.bo`), sirve para la entrega.
-- Para el negocio real conviene un dominio propio: `girlys.com.bo` o `girlysbolivia.com`
+- Para la entrega sirve la URL gratuita de Vercel.
+- Para el negocio conviene un dominio propio: `girlys.com.bo` o `girlysbolivia.com`
   (entre 10 y 15 USD al año).
-
-### Cómo se conecta un dominio nuevo (resumen)
-
-1. Comprar el dominio (NIC Bolivia, Namecheap, GoDaddy).
-2. Cambiar los *nameservers* a los del hosting.
-3. En CWP → **DNS Functions → DNS Zone Editor**, crear la zona.
-4. En CWP → **Addon Domains**, agregarlo apuntando a `public_html`.
-5. Emitir SSL (documento 3) y ejecutar `configurar-dominio.ps1`.
 
 ---
 
 ## 1.4 CMS elegido
 
-Se usan **dos piezas**, y cada una hace lo que mejor sabe hacer:
+El proyecto usa un **CMS basado en Git** (también llamado *Git-based CMS*):
 
 | Pieza | Tecnología | Dónde vive | Para qué |
 |---|---|---|---|
-| Sitio principal | **React + Vite** (sitio estático) | `/` | Calculadora, reserva, SEO, velocidad |
-| Blog | **WordPress + Astra** | `/blog/` | Publicar entradas sin tocar código (requisito de CMS, tema y plugins) |
+| Sitio principal | **React + Vite** | `/` | Calculadora, reserva, SEO, velocidad |
+| Blog | **Markdown + React** | `/blog` | Publicar entradas sin base de datos |
+| Gestión de contenido | **GitHub** | Repositorio | Crear, editar, borrar y versionar entradas |
+| Publicación | **Vercel** | Nube | Construir y publicar en cada cambio |
 
-### Por qué no todo en WordPress
+### Cómo se administra el contenido
 
-- La calculadora con precios dinámicos y el flujo de reserva se controlan mejor en React.
-- El sitio estático carga en menos de 1 segundo y no depende de una base de datos.
-- WordPress queda aislado: si el blog falla, el sitio principal sigue funcionando.
+Cada entrada es un archivo `.md` con un encabezado de datos:
 
-### Por qué no todo en React
+```markdown
+---
+titulo: Cómo cuidar la manicura semipermanente
+descripcion: Siete hábitos que alargan el esmaltado.
+fecha: 2026-10-26
+categoria: Cuidado de uñas
+imagen: /blog/cuidado-semipermanente.webp
+imagenAlt: Uñas con esmaltado nude
+---
 
-- El requisito pedía CMS, tema y plugins.
-- Un blog necesita escribir y publicar sin reconstruir el proyecto cada vez.
-- WordPress da panel, usuarios, categorías y SEO (Rank Math) sin programar.
-
-### Cómo se conectan
-
+Texto de la entrada con Markdown normal.
 ```
-https://dominio/            → sitio React (HTML/CSS/JS ya construido)
-https://dominio/blog/       → WordPress (PHP + base de datos)
-https://dominio/blog/wp-admin/ → panel de WordPress
-```
 
-El pie del sitio principal tiene un enlace al blog cuando `VITE_BLOG_URL` está definido (aquí: `/blog`).
+Flujo de trabajo:
+
+1. Se crea o edita el archivo (en GitHub o en la PC).
+2. Se guarda la imagen en `01-Sitio-Web/public/blog`.
+3. Se hace `commit` y `push`.
+4. Vercel reconstruye el sitio y publica la entrada sola.
+
+El historial de Git permite **volver atrás** si una entrada sale mal. Es el mismo
+principio de un CMS, pero sin panel visual ni base de datos.
+
+### Por qué no se usa WordPress
+
+| Problema de WordPress en este proyecto | Consecuencia |
+|---|---|
+| Vercel no ejecuta PHP | Habría que pagar o conseguir un hosting PHP aparte |
+| Necesita MySQL y un panel de administración | Más cuentas, contraseñas y actualizaciones |
+| Hay que actualizar el core, el tema y los plugins | Riesgo de seguridad y mantenimiento mensual |
+| El blog queda en otro servidor | El dominio se parte en dos y el SSL se duplica |
+
+La versión con WordPress existió durante el desarrollo y se descartó a propósito:
+**el objetivo es que el sitio completo se publique en Vercel con un solo clic**.
+Para la consigna, el CMS sigue existiendo: el contenido se gestiona desde el repositorio
+con Markdown, categorías, fechas e imágenes.
+
+### Qué partes del CMS están cubiertas
+
+| Función de un CMS | Cómo se resuelve aquí |
+|---|---|
+| Crear entradas | Archivo `.md` nuevo en `src/content/blog` |
+| Editar entradas | Editar el `.md` desde GitHub o localmente |
+| Borrar entradas | Eliminar el `.md` y hacer commit |
+| Categorías | Campo `categoria` del encabezado |
+| Fecha | Campo `fecha` |
+| Imagen destacada | Campo `imagen` + archivo en `public/blog` |
+| Vista previa | `npm run dev` en local |
+| Historial y rollback | Git / GitHub |
+| Publicación | Automática con Vercel |
+
+### Limitación honesta
+
+No hay un panel de administración visual como `wp-admin`. Si la cátedra exige
+**WordPress de forma obligatoria**, hay que decirlo antes de la entrega: este proyecto
+prioriza el despliegue estático en Vercel y no incluye PHP. La alternativa sería
+volver a un hosting PHP aparte, que es justamente lo que se quiso evitar.
 
 ---
 
@@ -123,5 +167,5 @@ El pie del sitio principal tiene un enlace al blog cuando `VITE_BLOG_URL` está 
 
 1. **Tema:** salón de uñas con precios transparentes.
 2. **Modelo de ingreso:** turnos + extras + anticipo del 50 % por WhatsApp.
-3. **Dominio:** subdominio gratuito del curso, con plan de migración a dominio propio.
-4. **CMS:** WordPress solo para el blog, React para el sitio comercial.
+3. **Dominio:** URL gratuita de Vercel y plan de migración a dominio propio.
+4. **CMS:** blog estático en Markdown gestionado desde GitHub; sin PHP ni base de datos.

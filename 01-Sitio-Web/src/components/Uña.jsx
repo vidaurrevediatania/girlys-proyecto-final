@@ -1,5 +1,13 @@
 import { useEffect, useId, useReducer, useRef } from 'react'
-import { BASE_Y, SEPARACION_REGLA, construirPath, medidas, puntaBezier, r } from '../lib/forma.js'
+import {
+  BASE_Y,
+  BORDE_NATURAL_Y,
+  SEPARACION_REGLA,
+  construirPath,
+  medidas,
+  puntaBezier,
+  r,
+} from '../lib/forma.js'
 import { textoLargo } from '../lib/precio.js'
 
 /** el diseño vive dentro del mismo clip y usa las mismas medidas que la uña.
@@ -24,7 +32,7 @@ function Diseno({ diseno, a, punta }) {
     // en vez de un french.
     //
     // El grosor va con el ancho de la uña, no con el largo: el borde libre
-    // es el mismo con 0.2 cm que con 1.4 cm.
+    // es el mismo con 0.24 cm que con 1.44 cm.
     const { c1i, c1d, c2i, c2d, vertice, yHombro, anchoPunta } = punta
     const d = a * 0.38
     const X = a + m
@@ -154,9 +162,9 @@ export default function Uña({
   return (
     <svg
       className={`una ${className}`}
-      viewBox={regla ? '-52 28 148 184' : '-48 28 96 184'}
+      viewBox={regla ? '-52 28 160 184' : '-48 28 96 184'}
       role="img"
-      aria-label={`Uña ${forma.nombre.toLowerCase()}, largo de ${textoLargo(unidades)}`}
+      aria-label={`Uña ${forma.nombre.toLowerCase()}, extensión de ${textoLargo(unidades)} desde el borde natural`}
     >
       <defs>
         <clipPath id={`u${id}`}>
@@ -228,11 +236,16 @@ export default function Uña({
       {/* 2. la medida, al costado de la uña */}
       {regla && (
         <g stroke="var(--tinta-4)" strokeWidth="1">
-          <line x1={medioDedo + 8} y1={BASE_Y} x2={medioDedo + 14} y2={BASE_Y} />
+          <line
+            x1={medioDedo + 8}
+            y1={BORDE_NATURAL_Y}
+            x2={medioDedo + 14}
+            y2={BORDE_NATURAL_Y}
+          />
           <line x1={medioDedo + 11} y1={punta.tipY} x2={medioDedo + 14} y2={punta.tipY} />
           <line
             x1={medioDedo + 11}
-            y1={BASE_Y}
+            y1={BORDE_NATURAL_Y}
             x2={medioDedo + 11}
             y2={punta.tipY}
             strokeDasharray="2 4"
@@ -242,9 +255,9 @@ export default function Uña({
       )}
       {regla && (
         <text
-          x={medioDedo + 11}
-          y={punta.tipY + 4}
-          textAnchor="middle"
+          x={medioDedo + 17}
+          y={(BORDE_NATURAL_Y + punta.tipY) / 2 + 4}
+          textAnchor="start"
           fill="var(--tinta-3)"
           fontSize="11"
           fontFamily="var(--sans)"

@@ -1,9 +1,11 @@
+import { largoEnCm } from './precio.js'
+
 /**
  * EL LARGO CRECE, EL ANCHO NO.
  *
  * Una uña de verdad no se ensancha cuando se alarga: lo que crece es el
  * borde libre. El lecho (su ancho) y la forma de la punta se quedan igual,
- * así que una almendra sigue siendo almendra con 0.2 cm y con 1.4 cm.
+ * así que una almendra sigue siendo almendra con 0.24 cm y con 1.44 cm.
  *
  * Si el ancho creciera con el largo, la uña sería solo un zoom: con el largo
  * mínimo parecería una uña y con el máximo una aguja. Por eso el ancho es
@@ -13,12 +15,20 @@
 export const ANCHO = 26
 export const SEPARACION_REGLA = 1.68 // la regla va a 1.68 medios anchos del centro
 
+// La ilustración de la calculadora usa unidades SVG de 1 CSS px cada una.
+// Así 1 cm = 96 / 2.54 unidades, al 100 % de zoom.
+export const CSS_PX_POR_CM = 96 / 2.54
+export const LECHO_NATURAL_CM = 1.2
+export const LECHO_NATURAL_PX = LECHO_NATURAL_CM * CSS_PX_POR_CM
+export const BASE_Y = 200
+export const BORDE_NATURAL_Y = BASE_Y - LECHO_NATURAL_PX
+
 /**
- * El largo en unidades de dibujo, a partir de las unidades del deslizador.
- * La relación es lineal: 3 unidades dan 60 u y 18 dan 164 u, con la uña de
- * 9 unidades (0.7 cm, el valor por defecto del calculadora) en 101.6 u.
+ * La uña conserva un lecho natural representativo de 1.2 cm; el valor
+ * seleccionado es la extensión libre que sobresale de ese borde, dibujada
+ * a 96 CSS px por pulgada (escala 1:1 al 100 % de zoom).
  */
-export const largoEnPx = (unidades) => 60 + ((unidades - 3) / 15) * 104
+export const largoEnPx = (unidades) => LECHO_NATURAL_PX + largoEnCm(unidades) * CSS_PX_POR_CM
 
 /** medidas derivadas de los 4 números interpolables, en un solo sitio
     para que la uña y el diseño usen exactamente las mismas cifras */
@@ -30,7 +40,8 @@ export function medidas({ unidades, punta, arco, caja }) {
   // la cúpula de la punta crece con el ancho de la punta y con el arco:
   // la cuadrada (arco chico) queda de corte casi recto, la redonda (arco ~1)
   // cierra media circunferencia
-  const altoPunta = Math.max(anchoPunta * arco, 0.6)
+  const extensionPx = largoEnCm(unidades) * CSS_PX_POR_CM
+  const altoPunta = Math.min(Math.max(anchoPunta * arco, 0.6), extensionPx * 0.65)
   const yHombro = tipY + altoPunta
   return { unidades, largoPx, anchoCuticula, anchoPunta, tipY, altoPunta, yHombro }
 }
@@ -109,8 +120,6 @@ export function puntaBezier({ unidades, punta, arco, caja }) {
 
   return { ...m, h, izq, c1i, c1d, c2i, c2d, vertice }
 }
-
-export const BASE_Y = 200
 
 /**
  * La UÑA: silueta continua de 4 números interpolables.

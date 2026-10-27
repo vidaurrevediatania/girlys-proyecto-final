@@ -87,9 +87,9 @@ export const FORMAS = [
 ]
 
 export const LARGOS = [
-  { id: 'corto', nombre: 'Corto', unidadesMax: 8, mult: 1.0, detalle: 'Hasta 0.6 cm sobre tu uña natural.' },
-  { id: 'medio', nombre: 'Medio', unidadesMax: 11, mult: 1.1, detalle: 'De 0.7 a 0.9 cm.' },
-  { id: 'largo', nombre: 'Largo', unidadesMax: 18, mult: 1.24, detalle: 'De 1 a 1.4 cm.' },
+  { id: 'corto', nombre: 'Corto', unidadesMax: 8, mult: 1.0, detalle: 'Extensión de 0.24 a 0.64 cm desde el borde natural.' },
+  { id: 'medio', nombre: 'Medio', unidadesMax: 11, mult: 1.1, detalle: 'Extensión de 0.72 a 0.88 cm desde el borde natural.' },
+  { id: 'largo', nombre: 'Largo', unidadesMax: 18, mult: 1.24, detalle: 'Extensión de 0.96 a 1.44 cm desde el borde natural.' },
 ]
 
 export const DISENOS = [

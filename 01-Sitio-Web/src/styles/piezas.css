@@ -359,11 +359,36 @@
 }
 .ticket-figura {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  gap: var(--e2);
   padding: var(--e2) 0 var(--e5);
 }
 .ticket-figura .una {
-  width: 212px;
+  width: 160px;
+  height: 184px;
+}
+.escala-referencia {
+  display: flex;
+  align-items: center;
+  gap: var(--e2);
+  color: var(--tinta-3);
+  font-size: var(--t-13);
+}
+.escala-referencia-linea {
+  display: block;
+  width: 1cm;
+  height: 2px;
+  background: var(--laton);
+}
+.escala-nota {
+  max-width: 240px;
+  margin: 0;
+  color: var(--tinta-3);
+  font-size: var(--t-11);
+  line-height: 1.45;
+  text-align: center;
 }
 .ticket-servicio {
   font-family: var(--serif);

@@ -90,7 +90,7 @@ export function mensajeReserva({ seleccion, precio, sucursal, saludo = 'Hola Gir
       '',
       `• Servicio: ${seleccion.servicio.nombre}`,
       `• Forma: ${seleccion.forma.nombre}`,
-      `• Largo: ${seleccion.largo.nombre} (${textoLargo(seleccion.unidades)})`,
+      `• Extensión: ${seleccion.largo.nombre} (${textoLargo(seleccion.unidades)} desde el borde natural)`,
       `• Diseño: ${seleccion.diseno.nombre}${seleccion.diseno.precio ? ` (+${seleccion.diseno.precio} Bs)` : ''}`,
     )
     if (seleccion.retiro) lineas.push('• Retiro de esmalte previo')

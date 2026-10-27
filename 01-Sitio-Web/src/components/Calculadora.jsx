@@ -89,7 +89,7 @@ export default function Calculadora({ seleccion, alCambiar, precio, alReservar }
             <Revelar className="bloque" delay={120}>
               <div className="bloque-cab">
                 <span className="numeral">c</span>
-                <h3 className="bloque-titulo">Ajusta el largo</h3>
+                <h3 className="bloque-titulo">Ajusta la extensión</h3>
               </div>
               <div className="largo-cabecera">
                 <span className="largo-tramo serif">{largo.nombre}</span>
@@ -103,7 +103,7 @@ export default function Calculadora({ seleccion, alCambiar, precio, alReservar }
                 value={pos}
                 onChange={(e) => alCambiar({ largoPos: Number(e.target.value) / 100 })}
                 style={{ '--llenado': `${pos}%` }}
-                aria-label={`Largo de la uña: ${textoLargo(seleccion.unidades)}`}
+                aria-label={`Extensión sobre tu uña natural: ${textoLargo(seleccion.unidades)}`}
                 aria-valuetext={`${largo.nombre}, ${textoLargo(seleccion.unidades)}`}
               />
               <div className="largo-marcas" aria-hidden="true">
@@ -166,6 +166,14 @@ export default function Calculadora({ seleccion, alCambiar, precio, alReservar }
                   diseno={diseno.id}
                   unidades={seleccion.unidades}
                 />
+                <div className="escala-referencia" aria-label="Referencia de escala de un centímetro">
+                  <span className="escala-referencia-linea" aria-hidden="true" />
+                  <span>1 cm</span>
+                </div>
+                <p className="escala-nota">
+                  La medida es la extensión desde el borde natural. Escala 1:1 al 100 % de zoom;
+                  puede variar según la pantalla.
+                </p>
               </figure>
 
               <div className="ticket-cuerpo">
@@ -175,7 +183,7 @@ export default function Calculadora({ seleccion, alCambiar, precio, alReservar }
                 <div className="ticket-lineas">
                   <LineaFila etiqueta={`Forma ${forma.nombre.toLowerCase()}`} valor={`+ ${precio.recargoForma}`} />
                   <LineaFila
-                    etiqueta={`Largo ${largo.nombre.toLowerCase()} · ${textoLargo(seleccion.unidades)}`}
+                    etiqueta={`Extensión ${largo.nombre.toLowerCase()} · ${textoLargo(seleccion.unidades)}`}
                     valor={`+ ${precio.recargoLargo}`}
                   />
                   <LineaFila

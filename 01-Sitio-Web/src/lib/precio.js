@@ -38,9 +38,8 @@ export const formatoBs = (n) => `${n} Bs`
 /**
  * LA MEDIDA DEL LARGO.
  *
- * El largo de la uña se cotiza en centímetros, no en milímetros: 10 unidades
- * del deslizador son 0.8 cm. Antes se mostraba el número de unidades con la
- * etiqueta "mm" y eso no correspondía con la medida real de la uña.
+ * La extensión libre se cotiza en centímetros desde el borde de la uña
+ * natural. Cada unidad del deslizador son 0.08 cm; 9 unidades son 0.72 cm.
  *
  * Todo pasa por aquí: el rótulo de la regla, el texto del tramo de precio y
  * la ficha. Cambiar UNIDAD_A_CM recorta la escala de golpe.
@@ -53,8 +52,8 @@ export const largoEnUnidades = (posicion) => Math.round(3 + posicion * 15)
 /** las unidades del deslizador, en centímetros */
 export const largoEnCm = (unidades) => unidades * UNIDAD_A_CM
 
-/** el largo como se muestra: "0.8 cm" */
-export const textoLargo = (unidades) => `${largoEnCm(unidades).toFixed(1)} cm`
+/** la extensión con la precisión real del deslizador: "0.72 cm" */
+export const textoLargo = (unidades) => `${largoEnCm(unidades).toFixed(2)} cm`
 
 /** las unidades caen dentro de un tramo de precio */
 export function tramoLargo(unidades) {

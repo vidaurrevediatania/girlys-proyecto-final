@@ -29,10 +29,10 @@ function Diseno({ diseno, a, punta }) {
     // de cúpula— el blanco se derramaba por los costados y quedaba un tazón
     // en vez de un french.
     //
-    // Media luna lisa: la curva interior vuelve al contorno en ambos costados,
-    // afinándose hasta una punta para evitar extremos cuadrados.
+    // Media luna lisa y redondeada; la curva interior conserva su arco y
+    // afina solo al acercarse a los extremos para que no queden cuadrados.
     const { c1i, c1d, c2i, c2d, vertice, yHombro, anchoPunta } = punta
-    const d = Math.min(a * 0.32, punta.extensionPx * 0.7)
+    const d = Math.min(a * 0.38, punta.extensionPx * 0.75)
     const X = a + 12
     const punto = ([x, y]) => `${r(x)} ${r(y)}`
     const baja = ([x, y], factor = 1) => punto([x, y + d * factor])
@@ -44,8 +44,8 @@ function Diseno({ diseno, a, punta }) {
             L ${r(-anchoPunta)} ${r(yHombro)}
             C ${punto(c1i)} ${punto(c2i)} ${punto(vertice)}
             C ${punto(c2d)} ${punto(c1d)} ${r(anchoPunta)} ${r(yHombro)}
-            C ${baja(c1d, 0.22)} ${baja(c2d)} ${r(0)} ${r(tipY + d)}
-            C ${baja(c2i)} ${baja(c1i, 0.22)} ${r(-anchoPunta)} ${r(yHombro)}
+            C ${baja(c1d, 0.78)} ${baja(c2d)} ${r(0)} ${r(tipY + d)}
+            C ${baja(c2i)} ${baja(c1i, 0.78)} ${r(-anchoPunta)} ${r(yHombro)}
             L ${r(-X)} ${r(yHombro)}
             L ${r(-X)} ${r(tipY - 12)} Z`}
       />

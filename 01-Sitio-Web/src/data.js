@@ -141,13 +141,13 @@ export const ANTICIPO = 0.5
 // antes de publicar. Ver docs/contenido.md, sección 3.
 export const SUCURSALES = [
   {
-    id: 'americas',
-    nombre: 'Av. Américas',
-    linea: 'Av. Américas, local 12 · Equipetrol',
-    calle: 'Av. Américas, local 12',
-    zona: 'Equipetrol',
+    id: 'centro',
+    nombre: 'Centro Histórico',
+    linea: 'Calle Bolívar 112 · Centro Histórico',
+    calle: 'Calle Bolívar 112',
+    zona: 'Centro Histórico',
     telefono: '+591 700 11 203',
-    nota: 'El salón más grande. Sala de espera con sofá y café.',
+    nota: 'Casa colonial restaurada, a dos cuadras de la Plaza 25 de Mayo.',
     horario: [
       { abre: '09:00', cierra: '19:30' },
       { abre: '09:00', cierra: '19:30' },
@@ -159,13 +159,13 @@ export const SUCURSALES = [
     ],
   },
   {
-    id: 'junin',
-    nombre: 'Calle Junín',
-    linea: 'Calle Junín 214 · Casco Viejo',
-    calle: 'Calle Junín 214',
-    zona: 'Casco Viejo',
+    id: 'recoleta',
+    nombre: 'La Recoleta',
+    linea: 'Calle Polanco 45 · La Recoleta',
+    calle: 'Calle Polanco 45',
+    zona: 'La Recoleta',
     telefono: '+591 700 44 118',
-    nota: 'Casa antigua reconvertida. Ocho butacas y sala chica.',
+    nota: 'Frente al mirador. Sala chica, pensada para citas tranquilas.',
     horario: [
       { abre: '08:30', cierra: '18:30' },
       { abre: '08:30', cierra: '18:30' },
@@ -177,11 +177,11 @@ export const SUCURSALES = [
     ],
   },
   {
-    id: 'jaime-mendoza',
-    nombre: 'Av. Jaime Mendoza',
-    linea: 'Av. Jaime Mendoza 3er anillo, piso 2 · Equipetrol Norte',
-    calle: 'Av. Jaime Mendoza, 3er anillo, piso 2',
-    zona: 'Equipetrol Norte',
+    id: 'siles',
+    nombre: 'Av. Hernando Siles',
+    linea: 'Av. Hernando Siles, 3er anillo, piso 2 · San Felipe',
+    calle: 'Av. Hernando Siles, 3er anillo, piso 2',
+    zona: 'San Felipe',
     telefono: '+591 700 88 455',
     nota: 'Segundo piso con ventanal. Se recomienda reservar para el atardecer.',
     horario: [

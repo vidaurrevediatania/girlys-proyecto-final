@@ -98,7 +98,7 @@ function VistaEntrada({ entrada }) {
                 width="1200"
                 height="800"
               />
-              <figcaption className="nota">Girlys · Santa Cruz de la Sierra</figcaption>
+              <figcaption className="nota">Girlys · Sucre</figcaption>
             </figure>
 
             {/* Contenido propio, versionado en el repositorio. No viene de usuarios. */}
@@ -111,7 +111,7 @@ function VistaEntrada({ entrada }) {
               <p className="etiqueta">Escrito por</p>
               <p className="serif blog-firma-nombre">Equipo de Girlys</p>
               <p className="apunte">
-                Manicura y pedicura con precio cerrado en Santa Cruz de la Sierra.
+                Manicura y pedicura con precio cerrado en Sucre.
                 Escribimos lo que aplicamos en el salón, sin promesas que no podamos cumplir.
               </p>
             </div>

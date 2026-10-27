@@ -12,11 +12,11 @@ Las fotos tienen que ser del salón o de trabajos propios: nada de imágenes de 
 > Manicura y pedicura con **precio cerrado**: elegís servicio, forma, largo y diseño, y sabés
 > cuánto vas a pagar antes de sentarte en la silla.
 >
-> Tres salones en Santa Cruz de la Sierra. Anticipo del 50 % y el resto en el salón.
+> Tres salones en Sucre. Anticipo del 50 % y el resto en el salón.
 >
 > Escribinos por WhatsApp y te pasamos disponibilidad 👉 [enlace]
 >
-> #manicura #santacruz #uñas #girlys
+> #manicura #sucre #uñas #girlys
 
 ---
 
@@ -33,7 +33,7 @@ Las fotos tienen que ser del salón o de trabajos propios: nada de imágenes de 
 >
 > Calculá tu combinación exacta en el sitio [enlace] o preguntanos por WhatsApp.
 >
-> #preciosclaros #manicura #pedicura #santacruz
+> #preciosclaros #manicura #pedicura #sucre
 
 ---
 
@@ -45,7 +45,7 @@ Las fotos tienen que ser del salón o de trabajos propios: nada de imágenes de 
 >
 > ¿Te gustó este diseño? Guardalo para tu próxima cita 📌
 >
-> #antesydespues #uñas #nailart #santacruzdelasierra
+> #antesydespues #uñas #nailart #sucrebolivia
 
 ---
 
@@ -90,7 +90,7 @@ Las fotos tienen que ser del salón o de trabajos propios: nada de imágenes de 
 >
 > [enlace]
 >
-> #reservaonline #manicura #santacruz
+> #reservaonline #manicura #sucre
 
 ---
 
@@ -114,7 +114,7 @@ Las fotos tienen que ser del salón o de trabajos propios: nada de imágenes de 
 >
 > Cupos limitados por semana porque se pinta a mano.
 >
-> #nailart #diseñopersonalizado #uñas #santacruz
+> #nailart #diseñopersonalizado #uñas #sucre
 
 ---
 
@@ -126,7 +126,7 @@ Las fotos tienen que ser del salón o de trabajos propios: nada de imágenes de 
 >
 > ¿Todavía no conocés el salón? Calculá tu precio acá [enlace] y escribinos.
 >
-> #opiniones #clientas #manicura #santacruz
+> #opiniones #clientas #manicura #sucre
 
 ---
 
@@ -134,7 +134,7 @@ Las fotos tienen que ser del salón o de trabajos propios: nada de imágenes de 
 
 ```
 #manicura #pedicura #uñas #nailart #semipermanente #frenchmanicure #uñasacrilicas
-#santacruz #santacruzdelasierra #bolivia #salondeuñas #preciosclaros #girlys
+#sucre #sucrebolivia #bolivia #salondeuñas #preciosclaros #girlys
 ```
 
 Usar entre 8 y 12 por publicación. No repetir siempre los mismos: alternar.

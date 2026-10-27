@@ -9,7 +9,7 @@ export default function Portada() {
     <section className="seccion t-portada portada" id="portada">
       <div className="contenido portada-rejilla">
         <div className="portada-texto">
-          <p className="etiqueta">Santa Cruz de la Sierra · desde 2019</p>
+          <p className="etiqueta">Sucre · desde 2019</p>
 
           <h1 className="titular portada-h1">
             Manicura y pedicura

@@ -97,7 +97,7 @@ Wordfence ni caché de plugins. Cada función que esos plugins resolvían se cub
 
 | Ajuste | Valor |
 |---|---|
-| Título del sitio | Girlys · Manicura y pedicura en Santa Cruz de la Sierra |
+| Título del sitio | Girlys · Manicura y pedicura en Sucre |
 | Descripción | Calcula el precio, elige forma, largo y diseño, y reserva |
 | Idioma | Español (`lang="es"`) |
 | Zona horaria de las entradas | Fecha fija en cada archivo Markdown |

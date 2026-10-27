@@ -6,7 +6,7 @@ Este documento explica **qué se decidió** y **por qué**, para que puedas defe
 
 ## 1.1 Tema del proyecto
 
-**Girlys** es un salón de manicura y pedicura en Santa Cruz de la Sierra, con tres sucursales.
+**Girlys** es un salón de manicura y pedicura en Sucre, con tres sucursales.
 El sitio resuelve un problema concreto del rubro: **la clienta no sabe cuánto va a pagar hasta que se sienta en la silla**.
 
 La propuesta del sitio es una sola frase:

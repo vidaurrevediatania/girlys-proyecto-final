@@ -36,7 +36,7 @@ Write-Host '  Generando certificado valido por 825 dias...'
     -keyout (Join-Path $certs 'localhost.key') `
     -out (Join-Path $certs 'localhost.crt') `
     -days 825 `
-    -subj '/C=BO/ST=Santa Cruz/L=Santa Cruz/O=Girlys Local/CN=localhost' `
+    -subj '/C=BO/ST=Sucre/L=Sucre/O=Girlys Local/CN=localhost' `
     -addext 'subjectAltName=DNS:localhost,DNS:girlys.local,IP:127.0.0.1' 2>$null
 
 if (Test-Path (Join-Path $certs 'localhost.crt')) {

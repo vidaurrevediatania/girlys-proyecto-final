@@ -16,7 +16,7 @@ export default function Pie() {
           <div>
             <p className="marca-nombre serif pie-marca">Girlys</p>
             <p className="apunte pie-linea">
-              Manicura y pedicura en Santa Cruz de la Sierra. Atendemos con cita,
+              Manicura y pedicura en Sucre. Atendemos con cita,
               sin fila y con el precio cerrado antes de empezar.
             </p>
             <Link className="btn btn-linea pie-cta" to={seccion('#calculadora')}>
@@ -97,7 +97,7 @@ export default function Pie() {
 
         <div className="pie-legal">
           <p className="nota">
-            © {anio} Girlys · Santa Cruz de la Sierra. Precios en bolivianos; el
+            © {anio} Girlys · Sucre. Precios en bolivianos; el
             anticipo del 50 % confirma el cupo.
           </p>
           <nav className="pie-legal-enlaces" aria-label="Información legal">

@@ -11,6 +11,7 @@ Todo el material ya está preparado en `05-Recursos\redes`:
 | `textos-publicaciones.md` | Las primeras 9 publicaciones escritas |
 | `calendario-4-semanas.md` | Qué publicar cada semana |
 | `generar-imagen-perfil.ps1` | Vuelve a generar la foto si cambia el nombre |
+| `generar-imagen-og.ps1` | Vuelve a generar la imagen de portada para compartir |
 
 ---
 
@@ -23,7 +24,7 @@ Todo el material ya está preparado en `05-Recursos\redes`:
 ```
 @girlys.nails
 @girlys.manicura
-@girlys.scz
+@girlys.sucre
 ```
 
 4. Cuando pregunte el tipo de cuenta, elegir **Profesional → Empresa** (es gratis).
@@ -37,12 +38,12 @@ Todo el material ya está preparado en `05-Recursos\redes`:
 ```
 Manicura y pedicura con precio cerrado 💅
 Calculá tu precio antes de reservar
-3 salones en Santa Cruz de la Sierra
+3 salones en Sucre, Bolivia
 👇 Reservá por WhatsApp
 ```
 
-9. En el campo **Sitio web**, pegar el dominio cuando lo tengas
-   (mientras tanto se deja vacío; Instagram no acepta `localhost`).
+9. En el campo **Sitio web**, pegar el dominio publicado:
+   `https://girlys-proyecto-final.vercel.app` (Instagram no acepta `localhost`).
 10. Activar el botón de WhatsApp en el perfil:
     **Editar perfil → Acciones → WhatsApp** → número del salón.
 
@@ -59,11 +60,11 @@ Calculá tu precio antes de reservar
 6. Descripción:
 
 ```
-Manicura y pedicura con precio cerrado en Santa Cruz de la Sierra.
+Manicura y pedicura con precio cerrado en Sucre.
 Calculá tu precio en el sitio y reservá por WhatsApp. Anticipo del 50 %.
 ```
 
-7. **Configuración → General → Nombre de usuario**: `girlys.nails` (o el que esté libre).
+7. En **Configuración → General → Nombre de usuario**: `girlys.nails` (o el que esté libre).
 8. En **Información de contacto**, agregar el WhatsApp y el horario.
 9. Botón de acción: **Enviar mensaje por WhatsApp**.
 
@@ -94,7 +95,8 @@ Todo lo que se pide en la consigna se cumple con cuentas orgánicas.
 
 ## 5.5 Conectar las redes con el sitio
 
-Cuando tengas las URLs, abrir `01-Sitio-Web\.env` y completar:
+Cuando tengas las URLs, abrir `01-Sitio-Web\.env.production` (el archivo que usa el sitio
+publicado) y completar:
 
 ```env
 VITE_INSTAGRAM_URL=https://instagram.com/girlys.nails
@@ -103,15 +105,23 @@ VITE_TIKTOK_URL=
 VITE_YOUTUBE_URL=
 ```
 
-Después:
+Para probar en la PC alcanza con repetir lo mismo en `01-Sitio-Web\.env` y ejecutar:
 
 ```powershell
 cd "01-Sitio-Web"
 npm run build
 ```
 
-Los iconos aparecen solos en el pie del sitio. Si una URL queda vacía, el icono no se muestra
-(no hay enlaces rotos).
+Para que se vea en el sitio publicado, además hay que subir el cambio:
+
+```powershell
+git add 01-Sitio-Web/.env.production
+git commit -m "Agregar enlaces de Instagram y Facebook"
+git push origin main
+```
+
+Vercel reconstruye sola en un par de minutos. Los iconos aparecen en el pie del sitio. Si una
+URL queda vacía, el icono no se muestra (no hay enlaces rotos).
 
 ---
 

@@ -1,6 +1,6 @@
 # Punto 6 · Técnicas de SEO aplicadas
 
-SEO = que Google entienda la página y la muestre cuando alguien busca "manicura Santa Cruz".
+SEO = que Google entienda la página y la muestre cuando alguien busca "manicura Sucre".
 
 ---
 
@@ -139,9 +139,9 @@ También sirve <https://validator.schema.org>.
 
 | Intención | Búsqueda | Dónde se cubre |
 |---|---|---|
-| Comercial | `manicura santa cruz precio` | Inicio + calculadora |
-| Comercial | `pedicura santa cruz` | Lista de precios |
-| Comercial | `uñas esculpidas santa cruz` | Servicio esculpido |
+| Comercial | `manicura sucre precio` | Inicio + calculadora |
+| Comercial | `pedicura sucre` | Lista de precios |
+| Comercial | `uñas esculpidas sucre` | Servicio esculpido |
 | Informativa | `cuánto dura la semipermanente` | Entrada del blog |
 | Informativa | `french clásica` | Entrada del blog |
 | Marca | `girlys uñas` | Inicio |

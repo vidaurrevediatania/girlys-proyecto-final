@@ -49,8 +49,8 @@ function datosEstructurados(ORIGEN) {
       url: `${ORIGEN}/`,
       logo: `${ORIGEN}/favicon.svg`,
       description:
-        'Salón de manicura y pedicura con precio cerrado en Santa Cruz de la Sierra, Bolivia.',
-      areaServed: 'Santa Cruz de la Sierra',
+        'Salón de manicura y pedicura con precio cerrado en Sucre, Bolivia.',
+      areaServed: 'Sucre',
     },
     ...SUCURSALES.map((sucursal) => ({
       '@type': 'NailSalon',
@@ -65,8 +65,8 @@ function datosEstructurados(ORIGEN) {
       address: {
         '@type': 'PostalAddress',
         streetAddress: `${sucursal.calle}, ${sucursal.zona}`,
-        addressLocality: 'Santa Cruz de la Sierra',
-        addressRegion: 'Santa Cruz',
+        addressLocality: 'Sucre',
+        addressRegion: 'Chuquisaca',
         addressCountry: 'BO',
       },
       openingHours: sucursal.horario

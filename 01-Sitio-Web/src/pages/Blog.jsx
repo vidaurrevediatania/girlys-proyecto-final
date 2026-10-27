@@ -14,7 +14,7 @@ export default function Blog() {
   const [destacada, ...resto] = visibles
 
   useSEO({
-    titulo: 'Blog de Girlys · Manicura y cuidado de uñas en Santa Cruz',
+    titulo: 'Blog de Girlys · Manicura y cuidado de uñas en Sucre',
     descripcion:
       'Consejos de manicura, tendencias y precios claros. Lo que aprendemos en el salón, escrito para que tu esmaltado dure más.',
     ruta: '/blog',
@@ -24,7 +24,7 @@ export default function Blog() {
       '@type': 'Blog',
       name: 'Blog de Girlys',
       description:
-        'Consejos de manicura, tendencias y precios claros en Santa Cruz de la Sierra.',
+        'Consejos de manicura, tendencias y precios claros en Sucre.',
       url: urlAbsoluta('/blog'),
       inLanguage: 'es-BO',
       publisher: {

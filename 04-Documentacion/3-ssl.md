@@ -28,7 +28,7 @@ Sirve para:
 openssl req -x509 -newkey rsa:2048 -nodes `
   -keyout certs\localhost.key -out certs\localhost.crt `
   -days 825 `
-  -subj "/C=BO/ST=Santa Cruz/L=Santa Cruz/O=Girlys Local/CN=localhost" `
+  -subj "/C=BO/ST=Sucre/L=Sucre/O=Girlys Local/CN=localhost" `
   -addext "subjectAltName=DNS:localhost,DNS:girlys.local,IP:127.0.0.1"
 ```
 

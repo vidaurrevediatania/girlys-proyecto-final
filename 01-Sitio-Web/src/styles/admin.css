@@ -1,0 +1,138 @@
+/* ============================================================
+   Panel de gestión (CMS demo)
+   ============================================================ */
+.admin {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+  background: var(--papel-2);
+}
+.admin-lateral {
+  background: var(--papel-3);
+  padding: var(--e6) var(--e5);
+  border-right: 1px solid var(--filete);
+  display: flex;
+  flex-direction: column;
+  gap: var(--e6);
+}
+.admin-marca .admin-logo {
+  font-size: var(--t-30);
+  line-height: 1;
+}
+.admin-sub {
+  display: block;
+  font-size: var(--t-12);
+  color: var(--tinta-3);
+  margin-top: var(--e1);
+}
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e1);
+}
+.admin-nav-btn {
+  text-align: left;
+  border: 0;
+  background: transparent;
+  padding: var(--e3) var(--e4);
+  border-radius: var(--r-medio);
+  color: var(--tinta-2);
+  font-size: var(--t-14);
+  cursor: pointer;
+}
+.admin-nav-btn.activo {
+  background: var(--papel-alto);
+  color: var(--tinta);
+  font-weight: 600;
+}
+.admin-aviso {
+  margin-top: auto;
+  color: var(--tinta-3);
+  font-size: var(--t-12);
+}
+.admin-principal {
+  padding: var(--e7) var(--e6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--e6);
+}
+.admin-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--e4);
+  border-bottom: 1px solid var(--filete);
+  padding-bottom: var(--e4);
+}
+.admin-mensaje {
+  font-size: var(--t-13);
+  color: var(--polvo-tinta);
+  background: color-mix(in oklab, var(--polvo) 14%, var(--papel-alto));
+  padding: var(--e2) var(--e3);
+  border-radius: var(--r-medio);
+}
+.admin-panel .admin-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--e4);
+  margin-bottom: var(--e5);
+}
+.admin-tarjeta {
+  background: var(--papel-alto);
+  border: 1px solid var(--filete);
+  border-radius: var(--r-grande);
+  padding: var(--e5);
+}
+.admin-cifra {
+  font-size: var(--t-38);
+  line-height: 1;
+  margin-top: var(--e2);
+}
+.admin-bloque .admin-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e4);
+}
+.admin-fila {
+  background: var(--papel-alto);
+  border: 1px solid var(--filete);
+  border-radius: var(--r-grande);
+  padding: var(--e5);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--e3);
+}
+.admin-campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e1);
+}
+.admin-campo-chico {
+  max-width: 140px;
+}
+.admin-campo-ancho {
+  grid-column: 1 / -1;
+}
+.admin-acciones {
+  display: flex;
+  align-items: center;
+  gap: var(--e4);
+  flex-wrap: wrap;
+}
+.admin-lista-simple {
+  margin: var(--e3) 0;
+  padding-left: var(--e5);
+  color: var(--tinta-2);
+}
+@media (max-width: 780px) {
+  .admin {
+    grid-template-columns: 1fr;
+  }
+  .admin-lateral {
+    border-right: 0;
+    border-bottom: 1px solid var(--filete);
+  }
+  .admin-panel .admin-tarjetas {
+    grid-template-columns: 1fr;
+  }
+}

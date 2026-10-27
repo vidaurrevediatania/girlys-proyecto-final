@@ -6,6 +6,7 @@ import { iniciarSiAcepto } from './lib/analytics.js'
 import './styles/app.css'
 import './styles/piezas.css'
 import './styles/blog.css'
+import './styles/admin.css'
 
 // si la persona ya aceptó la analítica en una visita anterior, se carga ahora
 iniciarSiAcepto()

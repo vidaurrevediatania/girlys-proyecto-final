@@ -1,0 +1,61 @@
+backend:
+  name: github
+  repo: vidaurrevediatania/girlys-proyecto-final
+  branch: main
+  base_url: https://girlys-proyecto-final.vercel.app
+  auth_endpoint: /api/auth
+
+media_folder: "01-Sitio-Web/public/fotos"
+public_folder: "/fotos"
+
+collections:
+  - name: "servicios"
+    label: "Servicios"
+    files:
+      - label: "Servicios"
+        name: "servicios"
+        file: "01-Sitio-Web/src/data/servicios.json"
+        fields:
+          - label: "Servicios"
+            name: "services"
+            widget: "list"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Zona", name: "zona", widget: "select", options: ["manos", "pies"] }
+              - { label: "Nombre", name: "nombre", widget: "string" }
+              - { label: "Duración (min)", name: "duracion", widget: "number" }
+              - { label: "Precio (Bs)", name: "precio", widget: "number" }
+              - { label: "Resumen", name: "resumen", widget: "string" }
+
+  - name: "sucursales"
+    label: "Sucursales"
+    files:
+      - label: "Sucursales"
+        name: "sucursales"
+        file: "01-Sitio-Web/src/data/sucursales.json"
+        fields:
+          - label: "Sucursales"
+            name: "branches"
+            widget: "list"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Nombre", name: "nombre", widget: "string" }
+              - { label: "Línea", name: "linea", widget: "string" }
+              - { label: "Calle", name: "calle", widget: "string" }
+              - { label: "Zona", name: "zona", widget: "string" }
+              - { label: "Teléfono", name: "telefono", widget: "string" }
+              - { label: "Consulta de mapa", name: "mapaQuery", widget: "string" }
+              - { label: "Nota", name: "nota", widget: "string" }
+              - { label: "Horario texto", name: "horarioTexto", widget: "string" }
+
+  - name: "blog"
+    label: "Blog"
+    folder: "01-Sitio-Web/src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Descripción", name: "description", widget: "string" }
+      - { label: "Fecha", name: "date", widget: "datetime" }
+      - { label: "Autor", name: "author", widget: "string", default: "Girlys" }
+      - { label: "Cuerpo", name: "body", widget: "markdown" }

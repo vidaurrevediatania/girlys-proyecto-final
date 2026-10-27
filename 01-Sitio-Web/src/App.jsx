@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import AvisoAnalitica from './components/AvisoAnalitica.jsx'
 import Inicio from './pages/Inicio.jsx'
-import Admin from './pages/Admin.jsx'
 import Blog from './pages/Blog.jsx'
 import Entrada from './pages/Entrada.jsx'
 import NoEncontrado from './pages/NoEncontrado.jsx'
@@ -31,7 +30,6 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Inicio />} />
-        <Route path="/admin" element={<Admin />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<Entrada />} />
         <Route path="*" element={<NoEncontrado />} />

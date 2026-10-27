@@ -1,3 +1,4 @@
+# CMS real, alojado aparte del panel de demostración /admin.
 backend:
   name: github
   repo: vidaurrevediatania/girlys-proyecto-final

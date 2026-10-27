@@ -22,11 +22,13 @@ Todo el material ya está preparado en `05-Recursos\redes`:
 
 1. Descargar Instagram en el teléfono (o entrar a <https://instagram.com>).
 
-## 5.0 Panel de gestión (CMS gráfico, nuevo)
+## 5.0 Panel de gestión (CMS gráfico)
 
-El sitio tiene un **panel gráfico de gestión** en `/admin`:
+El sitio incluye un **demo gráfico** en `/admin` y el CMS conectado a GitHub en `/cms`:
 
-- URL: <https://girlys-proyecto-final.vercel.app/admin>
+- Demo sin persistencia: <https://girlys-proyecto-final.vercel.app/admin>
+- CMS conectado a GitHub: <https://girlys-proyecto-final.vercel.app/cms>
+- El demo no guarda cambios; el CMS real requiere OAuth.
 - Editor visual para servicios, sucursales y artículos del blog.
 - Conectado a GitHub: cada cambio crea un commit y Vercel publica automáticamente.
 - Requiere configurar una aplicación OAuth de GitHub (ver sección 5.0.1).
@@ -44,7 +46,7 @@ El sitio tiene un **panel gráfico de gestión** en `/admin`:
    - `GITHUB_CLIENT_SECRET` = (el Client Secret)
 5. Redeployá (o esperá al próximo push).
 
-Después de eso, entrá a `/admin`, pulsá **Login with GitHub** y autorizá.
+Después de eso, entrá a `/cms`, pulsá **Login with GitHub** y autorizá.
 Los cambios que guardes crearán un commit en el repositorio y Vercel reconstruirá el sitio en 1 a 2 minutos.
 
 > El panel gráfico reemplaza la edición manual de `src/data.js` y los archivos Markdown

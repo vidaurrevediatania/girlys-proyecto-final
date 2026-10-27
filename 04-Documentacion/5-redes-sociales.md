@@ -108,8 +108,10 @@ VITE_TIKTOK_URL=
 VITE_YOUTUBE_URL=
 ```
 
-> Instagram ya está conectado con `https://www.instagram.com/girlys.sucre/`.
-> Falta completar `VITE_FACEBOOK_URL` cuando la página esté creada.
+> Instagram ya está conectado con `https://www.instagram.com/girlys.sucre/` y Facebook con
+> `https://www.facebook.com/share/1Gi3ihnXN4/`. El enlace de Facebook es el enlace compartido
+> que se recibió; si después configuras un nombre de usuario propio para la página, se puede
+> reemplazar por su URL más corta.
 
 Para probar en la PC alcanza con repetir lo mismo en `01-Sitio-Web\.env` y ejecutar:
 

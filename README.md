@@ -1,7 +1,12 @@
 # Girlys · Proyecto Final 2.0
 
-Sitio web de manicura y pedicura con **precio cerrado**, más un blog estático,
+Sitio web de **manicura** con **precio cerrado**, más un blog estático,
 listo para correr en una PC con Windows y publicarse en **Vercel** con GitHub.
+
+> **Ruta vigente para la entrega:** cPanel + WordPress en
+> <https://girlysbeautiful.si.com.bo>. El paso a paso está en
+> `04-Documentacion/10-cpanel-wordpress-14-puntos.md`.
+> La versión React + Vercel queda como respaldo y demostración de diseño.
 
 > **Arquitectura:** React + Vite para todo el sitio, blog en Markdown dentro del
 > mismo proyecto y despliegue estático en Vercel. **No hay WordPress, PHP, MySQL

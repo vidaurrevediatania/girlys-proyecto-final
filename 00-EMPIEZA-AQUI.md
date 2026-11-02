@@ -3,6 +3,12 @@
 Guía corta para abrir el proyecto y entender qué hay en cada carpeta.
 Todo está **en tu PC**. No hace falta WordPress, PHP, MySQL ni Docker.
 
+> **Ruta vigente para la entrega:** cPanel + WordPress en
+> <https://girlysbeautiful.si.com.bo>. El paso a paso de los 14 puntos está en
+> `04-Documentacion/10-cpanel-wordpress-14-puntos.md`.
+> Lo que sigue en esta guía describe la versión React + Vercel, que queda como
+> respaldo.
+
 > **Sitio ya publicado:** <https://girlys-proyecto-final.vercel.app>  
 > **Repositorio:** <https://github.com/vidaurrevediatania/girlys-proyecto-final>  
 > Ese dominio gratuito de Vercel es suficiente para la entrega.
